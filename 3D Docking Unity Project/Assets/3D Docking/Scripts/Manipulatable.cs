@@ -30,8 +30,8 @@ public class Manipulatable : MonoBehaviour
     {
         if (eventData.button != m_manipulateButton) { return; }
 
-        m_pCasterPose = m_orgCasterPose = GetEventPose(eventData);
-        m_pPose = m_orgPose = new RigidPose(transform);
+        m_orgCasterPose = GetEventPose(eventData);
+        m_orgPose = new RigidPose(transform);
 
     }
 
@@ -39,37 +39,18 @@ public class Manipulatable : MonoBehaviour
     {
         if (eventData.button != m_manipulateButton) { return; }
 
-        var casterPose = GetEventPose(eventData);
+        var curCasterPose = GetEventPose(eventData);
 
-        var offsetPose = RigidPose.FromToPose(m_pCasterPose, m_pPose);
+        Quaternion delta = GetDeltaQuaternion(m_orgCasterPose.rot, curCasterPose.rot);
 
-        var deltaPose = RigidPose.FromToPose(m_pCasterPose, casterPose);
-        Quaternion rot = Quaternion.LerpUnclamped(Quaternion.identity, deltaPose.rot, scaleFactor);
+        Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, scaleFactor);
 
-        var targetPose = m_pPose * deltaPose;
-
-        transform.position = targetPose.pos;
-        transform.rotation = targetPose.rot;
-
-        m_pPose = targetPose;
-        m_pCasterPose = casterPose;
+        transform.rotation = diff * m_orgPose.rot;
     }
 
 
     public void OnColliderEventDragEnd(ColliderButtonEventData eventData)
     {
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 
@@ -78,4 +59,46 @@ public class Manipulatable : MonoBehaviour
         var grabberTransform = eventData.eventCaster.transform;
         return new RigidPose(grabberTransform);
     }
+
+    static Quaternion GetDeltaQuaternion(Quaternion from, Quaternion to)
+    {
+        Quaternion d = to * Quaternion.Inverse(from);
+        return d;
+    }
+
+    void Start()
+    {
+    }
+
+
+
+
+    //public void OnColliderEventDragStart(ColliderButtonEventData eventData)
+    //{
+    //    if (eventData.button != m_manipulateButton) { return; }
+
+    //    m_pCasterPose = m_orgCasterPose = GetEventPose(eventData);
+    //    m_pPose = m_orgPose = new RigidPose(transform);
+
+    //}
+
+    //public void OnColliderEventDragUpdate(ColliderButtonEventData eventData)
+    //{
+    //    if (eventData.button != m_manipulateButton) { return; }
+
+    //    var casterPose = GetEventPose(eventData);
+
+    //    var offsetPose = RigidPose.FromToPose(m_pCasterPose, m_pPose);
+
+    //    var deltaPose = RigidPose.FromToPose(m_pCasterPose, casterPose);
+    //    Quaternion rot = Quaternion.LerpUnclamped(Quaternion.identity, deltaPose.rot, scaleFactor);
+
+    //    var targetPose = m_pPose * deltaPose;
+
+    //    transform.position = targetPose.pos;
+    //    transform.rotation = targetPose.rot;
+
+    //    m_pPose = targetPose;
+    //    m_pCasterPose = casterPose;
+    //}
 }

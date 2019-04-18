@@ -1,2 +1,25 @@
 
 3D Docking Unity Project/.vs/
+3D Docking Unity Project/Assembly-CSharp.csproj
+3D Docking Unity Project/Assembly-CSharp-Editor.csproj
+3D Docking Unity Project/actions.json
+3D Docking Unity Project/3D Docking Unity Project.sln
+3D Docking Unity Project/Library/
+3D Docking Unity Project/obj/
+3D Docking Unity Project/binding_holographic_hmd.json
+3D Docking Unity Project/binding_rift.json
+3D Docking Unity Project/binding_vive.json
+3D Docking Unity Project/binding_vive_pro.json
+3D Docking Unity Project/binding_vive_tracker_camera.json
+3D Docking Unity Project/bindings_holographic_controller.json
+3D Docking Unity Project/bindings_knuckles.json
+3D Docking Unity Project/bindings_knuckles_ev1.json
+3D Docking Unity Project/bindings_oculus_touch.json
+3D Docking Unity Project/bindings_vive_controller.json
+3D Docking Unity Project/bindings_vive_tracker.json
+3D Docking Unity Project/SteamVR.csproj
+3D Docking Unity Project/SteamVR_Actions.csproj
+3D Docking Unity Project/SteamVR_Editor.csproj
+3D Docking Unity Project/SteamVR_Input_Editor.csproj
+3D Docking Unity Project/SteamVR_Windows_EditorHelper.csproj
+3D Docking Unity Project/unityProject.vrmanifest
