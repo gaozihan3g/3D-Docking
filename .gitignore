@@ -1,4 +1,3 @@
-
 3D Docking Unity Project/.vs/
 3D Docking Unity Project/Assembly-CSharp.csproj
 3D Docking Unity Project/Assembly-CSharp-Editor.csproj
@@ -23,3 +22,6 @@
 3D Docking Unity Project/SteamVR_Input_Editor.csproj
 3D Docking Unity Project/SteamVR_Windows_EditorHelper.csproj
 3D Docking Unity Project/unityProject.vrmanifest
+3D Docking Unity Project/3D Docking Unity Project.csproj
+3D Docking Unity Project/3D Docking Unity Project.Editor.csproj
+3D Docking Unity Project/Temp/

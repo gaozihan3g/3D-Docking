@@ -23,8 +23,8 @@ public class Manipulatable : MonoBehaviour
     private RigidPose m_orgCasterPose = RigidPose.identity;
     private RigidPose m_orgPose = RigidPose.identity;
 
-    private RigidPose m_pCasterPose = RigidPose.identity;
-    private RigidPose m_pPose = RigidPose.identity;
+    //private RigidPose m_pCasterPose = RigidPose.identity;
+    //private RigidPose m_pPose = RigidPose.identity;
 
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
@@ -32,6 +32,8 @@ public class Manipulatable : MonoBehaviour
 
         m_orgCasterPose = GetEventPose(eventData);
         m_orgPose = new RigidPose(transform);
+
+        DockingManager.Instance.TouchStart();
 
     }
 
@@ -46,11 +48,14 @@ public class Manipulatable : MonoBehaviour
         Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, scaleFactor);
 
         transform.rotation = diff * m_orgPose.rot;
+
+        DockingManager.Instance.TouchUpdate();
     }
 
 
     public void OnColliderEventDragEnd(ColliderButtonEventData eventData)
     {
+        DockingManager.Instance.TouchEnd();
     }
 
 
