@@ -21,7 +21,7 @@ public class UserStudyManagerEditor : Editor
     {
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Task " + i))
+        if (GUILayout.Button("Condition #" + i))
         {
             usm.SetCurrentTask(i);
         }
@@ -29,25 +29,32 @@ public class UserStudyManagerEditor : Editor
         string s1;
         string s2;
         string s3;
-
+        string s4;
+        string s5;
 
         if (usm.GetCurrentUser() == null)
         {
-            s1 = s2 = s3 = "-";
+            s1 = s2 = s3 = s4 = s5 = "-";
         }
         else
         {
             s1 = usm.GetCurrentUser().tasks[i].time.ToString();
             s2 = usm.GetCurrentUser().tasks[i].accuracy.ToString();
             s3 = usm.GetCurrentUser().tasks[i].clutch.ToString();
+            s4 = usm.GetCurrentUser().tasks[i].initAngle.ToString();
+            s5 = usm.GetCurrentUser().tasks[i].angleThreshold.ToString();
         }
 
         GUILayout.Label("Time");
-        GUILayout.TextField(s1);
+        EditorGUILayout.TextField(s1);
         GUILayout.Label("Accuracy");
-        GUILayout.TextField(s2);
+        EditorGUILayout.TextField(s2);
         GUILayout.Label("Clutch");
-        GUILayout.TextField(s3);
+        EditorGUILayout.TextField(s3);
+        GUILayout.Label("InitAngle");
+        EditorGUILayout.TextField(s4);
+        GUILayout.Label("Threshold");
+        EditorGUILayout.TextField(s5);
 
         GUILayout.EndHorizontal();
     }
@@ -59,6 +66,12 @@ public class UserStudyManagerEditor : Editor
         if (!usm)
             usm = (UserStudyManager)target;
 
+
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Label("Conditions"); 
+        usm.numOfConditions = (int)(EditorGUILayout.Slider(usm.numOfConditions, 2f, 10f));
+        GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
 
@@ -74,15 +87,6 @@ public class UserStudyManagerEditor : Editor
         }
 
         GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
-
-        GUILayout.Label("Conditions");
-        usm.numOfConditions = (int)(GUILayout.HorizontalSlider(usm.numOfConditions, 1f, 10f));
-        GUILayout.Label(usm.numOfConditions.ToString());
-
-        GUILayout.EndHorizontal();
-
 
         if (usm.userSessions.Count != 0)
         {
@@ -101,14 +105,19 @@ public class UserStudyManagerEditor : Editor
             }
         }
 
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Label("Users");
+        EditorGUILayout.TextField(string.Format("{0}/{1}", usm.currentUser, usm.userSessions.Count));
+        GUILayout.Label("Conditions");
+        EditorGUILayout.TextField(string.Format("{0}/{1}", usm.currentCondition, usm.numOfConditions));
+
+        GUILayout.EndHorizontal();
+
         if (GUILayout.Button("Save Data"))
         {
             usm.SaveData();
         }
-
-
-        EditorGUILayout.HelpBox(string.Format("Total User:{0} Current User:{1} Total Condition:{2} Current Condition:{3}",
-            usm.userSessions.Count, usm.currentUser, usm.numOfConditions, usm.currentCondition), MessageType.Info);
 
         EditorGUILayout.HelpBox(usm.log, MessageType.Info);
 

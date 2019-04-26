@@ -12,7 +12,11 @@ public class DockingManager : MonoBehaviour
     public float angle;
 
     public float distThreshold;
+
+    [Range(1f, 30f)]
     public float angleThreshold;
+
+    public float initAngle;
 
 
     public bool isFirstTouch = true;
@@ -32,7 +36,33 @@ public class DockingManager : MonoBehaviour
         startTime = 0f;
         timer = 0f;
         clutch = 0;
+
+        RandomRotation();
     }
+
+    public void RandomRotation()
+    {
+        var a = GetRandomRotation();
+        var b = GetRandomRotation();
+
+        initAngle = Quaternion.Angle(a, b);
+
+        while (initAngle < angleThreshold)
+        {
+            b = GetRandomRotation();
+            initAngle = Quaternion.Angle(a, b);
+            Debug.Log("small angle happened!");
+        }
+
+        focusedObject.rotation = a;
+        targetObject.rotation = b;
+    }
+
+    Quaternion GetRandomRotation()
+    {
+        return Random.rotation;
+    }
+
 
     void Awake()
     {
@@ -110,13 +140,15 @@ public class DockingManager : MonoBehaviour
         if (angle < angleThreshold)
         {
             isTimeCounting = false;
+
+            // audio feedback
+            AudioManager.Instance.PlaySound(0);
+
+
+            // do sth to stop this task
+            // send to user study manager
+            UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Task(timer, angle, clutch, initAngle, angleThreshold));
         }
-
-
-        // do sth to stop this task
-        // send to user study manager
-        UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Task(timer, angle, clutch));
-
     }
 
 }

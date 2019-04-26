@@ -54,6 +54,8 @@ public class UserStudyManager : MonoBehaviour
         public float time;
         public float accuracy;
         public int clutch;
+        public float initAngle;
+        public float angleThreshold;
 
         public Task()
         {
@@ -62,16 +64,18 @@ public class UserStudyManager : MonoBehaviour
             clutch = 0;
         }
 
-        public Task(float t, float a, int c)
+        public Task(float t, float a, int c, float ia, float th)
         {
             time = t;
             accuracy = a;
             clutch = c;
+            initAngle = ia;
+            angleThreshold = th;
         }
 
         override public string ToString()
         {
-            return string.Format("{0}\t{1}\t{2}", time, accuracy, clutch);
+            return string.Format("{0}\t{1}\t{2}\t{3}\t{4}", time, accuracy, clutch, initAngle, angleThreshold);
         }
     }
 
@@ -84,14 +88,13 @@ public class UserStudyManager : MonoBehaviour
     [HideInInspector]
     public string log = "User Study Manager";
 
-    [SerializeField]
     public List<UserSession> userSessions;
 
-    //[HideInInspector]
-    //public bool initialized = false;
-
-    public int numOfConditions = 1;
+    [HideInInspector]
+    public int numOfConditions = 2;
+    [HideInInspector]
     public int currentCondition = 0;
+    [HideInInspector]
     public int currentUser = 0;
 
 
@@ -118,7 +121,7 @@ public class UserStudyManager : MonoBehaviour
 
     public void Init()
     {
-        numOfConditions = 1;
+        //numOfConditions = 1;
         currentCondition = 0;
         currentUser = 0;
 
@@ -143,6 +146,12 @@ public class UserStudyManager : MonoBehaviour
     public void SetCurrentTask(int i)
     {
         currentCondition = i;
+
+        // TODO init for a new trial
+        if (DockingManager.Instance != null)
+            DockingManager.Instance.Init();
+
+        Log("Current User: " + currentUser + " Current Condition: " + currentCondition);
     }
 
 
@@ -170,6 +179,7 @@ public class UserStudyManager : MonoBehaviour
     public void SetTaskResult(Task t)
     {
         userSessions[currentUser].tasks[currentCondition] = t;
+        Debug.Log("currentUser: " + currentUser + "currentCondition " + currentCondition + " " + t.ToString());
     }
 
 }

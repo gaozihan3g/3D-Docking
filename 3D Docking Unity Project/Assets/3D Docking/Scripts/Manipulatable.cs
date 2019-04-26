@@ -13,18 +13,20 @@ public class Manipulatable : MonoBehaviour
 , IColliderEventDragEndHandler
 {
 
+    public bool translationEnabled;
+    public bool rotationEnabled;
+
     [SerializeField]
     private ColliderButtonEventData.InputButton m_manipulateButton = ColliderButtonEventData.InputButton.Trigger;
 
 
     [SerializeField]
-    private float scaleFactor = 1.0f;
+    private float positionScaleFactor = 1.0f;
+    [SerializeField]
+    private float rotationScaleFactor = 1.0f;
 
     private RigidPose m_orgCasterPose = RigidPose.identity;
     private RigidPose m_orgPose = RigidPose.identity;
-
-    //private RigidPose m_pCasterPose = RigidPose.identity;
-    //private RigidPose m_pPose = RigidPose.identity;
 
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
@@ -43,11 +45,25 @@ public class Manipulatable : MonoBehaviour
 
         var curCasterPose = GetEventPose(eventData);
 
-        Quaternion delta = GetDeltaQuaternion(m_orgCasterPose.rot, curCasterPose.rot);
+        if (translationEnabled)
+        {
+            // translation
+            Vector3 deltaPos = curCasterPose.pos - m_orgCasterPose.pos;
 
-        Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, scaleFactor);
+            Vector3 diffPos = deltaPos * positionScaleFactor;
 
-        transform.rotation = diff * m_orgPose.rot;
+            transform.position = diffPos + m_orgPose.pos;
+        }
+
+        if (rotationEnabled)
+        {
+            // rotation
+            Quaternion delta = GetDeltaQuaternion(m_orgCasterPose.rot, curCasterPose.rot);
+
+            Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
+
+            transform.rotation = diff * m_orgPose.rot;
+        }
 
         DockingManager.Instance.TouchUpdate();
     }
