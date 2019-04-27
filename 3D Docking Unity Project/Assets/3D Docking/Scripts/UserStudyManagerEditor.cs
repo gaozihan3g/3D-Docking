@@ -9,77 +9,63 @@ public class UserStudyManagerEditor : Editor
     UserStudyManager usm;
 
     int gridIndex = 0;
+    bool showMetricNames = false;
 
 
     void Init()
     {
         gridIndex = 0;
-
+        showMetricNames = false;
     }
-
-    void TaskGUI(int i)
-    {
-        GUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Condition #" + i))
-        {
-            usm.SetCurrentTask(i);
-        }
-
-        string s1;
-        string s2;
-        string s3;
-        string s4;
-        string s5;
-
-        if (usm.GetCurrentUser() == null)
-        {
-            s1 = s2 = s3 = s4 = s5 = "-";
-        }
-        else
-        {
-            s1 = usm.GetCurrentUser().tasks[i].time.ToString();
-            s2 = usm.GetCurrentUser().tasks[i].accuracy.ToString();
-            s3 = usm.GetCurrentUser().tasks[i].clutch.ToString();
-            s4 = usm.GetCurrentUser().tasks[i].initAngle.ToString();
-            s5 = usm.GetCurrentUser().tasks[i].angleThreshold.ToString();
-        }
-
-        GUILayout.Label("Time");
-        EditorGUILayout.TextField(s1);
-        GUILayout.Label("Accuracy");
-        EditorGUILayout.TextField(s2);
-        GUILayout.Label("Clutch");
-        EditorGUILayout.TextField(s3);
-        GUILayout.Label("InitAngle");
-        EditorGUILayout.TextField(s4);
-        GUILayout.Label("Threshold");
-        EditorGUILayout.TextField(s5);
-
-        GUILayout.EndHorizontal();
-    }
-
 
     public override void OnInspectorGUI()
     {
-
         if (!usm)
             usm = (UserStudyManager)target;
 
+        if (!usm.initialized)
+        {
+            SetupGUI();
+        }
+        else
+        {
+            ExperimentGUI();
+        }
 
+        EditorGUILayout.HelpBox(usm.log, MessageType.Info);
+
+        DrawDefaultInspector();
+    }
+
+    void SetupGUI()
+    {
         GUILayout.BeginHorizontal();
-
-        GUILayout.Label("Conditions"); 
-        usm.numOfConditions = (int)(EditorGUILayout.Slider(usm.numOfConditions, 2f, 10f));
+        usm.numOfConditions = EditorGUILayout.IntField("Total Conditions", usm.numOfConditions);
+        usm.numOfMetrics = EditorGUILayout.IntField("Total Metrics", usm.numOfMetrics);
         GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Initialize"))
         {
             Init();
             usm.Init();
         }
+    }
+
+    void ExperimentGUI()
+    {
+        showMetricNames = EditorGUILayout.Foldout(showMetricNames, "Metric Names");
+
+        if (showMetricNames)
+        {
+            for (int i = 0; i < usm.numOfMetrics; ++i)
+            {
+                usm.metrics[i] = EditorGUILayout.TextField("" + i, usm.metrics[i]);
+            }
+        }
+
+
+        GUILayout.BeginHorizontal();
+
 
         if (GUILayout.Button("New User"))
         {
@@ -87,6 +73,8 @@ public class UserStudyManagerEditor : Editor
         }
 
         GUILayout.EndHorizontal();
+
+
 
         if (usm.userSessions.Count != 0)
         {
@@ -114,13 +102,45 @@ public class UserStudyManagerEditor : Editor
 
         GUILayout.EndHorizontal();
 
+
+
+        GUILayout.BeginHorizontal();
+
         if (GUILayout.Button("Save Data"))
         {
             usm.SaveData();
         }
 
-        EditorGUILayout.HelpBox(usm.log, MessageType.Info);
+        if (GUILayout.Button("Clear"))
+        {
+            usm.Clear();
+        }
 
-        DrawDefaultInspector();
+        GUILayout.EndHorizontal();
+    }
+
+    void TaskGUI(int i)
+    {
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("Condition #" + i))
+        {
+            usm.SetCurrentTask(i);
+        }
+
+
+        for (int j = 0; j < usm.metrics.Count; ++j)
+        {
+            GUILayout.Label(usm.metrics[j]);
+
+            string s = "-";
+
+            if (usm.GetCurrentUser() != null)
+                s = usm.GetCurrentUser().tasks[i].data[j].ToString();
+
+            EditorGUILayout.TextField(s);
+        }
+
+        GUILayout.EndHorizontal();
     }
 }

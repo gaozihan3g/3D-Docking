@@ -22,13 +22,14 @@ public class UserStudyManager : MonoBehaviour
             userCount = 0;
         }
 
-        public UserSession(int noc)
+        // condition, metrics
+        public UserSession(int noc, int nom)
         {
             id = userCount++;
             tasks = new List<Task>();
 
             for (int i = 0; i < noc; ++i)
-                tasks.Add(new Task());
+                tasks.Add(new Task(nom));
         }
 
         override public string ToString()
@@ -51,32 +52,57 @@ public class UserStudyManager : MonoBehaviour
     [Serializable]
     public class Task
     {
-        public float time;
-        public float accuracy;
-        public int clutch;
-        public float initAngle;
-        public float angleThreshold;
+        //public float time;
+        //public float accuracy;
+        //public int clutch;
+        //public float initAngle;
+        //public float angleThreshold;
 
-        public Task()
+        public List<float> data;
+
+        public Task (List<float> d)
         {
-            time = 0f;
-            accuracy = 0f;
-            clutch = 0;
+            data = d;
         }
 
-        public Task(float t, float a, int c, float ia, float th)
+        public Task(int n)
         {
-            time = t;
-            accuracy = a;
-            clutch = c;
-            initAngle = ia;
-            angleThreshold = th;
+            data = new List<float>();
+
+            for (int i = 0; i < n; ++i)
+                data.Add(0f);
+
+            //time = 0f;
+            //accuracy = 0f;
+            //clutch = 0;
         }
+
+        //public Task(float t, float a, int c, float ia, float th)
+        //{
+        //    time = t;
+        //    accuracy = a;
+        //    clutch = c;
+        //    initAngle = ia;
+        //    angleThreshold = th;
+        //}
 
         override public string ToString()
         {
-            return string.Format("{0}\t{1}\t{2}\t{3}\t{4}", time, accuracy, clutch, initAngle, angleThreshold);
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < data.Count; ++i)
+            {
+                string s = data[i].ToString();
+                sb.Append(s);
+                sb.Append("\t");
+            }
+            return sb.ToString();
         }
+
+        //override public string ToString()
+        //{
+        //    return string.Format("{0}\t{1}\t{2}\t{3}\t{4}", time, accuracy, clutch, initAngle, angleThreshold);
+        //}
     }
 
 
@@ -85,17 +111,24 @@ public class UserStudyManager : MonoBehaviour
     public string path = "Assets/";
     public string filename = "data.txt";
 
+    const string NEEDINIT = "Initialization needed. Enter condition # and metric #.";
+
     [HideInInspector]
-    public string log = "User Study Manager";
-
+    public string log;
+    [HideInInspector]
+    public bool initialized;
+    [HideInInspector]
     public List<UserSession> userSessions;
-
     [HideInInspector]
     public int numOfConditions = 2;
     [HideInInspector]
     public int currentCondition = 0;
     [HideInInspector]
     public int currentUser = 0;
+    [HideInInspector]
+    public int numOfMetrics;
+    [HideInInspector]
+    public List<string> metrics = new List<string>();
 
 
 
@@ -121,23 +154,27 @@ public class UserStudyManager : MonoBehaviour
 
     public void Init()
     {
-        //numOfConditions = 1;
         currentCondition = 0;
         currentUser = 0;
 
         UserSession.Init();
         userSessions = new List<UserSession>();
 
+        metrics = new List<string>();
+
+        for (int i = 0; i < numOfMetrics; ++i)
+	        metrics.Add("");
+
         if (DockingManager.Instance != null)
             DockingManager.Instance.Init();
 
-        //initialized = true;
+        initialized = true;
         Log("Initialized.");
     }
 
     public void NewUser()
     {
-        var us = new UserSession(numOfConditions);
+        var us = new UserSession(numOfConditions, metrics.Count);
 
         userSessions.Add(us);
         Log("User Added. " + userSessions.Count);
@@ -169,6 +206,14 @@ public class UserStudyManager : MonoBehaviour
         File.AppendAllText(path + filename, sb.ToString());
 
         AssetDatabase.Refresh();
+    }
+
+    public void Clear()
+    {
+    	initialized = false;
+
+        Log(NEEDINIT);
+        // to sth else to clear
     }
 
     public void Log(string s)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class DockingManager : MonoBehaviour
 {
 
@@ -93,6 +94,9 @@ public class DockingManager : MonoBehaviour
 
     void UpdateDiffs()
     {
+        if (focusedObject == null || targetObject == null)
+            return;
+
         distance = Vector3.Distance(focusedObject.position, targetObject.position);
         angle = Quaternion.Angle(focusedObject.rotation, targetObject.rotation);
     }
@@ -146,9 +150,29 @@ public class DockingManager : MonoBehaviour
 
 
             // do sth to stop this task
-            // send to user study manager
-            UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Task(timer, angle, clutch, initAngle, angleThreshold));
+
+            // send data
+            SendData();
+
+
         }
     }
+
+    public void SendData()
+    {
+        List<float> data = new List<float>();
+
+        // fill data
+        data.Add(timer);
+        data.Add(angle);
+        data.Add(clutch);
+        data.Add(initAngle);
+        data.Add(angleThreshold);
+
+        // send to user study manager
+        UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Task(data));
+
+    }
+
 
 }
