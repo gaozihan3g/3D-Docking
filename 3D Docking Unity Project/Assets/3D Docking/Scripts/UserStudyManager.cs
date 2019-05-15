@@ -1,134 +1,51 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
 using UnityEditor;
+using System.Xml.Serialization;
 
 [ExecuteInEditMode]
 public class UserStudyManager : MonoBehaviour
 {
-    [Serializable]
-    public class UserSession
-    {
-        static int userCount;
-
-        public int id;
-        public List<Task> tasks;
-
-        static public void Init()
-        {
-            userCount = 0;
-        }
-
-        // condition, metrics
-        public UserSession(int noc, int nom)
-        {
-            id = userCount++;
-            tasks = new List<Task>();
-
-            for (int i = 0; i < noc; ++i)
-                tasks.Add(new Task(nom));
-        }
-
-        override public string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append(id + "\t");
-
-            for (int i = 0; i < tasks.Count; ++i)
-            {
-                string s = tasks[i].ToString();
-                sb.Append(s);
-                sb.Append("\t");
-            }
-
-            return sb.ToString();
-        }
-    }
-
-    [Serializable]
-    public class Task
-    {
-        //public float time;
-        //public float accuracy;
-        //public int clutch;
-        //public float initAngle;
-        //public float angleThreshold;
-
-        public List<float> data;
-
-        public Task (List<float> d)
-        {
-            data = d;
-        }
-
-        public Task(int n)
-        {
-            data = new List<float>();
-
-            for (int i = 0; i < n; ++i)
-                data.Add(0f);
-
-            //time = 0f;
-            //accuracy = 0f;
-            //clutch = 0;
-        }
-
-        //public Task(float t, float a, int c, float ia, float th)
-        //{
-        //    time = t;
-        //    accuracy = a;
-        //    clutch = c;
-        //    initAngle = ia;
-        //    angleThreshold = th;
-        //}
-
-        override public string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < data.Count; ++i)
-            {
-                string s = data[i].ToString();
-                sb.Append(s);
-                sb.Append("\t");
-            }
-            return sb.ToString();
-        }
-
-        //override public string ToString()
-        //{
-        //    return string.Format("{0}\t{1}\t{2}\t{3}\t{4}", time, accuracy, clutch, initAngle, angleThreshold);
-        //}
-    }
-
-
     public static UserStudyManager Instance;
 
     public string path = "Assets/";
-    public string filename = "data.txt";
-
+    public string filename = "output.txt";
+    public string xmlFilename = "data.xml";
     const string NEEDINIT = "Initialization needed. Enter condition # and metric #.";
+
+    [HideInInspector]
+    public int numOfUsers = 40;
+    //[HideInInspector]
+    public List<UserSession> userSessions;
+    [HideInInspector]
+    public int currentUser = 0;
+
+    [HideInInspector]
+    public int numOfConditions = 2;
+    [HideInInspector]
+    public int currentCondition = 0;
+
+    [HideInInspector]
+    public int numOfTrials = 5;
+    [HideInInspector]
+    public int currentTrial = 0;
+
+    [HideInInspector]
+    public int numOfMetrics;
+    [HideInInspector]
+    public List<string> metrics = new List<string>();
+
+
+    //TODO
+    public string dataString;
 
     [HideInInspector]
     public string log;
     [HideInInspector]
     public bool initialized;
-    [HideInInspector]
-    public List<UserSession> userSessions;
-    [HideInInspector]
-    public int numOfConditions = 2;
-    [HideInInspector]
-    public int currentCondition = 0;
-    [HideInInspector]
-    public int currentUser = 0;
-    [HideInInspector]
-    public int numOfMetrics;
-    [HideInInspector]
-    public List<string> metrics = new List<string>();
 
 
 
@@ -157,13 +74,20 @@ public class UserStudyManager : MonoBehaviour
         currentCondition = 0;
         currentUser = 0;
 
+        // populate users
+
         UserSession.Init();
         userSessions = new List<UserSession>();
+
+        for (int i = 0; i < numOfUsers; ++i) 
+        {
+            userSessions.Add(new UserSession(numOfConditions, numOfTrials, numOfMetrics));
+        }
 
         metrics = new List<string>();
 
         for (int i = 0; i < numOfMetrics; ++i)
-	        metrics.Add("");
+	        metrics.Add("metric" + i);
 
         if (DockingManager.Instance != null)
             DockingManager.Instance.Init();
@@ -172,40 +96,83 @@ public class UserStudyManager : MonoBehaviour
         Log("Initialized.");
     }
 
-    public void NewUser()
-    {
-        var us = new UserSession(numOfConditions, metrics.Count);
+    //public void NewUser()
+    //{
+    //    var us = new UserSession(numOfConditions, metrics.Count);
 
-        userSessions.Add(us);
-        Log("User Added. " + userSessions.Count);
-    }
+    //    userSessions.Add(us);
+    //    Log("User Added. " + userSessions.Count);
+    //}
 
-    public void SetCurrentTask(int i)
+    public void SetCurrentTask(int condition, int trial)
     {
-        currentCondition = i;
+        currentCondition = condition;
+        currentTrial = trial;
 
         // TODO init for a new trial
         if (DockingManager.Instance != null)
             DockingManager.Instance.Init();
 
-        Log("Current User: " + currentUser + " Current Condition: " + currentCondition);
+        Log("Current User: " + currentUser +
+            " Current Condition: " + currentCondition + 
+            " Current Trial: " + currentTrial);
     }
 
 
-    public void SaveData()
+    public void ExportData()
     {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < userSessions.Count; ++i)
+        // metric names
+        for (int i = 0; i < numOfConditions; ++i)
         {
-            string s = userSessions[i].ToString();
+            for (int j = 0; j < numOfTrials; ++j)
+            {
+                for (int k = 0; k < metrics.Count; ++k)
+                {
+                    string s = "c" + i + "t" + j + metrics[k];
+                    sb.Append(s);
+                    sb.Append("\t");
+                }
+            } 
+        }
+
+        sb.Append("\n");
+
+        for (int ii = 0; ii < userSessions.Count; ++ii)
+        {
+            string s = userSessions[ii].ToString();
             sb.Append(s);
             sb.Append("\n");
         }
 
-        File.AppendAllText(path + filename, sb.ToString());
+        File.WriteAllText(path + filename, sb.ToString());
+        AssetDatabase.Refresh();
+    }
+
+    public void LoadData()
+    {
+        LoadXML();
+    }
+
+    public void SaveXML()
+    {
+        var serializer = new XmlSerializer(typeof(List<UserSession>));
+        using (var stream = File.OpenWrite(path + xmlFilename))
+        {
+            serializer.Serialize(stream, userSessions);
+        }
 
         AssetDatabase.Refresh();
+    }
+
+    public void LoadXML()
+    {
+        var serializer = new XmlSerializer(typeof(List<UserSession>));
+        using (var stream = File.OpenRead(path + xmlFilename))
+        {
+            userSessions = (List<UserSession>)(serializer.Deserialize(stream));
+        }
     }
 
     public void Clear()
@@ -225,6 +192,93 @@ public class UserStudyManager : MonoBehaviour
     {
         userSessions[currentUser].tasks[currentCondition] = t;
         Debug.Log("currentUser: " + currentUser + "currentCondition " + currentCondition + " " + t.ToString());
+    }
+
+
+    [Serializable]
+    public class UserSession
+    {
+        static int userCount;
+
+        public int id;
+        public List<Task> tasks;
+
+        int numOfTrials;
+
+        static public void Init()
+        {
+            userCount = 0;
+        }
+
+        public UserSession()
+        { }
+
+        // condition, trial, metrics
+        public UserSession(int noc, int not, int nom)
+        {
+            id = userCount++;
+            numOfTrials = not;
+            tasks = new List<Task>();
+
+            for (int i = 0; i < noc * not; ++i)
+                tasks.Add(new Task(nom));
+        }
+
+        public Task GetTask(int c, int t)
+        {
+            return tasks[c * numOfTrials + t]; 
+        }
+
+        override public string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //sb.Append(id + "\t");
+
+            for (int i = 0; i < tasks.Count; ++i)
+            {
+                string s = tasks[i].ToString();
+                sb.Append(s);
+            }
+
+            return sb.ToString();
+        }
+    }
+
+    [Serializable]
+    public class Task
+    {
+        public List<float> data;
+
+
+        public Task()
+        { }
+
+        public Task(List<float> d)
+        {
+            data = d;
+        }
+
+        public Task(int n)
+        {
+            data = new List<float>();
+
+            for (int i = 0; i < n; ++i)
+                data.Add(0f);
+        }
+
+        override public string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < data.Count; ++i)
+            {
+                string s = data[i].ToString();
+                sb.Append(s);
+                sb.Append("\t");
+            }
+            return sb.ToString();
+        }
     }
 
 }

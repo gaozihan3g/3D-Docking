@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6460972407665195936}
-  - component: {fileID: 7546674128177771872}
+  - component: {fileID: 1256931337220654489}
   m_Layer: 0
   m_Name: User Study Manager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7546674128177771872
+--- !u!114 &1256931337220654489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,11 +44,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: Assets/
-  filename: data.txt
-  log: Initialized.
-  initialized: 0
+  filename: output.txt
+  xmlFilename: data.xml
+  numOfUsers: 40
   userSessions: []
-  numOfConditions: 1
-  currentCondition: 0
   currentUser: 0
+  numOfConditions: 2
+  currentCondition: 0
+  numOfTrials: 5
+  currentTrial: 0
+  numOfMetrics: 0
   metrics: []
+  dataString: 
+  log: 
+  initialized: 0
