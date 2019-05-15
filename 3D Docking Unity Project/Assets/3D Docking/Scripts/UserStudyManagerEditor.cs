@@ -9,14 +9,14 @@ public class UserStudyManagerEditor : Editor
     UserStudyManager usm;
 
     int gridIndex = 0;
-    bool showMetricNames = false;
+    //bool showMetricNames = false;
     bool[] showCondition = new bool[4];
 
 
     void Init()
     {
         gridIndex = 0;
-        showMetricNames = false;
+        //showMetricNames = false;
         showCondition = new bool[usm.numOfConditions];
     }
 
@@ -59,6 +59,7 @@ public class UserStudyManagerEditor : Editor
         if (GUILayout.Button("Load XML"))
         {
             usm.LoadXML();
+            Init();
         }
 
         if (GUILayout.Button("Export Data"))
@@ -88,15 +89,15 @@ public class UserStudyManagerEditor : Editor
 
     void ExperimentGUI()
     {
-        showMetricNames = EditorGUILayout.Foldout(showMetricNames, "Metric Names");
+        //showMetricNames = EditorGUILayout.Foldout(showMetricNames, "Metric Names");
 
-        if (showMetricNames)
-        {
-            for (int i = 0; i < usm.numOfMetrics; ++i)
-            {
-                usm.metrics[i] = EditorGUILayout.TextField("" + i, usm.metrics[i]);
-            }
-        }
+        //if (showMetricNames)
+        //{
+        //    for (int i = 0; i < usm.numOfMetrics; ++i)
+        //    {
+        //        usm.metrics[i] = EditorGUILayout.TextField("" + i, usm.metrics[i]);
+        //    }
+        //}
 
 
         if (usm.userSessions.Count != 0)
@@ -148,12 +149,12 @@ public class UserStudyManagerEditor : Editor
         }
 
 
-        for (int i = 0; i < usm.metrics.Count; ++i)
+        for (int i = 0; i < usm.numOfMetrics; ++i)
         {
             if (usm.GetCurrentUser() == null)
                 return;
 
-            GUILayout.Label(usm.metrics[i].ToString());
+            GUILayout.Label("Value " + (i + 1));
             EditorGUILayout.TextField(usm.GetCurrentUser().GetTask(con, tri).data[i].ToString());
         }
 
