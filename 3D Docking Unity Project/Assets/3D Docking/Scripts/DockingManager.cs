@@ -5,65 +5,164 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class DockingManager : MonoBehaviour
 {
+    public Transform anchor;
+    public Transform fromObject;
+    public Transform toObject;
+    public Transform head;
+    public Transform hand;
 
-    public Transform focusedObject;
-    public Transform targetObject;
+    public float randomOffsetRadius = 1f;
+    public float initDist = 1f;
+    public float initAngle;
 
     public float distance;
     public float angle;
 
-    public float distThreshold;
+    [Range(0f, 0.1f)]
+    public float easyDistThreshold = 0.03f;
+    [Range(0f, 30f)]
+    public float easyAngleThreshold = 30f;
 
-    [Range(1f, 30f)]
-    public float angleThreshold;
+    [Range(0f, 0.1f)]
+    public float distThreshold = 0.01f;
+    [Range(0f, 30f)]
+    public float angleThreshold = 5f;
 
-    public float initAngle;
+    bool isFirstTouch = true;
+    bool isTouching = false;
+    bool isTimeCounting = false;
 
+    bool easyThresholdMet = false;
 
-    public bool isFirstTouch = true;
-    public bool isTimeCounting = false;
-    public float startTime;
+    float startTime;
+
     public float timer = 0f;
     public int clutch = 0;
 
+    public float distAccuracy;
+    public float angleAccuracy;
+    public float totalAccuracy = 0f;
+
+    public float totalHeadDistance = 0f;
+    public float totalHeadAngle = 0f;
+
+    public float totalHandDistance = 0f;
+    public float totalHandAngle = 0f;
+
+    public float totalObjDistance = 0f;
+    public float totalObjAngle = 0f;
+
+    public float translationEfficiency = 0f;
+    public float rotationEfficiency = 0f;
+
+    public float timer_0 = 0f;
+    public int clutch_0 = 0;
+
+    public float distAccuracy_0;
+    public float angleAccuracy_0;
+
+    public float totalHeadDistance_0 = 0f;
+    public float totalHeadAngle_0 = 0f;
+
+    public float totalHandDistance_0 = 0f;
+    public float totalHandAngle_0 = 0f;
+
+    public float totalObjDistance_0 = 0f;
+    public float totalObjAngle_0 = 0f;
+
+    public float translationEfficiency_0 = 0f;
+    public float rotationEfficiency_0 = 0f;
+
+    Vector3 preHeadPos;
+    Quaternion preHeadRot;
+
+    Vector3 preHandPos;
+    Quaternion preHandRot;
+
+    Vector3 preFromObjPos;
+    Quaternion preFromObjRot;
+
+    Vector3 orgFromObjPos;
+    Quaternion orgFromObjRot;
+
+    public string timeFormatStr = "Completion Time: {0:F2}s";
 
     public static DockingManager Instance;
 
+    const float minMovementValue = 0.001f;
 
     public void Init()
     {
         isFirstTouch = true;
         isTimeCounting = false;
+        easyThresholdMet = false;
+
         startTime = 0f;
         timer = 0f;
         clutch = 0;
 
+        totalHeadDistance = 0f;
+        totalHeadAngle = 0f;
+
+        totalHandDistance = 0f;
+        totalHandAngle = 0f;
+
+        totalObjDistance = 0f;
+        totalObjAngle = 0f;
+
+        timer_0 = 0f;
+        clutch_0 = 0;
+
+        distAccuracy_0 = 0f;
+        angleAccuracy_0 = 0f;
+
+        totalHeadDistance_0 = 0f;
+        totalHeadAngle_0 = 0f;
+
+        totalHandDistance_0 = 0f;
+        totalHandAngle_0 = 0f;
+
+        totalObjDistance_0 = 0f;
+        totalObjAngle_0 = 0f;
+
+        translationEfficiency_0 = 0f;
+        rotationEfficiency_0 = 0f;
+
+
+        // reset pos
+        RandomPosition();
+
+        // reset rot
         RandomRotation();
+
+        // register org data
+        orgFromObjPos = fromObject.position;
+        orgFromObjRot = fromObject.rotation;
+
+
+        // reset UI
+        if (UIManager.Instance != null)
+            UIManager.Instance.SetText("Ready");
+    }
+
+    public void RandomPosition()
+    {
+        fromObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
+
+        var theta =  Random.Range(0f, 2 * Mathf.PI);
+        Vector3 d = new Vector3(Mathf.Cos(theta), 0f, Mathf.Sin(theta));
+        toObject.position = fromObject.position + d * initDist;
     }
 
     public void RandomRotation()
     {
-        var a = GetRandomRotation();
-        var b = GetRandomRotation();
+        var a = Random.rotation;
+        var x = Random.onUnitSphere;
+        var b = Quaternion.AngleAxis(initAngle, x);
 
-        initAngle = Quaternion.Angle(a, b);
-
-        while (initAngle < angleThreshold)
-        {
-            b = GetRandomRotation();
-            initAngle = Quaternion.Angle(a, b);
-            Debug.Log("small angle happened!");
-        }
-
-        focusedObject.rotation = a;
-        targetObject.rotation = b;
+        fromObject.rotation = a;
+        toObject.rotation = b * a;
     }
-
-    Quaternion GetRandomRotation()
-    {
-        return Random.rotation;
-    }
-
 
     void Awake()
     {
@@ -88,17 +187,30 @@ public class DockingManager : MonoBehaviour
     void Update()
     {
         UpdateDiffs();
+        UpdateAccuracy();
         UpdateTime();
+        UpdateStats();
     }
 
 
+
+    void UpdateAccuracy()
+    {
+        distAccuracy = Map(distance, initDist, 0f, 0f, 1f, true);
+        angleAccuracy = Map(angle, initAngle, 0f, 0f, 1f, true);
+        totalAccuracy = 0.5f * distAccuracy + 0.5f * angleAccuracy;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.SetColor(totalAccuracy);
+    }
+
     void UpdateDiffs()
     {
-        if (focusedObject == null || targetObject == null)
+        if (fromObject == null || toObject == null)
             return;
 
-        distance = Vector3.Distance(focusedObject.position, targetObject.position);
-        angle = Quaternion.Angle(focusedObject.rotation, targetObject.rotation);
+        distance = Vector3.Distance(fromObject.position, toObject.position);
+        angle = Quaternion.Angle(fromObject.rotation, toObject.rotation);
     }
 
     void UpdateTime()
@@ -109,8 +221,60 @@ public class DockingManager : MonoBehaviour
         }
     }
 
+    void UpdateStats()
+    {
+        if (head == null)
+            return;
+
+        if (fromObject == null)
+            return;
+
+        if (isTimeCounting)
+        {
+            // head
+            float deltaHD = Vector3.Distance(head.position, preHeadPos);
+
+            if (deltaHD > minMovementValue)
+                totalHeadDistance += deltaHD;
+
+            float deltaHA = Quaternion.Angle(head.rotation, preHeadRot);
+            totalHeadAngle += deltaHA;
+
+            // hand
+            // only touch
+            if (isTouching)
+            {
+                float deltaHandD = Vector3.Distance(hand.position, preHandPos);
+
+                if (deltaHandD > minMovementValue)
+                    totalHandDistance += deltaHandD;
+
+                float deltaHandA = Quaternion.Angle(hand.rotation, preHandRot);
+                totalHandAngle += deltaHandA;
+            }
+
+            // obj
+            float deltaOD = Vector3.Distance(fromObject.position, preFromObjPos);
+            totalObjDistance += deltaOD;
+
+            float deltaOA = Quaternion.Angle(fromObject.rotation, preFromObjRot);
+            totalObjAngle += deltaOA;
+
+        }
+
+        preHeadPos = head.position;
+        preHeadRot = head.rotation;
+
+        preHandPos = hand.position;
+        preHandRot = hand.rotation;
+
+        preFromObjPos = fromObject.position;
+        preFromObjRot = fromObject.rotation;
+    }
+
     public void TouchStart()
     {
+        isTouching = true;
         // touch check
         if (isFirstTouch)
         {
@@ -128,51 +292,137 @@ public class DockingManager : MonoBehaviour
 
     public void TouchEnd()
     {
-        // accuracy check
-        AccuracyCheck();
+        isTouching = false;
         // clutch +1
         clutch++;
+        // accuracy check
+        AccuracyCheck();
     }
 
 
     void AccuracyCheck()
     {
-        // get angle
+        // check easy
+        if (distance > easyDistThreshold)
+            return;
 
-        // compare with threshold
-        // if smaller, then stop timer
-        if (angle < angleThreshold)
+        if (angle > easyAngleThreshold)
+            return;
+
+        // change flag
+        if (!easyThresholdMet)
         {
-            isTimeCounting = false;
+            // if met, record stats
+            timer_0 = timer;
+            clutch_0 = clutch;
 
-            // audio feedback
-            AudioManager.Instance.PlaySound(0);
+            distAccuracy_0 = distAccuracy;
+            angleAccuracy_0 = angleAccuracy;
+
+            totalHeadDistance_0 = totalHeadDistance;
+            totalHeadAngle_0 = totalHeadAngle;
+
+            totalHandDistance_0 = totalHandDistance;
+            totalHandAngle_0 = totalHandAngle;
+
+            totalObjDistance_0 = totalObjDistance;
+            totalObjAngle_0 = totalObjAngle;
+
+            // calculate efficiency
+            translationEfficiency_0 = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance_0;
+            rotationEfficiency_0 = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle_0;
 
 
-            // do sth to stop this task
+    // audio feedback
+    AudioManager.Instance.PlaySound(0);
 
-            // send data
-            SendData();
-
-
+            easyThresholdMet = true;
         }
+
+        // check hard
+        if (distance > distThreshold)
+            return;
+
+        if (angle > angleThreshold)
+            return;
+
+        // stop timer
+        isTimeCounting = false;
+
+        // audio feedback
+        AudioManager.Instance.PlaySound(1);
+
+        // calculate efficiency
+        translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance;
+        rotationEfficiency = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle;
+
+        // do sth to stop this task
+
+        // send data
+        SendData();
     }
 
     public void SendData()
     {
+        if (UserStudyManager.Instance == null)
+        {
+            Debug.Log("GAME NOT RUNNING!");
+            return;
+        }
+
+
+
         List<float> data = new List<float>();
 
         // fill data
+
+        data.Add(timer_0);
         data.Add(timer);
-        data.Add(angle);
+
+        data.Add(clutch_0);
         data.Add(clutch);
-        data.Add(initAngle);
-        data.Add(angleThreshold);
+
+        data.Add(distAccuracy_0);
+        data.Add(distAccuracy);
+
+        data.Add(angleAccuracy_0);
+        data.Add(angleAccuracy);
+
+        data.Add(totalHeadDistance_0);
+        data.Add(totalHeadDistance);
+
+        data.Add(totalHeadAngle_0);
+        data.Add(totalHeadAngle);
+
+        data.Add(totalHandDistance_0);
+        data.Add(totalHandDistance);
+
+        data.Add(totalHandAngle_0);
+        data.Add(totalHandAngle);
+
+        data.Add(translationEfficiency_0);
+        data.Add(translationEfficiency);
+
+        data.Add(rotationEfficiency_0);
+        data.Add(rotationEfficiency);
+
+        // set completion time
+        UIManager.Instance.SetText(string.Format(timeFormatStr, timer));
 
         // send to user study manager
         UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Task(data));
 
     }
 
+    public static float Map(float v, float fmin, float fmax, float tmin, float tmax, bool clamp = false)
+    {
+        float fd = fmax - fmin;
+        float t = (v - fmin) / fd;
+        float td = tmax - tmin;
+        float r = tmin + t * td;
+        if (clamp)
+            return Mathf.Clamp(r, tmin, tmax);
+        return r;
+    }
 
 }

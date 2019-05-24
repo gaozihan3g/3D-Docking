@@ -11,10 +11,11 @@ public class UserStudyManager : MonoBehaviour
 {
     public static UserStudyManager Instance;
 
-    public string path = "Assets/";
-    public string filename = "output.txt";
-    public string xmlFilename = "data.xml";
+    string path = "Assets/";
+    string fileNameFormat = "output_{0}.txt";
+    string xmlFilename = "data.xml";
     const string NEEDINIT = "Initialization needed. Enter condition # and metric #.";
+    public bool practice = true;
 
     [HideInInspector]
     public int numOfUsers = 40;
@@ -24,7 +25,7 @@ public class UserStudyManager : MonoBehaviour
     public int currentUser = 0;
 
     [HideInInspector]
-    public int numOfConditions = 2;
+    public int numOfConditions = 4;
     [HideInInspector]
     public int currentCondition = 0;
 
@@ -34,13 +35,7 @@ public class UserStudyManager : MonoBehaviour
     public int currentTrial = 0;
 
     [HideInInspector]
-    public int numOfMetrics;
-    //[HideInInspector]
-    //public List<string> metrics = new List<string>();
-
-
-    //TODO
-    public string dataString;
+    public int numOfMetrics = 5;
 
     [HideInInspector]
     public string log;
@@ -69,6 +64,13 @@ public class UserStudyManager : MonoBehaviour
         }
     }
 
+    public void PracticeMode()
+    {
+        if (DockingManager.Instance != null)
+            DockingManager.Instance.Init();
+        practice = true;
+    }
+
     public void Init()
     {
         currentCondition = 0;
@@ -79,15 +81,10 @@ public class UserStudyManager : MonoBehaviour
         UserSession.Init();
         userSessions = new List<UserSession>();
 
-        for (int i = 0; i < numOfUsers; ++i) 
+        for (int i = 0; i < numOfUsers; ++i)
         {
             userSessions.Add(new UserSession(numOfConditions, numOfTrials, numOfMetrics));
         }
-
-        //metrics = new List<string>();
-
-        //for (int i = 0; i < numOfMetrics; ++i)
-	        //metrics.Add("metric" + i);
 
         if (DockingManager.Instance != null)
             DockingManager.Instance.Init();
@@ -99,6 +96,7 @@ public class UserStudyManager : MonoBehaviour
 
     public void SetCurrentTask(int condition, int trial)
     {
+        practice = false;
         currentCondition = condition;
         currentTrial = trial;
 
@@ -107,7 +105,7 @@ public class UserStudyManager : MonoBehaviour
             DockingManager.Instance.Init();
 
         Log("Current User: " + (currentUser + 1) +
-            " Current Condition: " + (currentCondition + 1) + 
+            " Current Condition: " + (currentCondition + 1) +
             " Current Trial: " + (currentTrial + 1));
     }
 
@@ -127,7 +125,7 @@ public class UserStudyManager : MonoBehaviour
                     sb.Append(s);
                     sb.Append("\t");
                 }
-            } 
+            }
         }
 
         sb.Append("\n");
@@ -139,14 +137,15 @@ public class UserStudyManager : MonoBehaviour
             sb.Append("\n");
         }
 
-        File.WriteAllText(path + filename, sb.ToString());
+        string fileNameStr = string.Format(fileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        File.WriteAllText(path + fileNameStr, sb.ToString());
         AssetDatabase.Refresh();
     }
 
     public void SaveXML()
     {
         var serializer = new XmlSerializer(typeof(List<UserSession>));
-        using (var stream = File.OpenWrite(path + xmlFilename))
+        using (var stream = new FileStream(path + xmlFilename, FileMode.Truncate))
         {
             serializer.Serialize(stream, userSessions);
         }
@@ -176,14 +175,19 @@ public class UserStudyManager : MonoBehaviour
         // get metrics
         var m = t[0].data;
         numOfMetrics = m.Count;
+
+        initialized = true;
     }
 
     public void Clear()
     {
-    	initialized = false;
+        initialized = false;
+
+
 
         Log(NEEDINIT);
         // to sth else to clear
+        userSessions = new List<UserSession>();
     }
 
     public void Log(string s)
@@ -193,11 +197,17 @@ public class UserStudyManager : MonoBehaviour
 
     public void SetTaskResult(Task t)
     {
+        if (practice)
+            return;
+
         userSessions[currentUser].conditions[currentCondition].trials[currentTrial] = t;
-        Debug.Log("currentUser: " + currentUser + 
-            "currentCondition " + currentCondition +
-            "currentTrial " + currentTrial +
-             " " + t.ToString());
+        Debug.Log("[CurrentUser: " + (currentUser + 1) +
+            "] [CurrentCondition: " + (currentCondition + 1) +
+            "] [CurrentTrial: " + (currentTrial + 1) +
+             "] " + t.ToString());
+
+        // save it ?
+        SaveXML();
     }
 
 

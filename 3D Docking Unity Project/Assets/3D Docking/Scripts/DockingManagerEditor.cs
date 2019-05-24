@@ -17,6 +17,10 @@ public class DockingManagerEditor : Editor
 
         DrawDefaultInspector();
 
+        if (GUILayout.Button("Initialize"))
+        {
+            dm.Init();
+        }
 
         if (GUILayout.Button("Send Data"))
         {

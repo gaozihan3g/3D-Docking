@@ -1,29 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
-[CustomEditor(typeof(UserStudyManager))]
-public class UserStudyManagerEditor : Editor
+public class UserStudyWindow : EditorWindow
 {
-    UserStudyManager usm;
+
+    public UserStudyManager usm;
 
     int gridIndex = 0;
-    //bool showMetricNames = false;
     bool[] showCondition = new bool[4];
 
 
-    void Init()
+    [MenuItem("Window/User Study Window")]
+    static void Init()
     {
-        gridIndex = 0;
-        //showMetricNames = false;
-        showCondition = new bool[usm.numOfConditions];
+        // Get existing open window or if none, make a new one:
+        UserStudyWindow window = (UserStudyWindow)EditorWindow.GetWindow(typeof(UserStudyWindow));
+        window.Show();
     }
 
-    public override void OnInspectorGUI()
+    private void Awake()
     {
-        if (!usm)
-            usm = (UserStudyManager)target;
+        Initialize();
+    }
+
+    void Initialize()
+    {
+        if (usm == null)
+            return;
+
+        gridIndex = 0;
+        showCondition = new bool[usm.numOfConditions];
+
+        for (int i = 0; i < showCondition.Length; ++i)
+            showCondition[i] = true;
+    }
+
+    void OnGUI()
+    {
+        if (usm == null)
+        {
+            if (GUILayout.Button("GetUserStudyManager"))
+            {
+                if (UserStudyManager.Instance != null)
+                    usm = UserStudyManager.Instance;
+            }
+        }
+
+        if (usm == null)
+            return;
 
         ConsoleGUI();
 
@@ -37,8 +62,6 @@ public class UserStudyManagerEditor : Editor
         }
 
         EditorGUILayout.HelpBox(usm.log, MessageType.Info);
-
-        DrawDefaultInspector();
     }
 
     void ConsoleGUI()
@@ -48,7 +71,7 @@ public class UserStudyManagerEditor : Editor
         if (GUILayout.Button("Initialize"))
         {
             usm.Init();
-            Init();
+            Initialize();
         }
 
         if (GUILayout.Button("Save XML"))
@@ -59,7 +82,7 @@ public class UserStudyManagerEditor : Editor
         if (GUILayout.Button("Load XML"))
         {
             usm.LoadXML();
-            Init();
+            Initialize();
         }
 
         if (GUILayout.Button("Export Data"))
@@ -77,35 +100,22 @@ public class UserStudyManagerEditor : Editor
 
     void SetupGUI()
     {
-        GUILayout.BeginHorizontal();
         usm.numOfUsers = EditorGUILayout.IntField("User #", usm.numOfUsers);
         usm.numOfConditions = EditorGUILayout.IntField("Condition #", usm.numOfConditions);
-        GUILayout.EndHorizontal();
-        GUILayout.BeginHorizontal();
         usm.numOfTrials = EditorGUILayout.IntField("Trial #", usm.numOfTrials);
         usm.numOfMetrics = EditorGUILayout.IntField("Metric #", usm.numOfMetrics);
-        GUILayout.EndHorizontal();
+
+        GUILayout.FlexibleSpace();
     }
 
     void ExperimentGUI()
     {
-        //showMetricNames = EditorGUILayout.Foldout(showMetricNames, "Metric Names");
-
-        //if (showMetricNames)
-        //{
-        //    for (int i = 0; i < usm.numOfMetrics; ++i)
-        //    {
-        //        usm.metrics[i] = EditorGUILayout.TextField("" + i, usm.metrics[i]);
-        //    }
-        //}
-
-
         if (usm.userSessions.Count != 0)
         {
             // user buttons
             List<string> gridStrings = new List<string>();
             for (int i = 0; i < usm.userSessions.Count; ++i)
-                gridStrings.Add("User #" + (i + 1).ToString());
+                gridStrings.Add("#" + (i + 1).ToString());
 
             gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), 10);
 
@@ -120,6 +130,15 @@ public class UserStudyManagerEditor : Editor
 
                 if (showCondition[j])
                 {
+                    // practice
+                    if (GUILayout.Button("Practice Condition #" + (j + 1)))
+                    {
+                        //change condition
+                        if (ConditionManager.Instance != null)
+                            ConditionManager.Instance.SetCondition(j);
+
+                        usm.PracticeMode();
+                    }
                     // each task
                     for (int i = 0; i < usm.numOfTrials; ++i)
                     {
@@ -128,6 +147,8 @@ public class UserStudyManagerEditor : Editor
                 }
             }
         }
+
+        GUILayout.FlexibleSpace();
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("User");
@@ -143,8 +164,11 @@ public class UserStudyManagerEditor : Editor
     {
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Trial #" + (tri + 1)))
+        if (GUILayout.Button("Trial #" + (tri + 1), GUILayout.Width(100)))
         {
+            //change condition
+            ConditionManager.Instance.SetCondition(con);
+
             usm.SetCurrentTask(con, tri);
         }
 
@@ -154,8 +178,7 @@ public class UserStudyManagerEditor : Editor
             if (usm.GetCurrentUser() == null)
                 return;
 
-            GUILayout.Label("Value " + (i + 1));
-            EditorGUILayout.TextField(usm.GetCurrentUser().GetTask(con, tri).data[i].ToString());
+            usm.GetCurrentUser().GetTask(con, tri).data[i] = EditorGUILayout.FloatField(usm.GetCurrentUser().GetTask(con, tri).data[i], GUILayout.Width(30));
         }
 
         GUILayout.EndHorizontal();

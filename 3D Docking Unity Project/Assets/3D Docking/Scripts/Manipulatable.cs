@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using HTC.UnityPlugin.Vive;
 
 public class Manipulatable : MonoBehaviour
+, IColliderEventHoverEnterHandler
+, IColliderEventHoverExitHandler
 , IColliderEventDragStartHandler
 , IColliderEventDragUpdateHandler
 , IColliderEventDragEndHandler
@@ -15,6 +17,8 @@ public class Manipulatable : MonoBehaviour
 
     public bool translationEnabled;
     public bool rotationEnabled;
+    public bool showHighlight = false;
+    public GameObject highlight;
 
     [SerializeField]
     private ColliderButtonEventData.InputButton m_manipulateButton = ColliderButtonEventData.InputButton.Trigger;
@@ -27,6 +31,8 @@ public class Manipulatable : MonoBehaviour
 
     private RigidPose m_orgCasterPose = RigidPose.identity;
     private RigidPose m_orgPose = RigidPose.identity;
+
+
 
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
@@ -87,39 +93,34 @@ public class Manipulatable : MonoBehaviour
         return d;
     }
 
-    void Start()
+    public void SetRotationFactor(float f)
     {
+        rotationScaleFactor = f;
     }
 
+    public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
+    {
+        if (highlight == null)
+            return;
 
+        if (showHighlight)
+            highlight.SetActive(true);
+    }
 
+    public void OnColliderEventHoverExit(ColliderHoverEventData eventData)
+    {
+        if (highlight == null)
+            return;
 
-    //public void OnColliderEventDragStart(ColliderButtonEventData eventData)
-    //{
-    //    if (eventData.button != m_manipulateButton) { return; }
+        if (showHighlight)
+            highlight.SetActive(false);
+    }
+    void Start()
+    {
+        if (highlight == null)
+            return;
 
-    //    m_pCasterPose = m_orgCasterPose = GetEventPose(eventData);
-    //    m_pPose = m_orgPose = new RigidPose(transform);
-
-    //}
-
-    //public void OnColliderEventDragUpdate(ColliderButtonEventData eventData)
-    //{
-    //    if (eventData.button != m_manipulateButton) { return; }
-
-    //    var casterPose = GetEventPose(eventData);
-
-    //    var offsetPose = RigidPose.FromToPose(m_pCasterPose, m_pPose);
-
-    //    var deltaPose = RigidPose.FromToPose(m_pCasterPose, casterPose);
-    //    Quaternion rot = Quaternion.LerpUnclamped(Quaternion.identity, deltaPose.rot, scaleFactor);
-
-    //    var targetPose = m_pPose * deltaPose;
-
-    //    transform.position = targetPose.pos;
-    //    transform.rotation = targetPose.rot;
-
-    //    m_pPose = targetPose;
-    //    m_pCasterPose = casterPose;
-    //}
+        if (showHighlight)
+            highlight.SetActive(false);
+    }
 }
