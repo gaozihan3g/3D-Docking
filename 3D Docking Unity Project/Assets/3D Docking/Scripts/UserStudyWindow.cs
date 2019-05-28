@@ -8,7 +8,8 @@ public class UserStudyWindow : EditorWindow
     public UserStudyManager usm;
 
     int gridIndex = 0;
-    bool[] showCondition = new bool[4];
+    Vector2 scrollPos;
+    bool[] showCondition;
 
 
     [MenuItem("Window/User Study Window")]
@@ -117,10 +118,12 @@ public class UserStudyWindow : EditorWindow
             for (int i = 0; i < usm.userSessions.Count; ++i)
                 gridStrings.Add("#" + (i + 1).ToString());
 
-            gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), 10);
+            gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), 6);
 
             usm.currentUser = gridIndex;
 
+
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
 
             // each condition
@@ -130,22 +133,32 @@ public class UserStudyWindow : EditorWindow
 
                 if (showCondition[j])
                 {
+
+                    string s = gridIndex % usm.numOfConditions + "_" + j;
+
+                    if (usm.OrderDictionary == null)
+                        usm.InitOrderDict();
+
+                    int c = usm.OrderDictionary[s];
+
                     // practice
-                    if (GUILayout.Button("Practice Condition #" + (j + 1)))
+                    if (GUILayout.Button("Practice " + ((ConditionManager.Condition)c).ToString()))
                     {
                         //change condition
                         if (ConditionManager.Instance != null)
-                            ConditionManager.Instance.SetCondition(j);
+                            ConditionManager.Instance.SetCondition(c);
 
                         usm.PracticeMode();
                     }
                     // each task
                     for (int i = 0; i < usm.numOfTrials; ++i)
                     {
-                        TaskGUI(j, i);
+                        TaskGUI(c, i);
                     }
                 }
             }
+
+            EditorGUILayout.EndScrollView();
         }
 
         GUILayout.FlexibleSpace();
@@ -164,7 +177,7 @@ public class UserStudyWindow : EditorWindow
     {
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Trial #" + (tri + 1), GUILayout.Width(100)))
+        if (GUILayout.Button(((ConditionManager.Condition)con).ToString() + " #" + (tri + 1), GUILayout.Width(150)))
         {
             //change condition
             ConditionManager.Instance.SetCondition(con);

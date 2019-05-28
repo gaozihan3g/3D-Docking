@@ -18,14 +18,14 @@ public class UserStudyManager : MonoBehaviour
     public bool practice = true;
 
     [HideInInspector]
-    public int numOfUsers = 40;
+    public int numOfUsers = 36;
     //[HideInInspector]
     public List<UserSession> userSessions;
     [HideInInspector]
     public int currentUser = 0;
 
     [HideInInspector]
-    public int numOfConditions = 4;
+    public int numOfConditions = 6;
     [HideInInspector]
     public int currentCondition = 0;
 
@@ -35,14 +35,15 @@ public class UserStudyManager : MonoBehaviour
     public int currentTrial = 0;
 
     [HideInInspector]
-    public int numOfMetrics = 5;
+    public int numOfMetrics = 20;
 
     [HideInInspector]
     public string log;
     [HideInInspector]
     public bool initialized;
 
-
+    private Dictionary<string, int> orderDictionary;
+    public Dictionary<string, int> OrderDictionary { get => orderDictionary; }
 
     public UserSession GetCurrentUser()
     {
@@ -76,6 +77,8 @@ public class UserStudyManager : MonoBehaviour
         currentCondition = 0;
         currentUser = 0;
 
+        InitOrderDict();
+
         // populate users
 
         UserSession.Init();
@@ -91,6 +94,53 @@ public class UserStudyManager : MonoBehaviour
 
         initialized = true;
         Log("Initialized.");
+    }
+
+    public void InitOrderDict()
+    {
+        orderDictionary = new Dictionary<string, int>();
+
+        orderDictionary.Add("0_0", 0);
+        orderDictionary.Add("0_1", 1);
+        orderDictionary.Add("0_2", 5);
+        orderDictionary.Add("0_3", 2);
+        orderDictionary.Add("0_4", 4);
+        orderDictionary.Add("0_5", 3);
+
+        orderDictionary.Add("1_0", 1);
+        orderDictionary.Add("1_1", 2);
+        orderDictionary.Add("1_2", 0);
+        orderDictionary.Add("1_3", 3);
+        orderDictionary.Add("1_4", 5);
+        orderDictionary.Add("1_5", 4);
+
+        orderDictionary.Add("2_0", 2);
+        orderDictionary.Add("2_1", 3);
+        orderDictionary.Add("2_2", 1);
+        orderDictionary.Add("2_3", 4);
+        orderDictionary.Add("2_4", 0);
+        orderDictionary.Add("2_5", 5);
+
+        orderDictionary.Add("3_0", 3);
+        orderDictionary.Add("3_1", 4);
+        orderDictionary.Add("3_2", 2);
+        orderDictionary.Add("3_3", 5);
+        orderDictionary.Add("3_4", 1);
+        orderDictionary.Add("3_5", 0);
+
+        orderDictionary.Add("4_0", 4);
+        orderDictionary.Add("4_1", 5);
+        orderDictionary.Add("4_2", 3);
+        orderDictionary.Add("4_3", 0);
+        orderDictionary.Add("4_4", 2);
+        orderDictionary.Add("4_5", 1);
+
+        orderDictionary.Add("5_0", 5);
+        orderDictionary.Add("5_1", 0);
+        orderDictionary.Add("5_2", 4);
+        orderDictionary.Add("5_3", 1);
+        orderDictionary.Add("5_4", 3);
+        orderDictionary.Add("5_5", 2);
     }
 
 

@@ -9,7 +9,7 @@ public class ConditionManager : MonoBehaviour
     {
         VR_SLOW,
         VR_NORMAL,
-        VR_fAST,
+        VR_FAST,
         AR_SLOW,
         AR_NORMAL,
         AR_FAST
@@ -18,8 +18,8 @@ public class ConditionManager : MonoBehaviour
     public Condition curCondition;
     public static ConditionManager Instance;
 
-    public MeshRenderer camRenderer;
-    public GameObject environment;
+    public GameObject[] highResObjects;
+    public GameObject[] lowResObjects;
     public Manipulatable obj;
 
     public float slow = 0.33f;
@@ -43,13 +43,13 @@ public class ConditionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnValidate()
@@ -69,51 +69,60 @@ public class ConditionManager : MonoBehaviour
         {
             case Condition.VR_SLOW:
                 SetSpeedLevel(0);
-                ToggleEnvironment(true);
-                ToggleCam(false);
+                ToggleLowRes(true);
+                ToggleHighRes(false);
                 break;
             case Condition.VR_NORMAL:
                 SetSpeedLevel(1);
-                ToggleEnvironment(true);
-                ToggleCam(false);
+                ToggleLowRes(true);
+                ToggleHighRes(false);
                 break;
-            case Condition.VR_fAST:
+            case Condition.VR_FAST:
                 SetSpeedLevel(2);
-                ToggleEnvironment(true);
-                ToggleCam(false);
+                ToggleLowRes(true);
+                ToggleHighRes(false);
                 break;
             case Condition.AR_SLOW:
                 SetSpeedLevel(0);
-                ToggleEnvironment(false);
-                ToggleCam(true);
+                ToggleLowRes(false);
+                ToggleHighRes(true);
                 break;
             case Condition.AR_NORMAL:
                 SetSpeedLevel(1);
-                ToggleEnvironment(false);
-                ToggleCam(true);
+                ToggleLowRes(false);
+                ToggleHighRes(true);
                 break;
             case Condition.AR_FAST:
                 SetSpeedLevel(2);
-                ToggleEnvironment(false);
-                ToggleCam(true);
+                ToggleLowRes(false);
+                ToggleHighRes(true);
                 break;
         }
     }
 
-    void ToggleCam(bool b)
+    void ToggleHighRes(bool b)
     {
-        if (camRenderer == null)
+        if (highResObjects == null)
             return;
 
-        camRenderer.enabled = b;
+        foreach (var o in highResObjects)
+        {
+            if (o != null)
+                o.SetActive(b);
+        }
     }
 
-    void ToggleEnvironment(bool b)
+    void ToggleLowRes(bool b)
     {
-        if (environment == null)
+        if (lowResObjects == null)
             return;
 
-        environment.SetActive(b);
+        foreach (var o in lowResObjects)
+        {
+            if (o != null)
+                o.SetActive(b);
+        }
+
     }
 
     void SetSpeedLevel(int i)
