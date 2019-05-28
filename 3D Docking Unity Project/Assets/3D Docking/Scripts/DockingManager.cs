@@ -410,7 +410,7 @@ public class DockingManager : MonoBehaviour
         UIManager.Instance.SetText(string.Format(timeFormatStr, timer));
 
         // send to user study manager
-        UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Task(data));
+        UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Trial(data));
 
     }
 

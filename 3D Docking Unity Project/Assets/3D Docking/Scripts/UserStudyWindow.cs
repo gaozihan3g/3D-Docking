@@ -91,6 +91,11 @@ public class UserStudyWindow : EditorWindow
             usm.ExportData();
         }
 
+        if (GUILayout.Button("Export Data 0"))
+        {
+            usm.ExportData(0);
+        }
+
         if (GUILayout.Button("Clear"))
         {
             usm.Clear();
@@ -141,8 +146,9 @@ public class UserStudyWindow : EditorWindow
 
                     int c = usm.OrderDictionary[s];
 
+                    EditorGUILayout.BeginHorizontal();
                     // practice
-                    if (GUILayout.Button("Practice " + ((ConditionManager.Condition)c).ToString()))
+                    if (GUILayout.Button("Practice \n" + ((ConditionManager.Condition)c).ToString(), GUILayout.ExpandHeight(true), GUILayout.MaxWidth(100)))
                     {
                         //change condition
                         if (ConditionManager.Instance != null)
@@ -150,11 +156,16 @@ public class UserStudyWindow : EditorWindow
 
                         usm.PracticeMode();
                     }
+
+                    EditorGUILayout.BeginVertical();
                     // each task
                     for (int i = 0; i < usm.numOfTrials; ++i)
                     {
                         TaskGUI(c, i);
                     }
+                    EditorGUILayout.EndVertical();
+
+                    EditorGUILayout.EndHorizontal();
                 }
             }
 

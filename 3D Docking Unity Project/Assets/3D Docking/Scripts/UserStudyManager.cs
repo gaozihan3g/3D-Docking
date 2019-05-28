@@ -160,6 +160,38 @@ public class UserStudyManager : MonoBehaviour
     }
 
 
+    public void ExportData(int k)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        // metric names
+        for (int i = 0; i < numOfConditions; ++i)
+        {
+            for (int j = 0; j < numOfTrials; ++j)
+            {
+                string s = "c" + i + "t" + j + "v" + k;
+                sb.Append(s);
+                sb.Append("\t");
+            }
+        }
+
+        sb.Append("\n");
+
+        // values
+        for (int i = 0; i < userSessions.Count; ++i)
+        {
+            var dataStr = userSessions[i].GetDataString(k);
+
+
+            sb.Append(dataStr);
+            sb.Append("\n");
+        }
+
+        string fileNameStr = string.Format(fileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        File.WriteAllText(path + fileNameStr, sb.ToString());
+        AssetDatabase.Refresh();
+    }
+
     public void ExportData()
     {
         StringBuilder sb = new StringBuilder();
@@ -245,7 +277,7 @@ public class UserStudyManager : MonoBehaviour
         log = s;
     }
 
-    public void SetTaskResult(Task t)
+    public void SetTaskResult(Trial t)
     {
         if (practice)
             return;
@@ -288,9 +320,21 @@ public class UserStudyManager : MonoBehaviour
                 conditions.Add(new Condition(not, nom));
         }
 
-        public Task GetTask(int c, int t)
+        public Trial GetTask(int c, int t)
         {
             return conditions[c].trials[t];
+        }
+
+        public string GetDataString(int k)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < conditions.Count; ++i)
+            {
+                string s = conditions[i].GetDataString(k);
+                sb.Append(s);
+            }
+            return sb.ToString();
         }
 
         override public string ToString()
@@ -310,17 +354,29 @@ public class UserStudyManager : MonoBehaviour
     [Serializable]
     public class Condition
     {
-        public List<Task> trials;
+        public List<Trial> trials;
 
         public Condition()
         { }
 
         public Condition(int not, int nom)
         {
-            trials = new List<Task>();
+            trials = new List<Trial>();
 
             for (int i = 0; i < not; ++i)
-                trials.Add(new Task(nom));
+                trials.Add(new Trial(nom));
+        }
+
+        public string GetDataString(int k)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < trials.Count; ++i)
+            {
+                string s = trials[i].GetDataString(k);
+                sb.Append(s);
+            }
+            return sb.ToString();
         }
 
         override public string ToString()
@@ -338,25 +394,30 @@ public class UserStudyManager : MonoBehaviour
 
 
     [Serializable]
-    public class Task
+    public class Trial
     {
         public List<float> data;
 
 
-        public Task()
+        public Trial()
         { }
 
-        public Task(List<float> d)
+        public Trial(List<float> d)
         {
             data = d;
         }
 
-        public Task(int n)
+        public Trial(int n)
         {
             data = new List<float>();
 
             for (int i = 0; i < n; ++i)
                 data.Add(0f);
+        }
+
+        public string GetDataString(int k)
+        {
+            return data[k].ToString() + "\t";
         }
 
         override public string ToString()
