@@ -15,9 +15,6 @@ public class DockingManager : MonoBehaviour
     public float initDist = 1f;
     public float initAngle;
 
-    public float distance;
-    public float angle;
-
     [Range(0f, 0.1f)]
     public float easyDistThreshold = 0.03f;
     [Range(0f, 30f)]
@@ -27,6 +24,8 @@ public class DockingManager : MonoBehaviour
     public float distThreshold = 0.01f;
     [Range(0f, 30f)]
     public float angleThreshold = 5f;
+
+    //public bool updateDistance = false;
 
     bool isFirstTouch = true;
     bool isTouching = false;
@@ -39,9 +38,8 @@ public class DockingManager : MonoBehaviour
     public float timer = 0f;
     public int clutch = 0;
 
-    public float distAccuracy;
-    public float angleAccuracy;
-    public float totalAccuracy = 0f;
+    public float distance;
+    public float angle;
 
     public float totalHeadDistance = 0f;
     public float totalHeadAngle = 0f;
@@ -58,8 +56,8 @@ public class DockingManager : MonoBehaviour
     public float timer_0 = 0f;
     public int clutch_0 = 0;
 
-    public float distAccuracy_0;
-    public float angleAccuracy_0;
+    public float distance0;
+    public float angle0;
 
     public float totalHeadDistance_0 = 0f;
     public float totalHeadAngle_0 = 0f;
@@ -113,8 +111,8 @@ public class DockingManager : MonoBehaviour
         timer_0 = 0f;
         clutch_0 = 0;
 
-        distAccuracy_0 = 0f;
-        angleAccuracy_0 = 0f;
+        distance0 = 0f;
+        angle0 = 0f;
 
         totalHeadDistance_0 = 0f;
         totalHeadAngle_0 = 0f;
@@ -141,15 +139,15 @@ public class DockingManager : MonoBehaviour
 
 
         // reset UI
-        if (UIManager.Instance != null)
-            UIManager.Instance.SetText("Ready");
+        //if (UIManager.Instance != null)
+        //    UIManager.Instance.SetText("Ready");
     }
 
     public void RandomPosition()
     {
         fromObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
 
-        var theta =  Random.Range(0f, 2 * Mathf.PI);
+        var theta = Random.Range(0f, 2 * Mathf.PI);
         Vector3 d = new Vector3(Mathf.Cos(theta), 0f, Mathf.Sin(theta));
         toObject.position = fromObject.position + d * initDist;
     }
@@ -196,12 +194,18 @@ public class DockingManager : MonoBehaviour
 
     void UpdateAccuracy()
     {
-        distAccuracy = Map(distance, initDist, 0f, 0f, 1f, true);
-        angleAccuracy = Map(angle, initAngle, 0f, 0f, 1f, true);
-        totalAccuracy = 0.5f * distAccuracy + 0.5f * angleAccuracy;
+        //float distAccuracy = Map(distance, initDist, 0f, 0f, 1f, true);
+        float angleAccuracy = Map(angle, initAngle, 0f, 0f, 1f, true);
+
+        //float totalAccuracy = 0f;
+
+        //if (updateDistance)
+        //    totalAccuracy = 0.5f * distAccuracy + 0.5f * angleAccuracy;
+        //else
+        //    totalAccuracy = angleAccuracy;
 
         if (UIManager.Instance != null)
-            UIManager.Instance.SetColor(totalAccuracy);
+            UIManager.Instance.SetColor(angleAccuracy);
     }
 
     void UpdateDiffs()
@@ -210,6 +214,7 @@ public class DockingManager : MonoBehaviour
             return;
 
         distance = Vector3.Distance(fromObject.position, toObject.position);
+
         angle = Quaternion.Angle(fromObject.rotation, toObject.rotation);
     }
 
@@ -316,8 +321,8 @@ public class DockingManager : MonoBehaviour
             timer_0 = timer;
             clutch_0 = clutch;
 
-            distAccuracy_0 = distAccuracy;
-            angleAccuracy_0 = angleAccuracy;
+            distance0 = distance;
+            angle0 = angle;
 
             totalHeadDistance_0 = totalHeadDistance;
             totalHeadAngle_0 = totalHeadAngle;
@@ -333,8 +338,8 @@ public class DockingManager : MonoBehaviour
             rotationEfficiency_0 = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle_0;
 
 
-    // audio feedback
-    AudioManager.Instance.PlaySound(0);
+            // audio feedback
+            AudioManager.Instance.PlaySound(0);
 
             easyThresholdMet = true;
         }
@@ -350,16 +355,26 @@ public class DockingManager : MonoBehaviour
         isTimeCounting = false;
 
         // audio feedback
+        // if last task
         AudioManager.Instance.PlaySound(1);
 
         // calculate efficiency
         translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance;
         rotationEfficiency = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle;
 
-        // do sth to stop this task
-
         // send data
         SendData();
+
+        // auto start next trial
+        AutoStartNextTrial();
+
+    }
+
+
+    //TODO
+    void AutoStartNextTrial()
+    {
+        UserStudyManager.Instance.AutoSetNextTask();
     }
 
     public void SendData()
@@ -379,14 +394,14 @@ public class DockingManager : MonoBehaviour
         data.Add(timer_0);
         data.Add(timer);
 
+        data.Add(angle0);
+        data.Add(angle);
+
+        data.Add(distance0);
+        data.Add(distance);
+
         data.Add(clutch_0);
         data.Add(clutch);
-
-        data.Add(distAccuracy_0);
-        data.Add(distAccuracy);
-
-        data.Add(angleAccuracy_0);
-        data.Add(angleAccuracy);
 
         data.Add(totalHeadDistance_0);
         data.Add(totalHeadDistance);
@@ -407,7 +422,7 @@ public class DockingManager : MonoBehaviour
         data.Add(rotationEfficiency);
 
         // set completion time
-        UIManager.Instance.SetText(string.Format(timeFormatStr, timer));
+        //UIManager.Instance.SetText(string.Format(timeFormatStr, timer));
 
         // send to user study manager
         UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Trial(data));

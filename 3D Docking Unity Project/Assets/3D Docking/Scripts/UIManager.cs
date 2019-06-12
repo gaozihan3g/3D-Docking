@@ -39,7 +39,24 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateText();
+    }
 
+    void UpdateText()
+    {
+        if (ConditionManager.Instance == null)
+            return;
+        if (UserStudyManager.Instance == null)
+            return;
+        if (DockingManager.Instance == null)
+            return;
+
+        text.text = string.Format("Condition: {0}\nCondition: {1} / 8\nTrial: {2} / 10\n\nCompletion Time: {3:F2}s",
+            ConditionManager.Instance.curCondition.ToString(),
+            UserStudyManager.Instance.autoConditionCounter + 1,
+            UserStudyManager.Instance.currentTrial + 1,
+            DockingManager.Instance.timer
+            );
     }
 
     public void SetText(string s = "")

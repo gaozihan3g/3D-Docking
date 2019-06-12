@@ -10,6 +10,8 @@ public class UserStudyWindow : EditorWindow
     int gridIndex = 0;
     Vector2 scrollPos;
     bool[] showCondition;
+    int exportIndex = 0;
+    public string[] options;
 
 
     [MenuItem("Window/User Study Window")]
@@ -35,6 +37,14 @@ public class UserStudyWindow : EditorWindow
 
         for (int i = 0; i < showCondition.Length; ++i)
             showCondition[i] = true;
+
+        exportIndex = 0;
+
+        List<string> s = new List<string>();
+        for (int j = 0; j < usm.numOfMetrics; ++j)
+            s.Add(j.ToString());
+        //options
+        options = s.ToArray();
     }
 
     void OnGUI()
@@ -68,37 +78,44 @@ public class UserStudyWindow : EditorWindow
     void ConsoleGUI()
     {
         GUILayout.BeginHorizontal();
-
         if (GUILayout.Button("Initialize"))
         {
             usm.Init();
             Initialize();
         }
-
         if (GUILayout.Button("Save XML"))
         {
             usm.SaveXML();
         }
-
         if (GUILayout.Button("Load XML"))
         {
             usm.LoadXML();
             Initialize();
         }
 
-        if (GUILayout.Button("Export Data"))
-        {
-            usm.ExportData();
-        }
-
-        if (GUILayout.Button("Export Data 0"))
-        {
-            usm.ExportData(0);
-        }
 
         if (GUILayout.Button("Clear"))
         {
             usm.Clear();
+        }
+
+        GUILayout.EndHorizontal();
+
+
+        GUILayout.BeginHorizontal();
+
+        exportIndex = EditorGUILayout.Popup(exportIndex, options);
+
+
+        if (GUILayout.Button("Export Data " + exportIndex))
+        {
+            usm.ExportData(exportIndex);
+        }
+
+        if (GUILayout.Button("Export All Data"))
+        {
+            for (int i = 0; i < usm.numOfMetrics; ++i)
+                usm.ExportData(i);
         }
 
         GUILayout.EndHorizontal();
@@ -123,13 +140,21 @@ public class UserStudyWindow : EditorWindow
             for (int i = 0; i < usm.userSessions.Count; ++i)
                 gridStrings.Add("#" + (i + 1).ToString());
 
-            gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), 6);
+            gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), 8);
 
             usm.currentUser = gridIndex;
 
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
+
+            // auto button
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Auto", GUILayout.Width(100)))
+            {
+                usm.AutoInit();
+            }
+            GUILayout.EndHorizontal();
 
             // each condition
             for (int j = 0; j < usm.numOfConditions; ++j)
@@ -144,11 +169,11 @@ public class UserStudyWindow : EditorWindow
                     if (usm.OrderDictionary == null)
                         usm.InitOrderDict();
 
-                    int c = usm.OrderDictionary[s];
+                    int c = usm.OrderDictionary[s] - 1;
 
                     EditorGUILayout.BeginHorizontal();
                     // practice
-                    if (GUILayout.Button("Practice \n" + ((ConditionManager.Condition)c).ToString(), GUILayout.ExpandHeight(true), GUILayout.MaxWidth(100)))
+                    if (GUILayout.Button("Practice #" + (c + 1) + "\n" + ((ConditionManager.Condition)c).ToString(), GUILayout.ExpandHeight(true), GUILayout.Width(100)))
                     {
                         //change condition
                         if (ConditionManager.Instance != null)
@@ -190,10 +215,7 @@ public class UserStudyWindow : EditorWindow
 
         if (GUILayout.Button(((ConditionManager.Condition)con).ToString() + " #" + (tri + 1), GUILayout.Width(150)))
         {
-            //change condition
-            ConditionManager.Instance.SetCondition(con);
-
-            usm.SetCurrentTask(con, tri);
+            usm.TaskSetup(con, tri);
         }
 
 

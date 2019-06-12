@@ -11,11 +11,13 @@ public class UserStudyManager : MonoBehaviour
 {
     public static UserStudyManager Instance;
 
-    string path = "Assets/";
-    string fileNameFormat = "output_{0}.txt";
-    string xmlFilename = "data.xml";
-    const string NEEDINIT = "Initialization needed. Enter condition # and metric #.";
+    const string kPath = "Assets/Output/";
+    const string kXmlFileName = "data.xml";
+    const string kFileNameFormat = "output_{0}_{1}.txt";
+    const string kNeedInit = "Initialization needed. Enter condition # and metric #.";
     public bool practice = true;
+    public bool auto = false;
+    public int autoConditionCounter = 0;
 
     [HideInInspector]
     public int numOfUsers = 36;
@@ -76,6 +78,7 @@ public class UserStudyManager : MonoBehaviour
     {
         currentCondition = 0;
         currentUser = 0;
+        auto = false;
 
         InitOrderDict();
 
@@ -96,7 +99,7 @@ public class UserStudyManager : MonoBehaviour
         Log("Initialized.");
     }
 
-    public void InitOrderDict()
+    public void InitOrderDict6()
     {
         orderDictionary = new Dictionary<string, int>();
 
@@ -144,15 +147,144 @@ public class UserStudyManager : MonoBehaviour
     }
 
 
-    public void SetCurrentTask(int condition, int trial)
+    public void InitOrderDict()
+    {
+        orderDictionary = new Dictionary<string, int>();
+
+        orderDictionary.Add("0_0", 1);
+        orderDictionary.Add("0_1", 2);
+        orderDictionary.Add("0_2", 8);
+        orderDictionary.Add("0_3", 3);
+        orderDictionary.Add("0_4", 7);
+        orderDictionary.Add("0_5", 4);
+        orderDictionary.Add("0_6", 6);
+        orderDictionary.Add("0_7", 5);
+
+        orderDictionary.Add("1_0", 2);
+        orderDictionary.Add("1_1", 3);
+        orderDictionary.Add("1_2", 1);
+        orderDictionary.Add("1_3", 4);
+        orderDictionary.Add("1_4", 8);
+        orderDictionary.Add("1_5", 5);
+        orderDictionary.Add("1_6", 7);
+        orderDictionary.Add("1_7", 6);
+
+        orderDictionary.Add("2_0", 3);
+        orderDictionary.Add("2_1", 4);
+        orderDictionary.Add("2_2", 2);
+        orderDictionary.Add("2_3", 5);
+        orderDictionary.Add("2_4", 1);
+        orderDictionary.Add("2_5", 6);
+        orderDictionary.Add("2_6", 8);
+        orderDictionary.Add("2_7", 7);
+
+        orderDictionary.Add("3_0", 4);
+        orderDictionary.Add("3_1", 5);
+        orderDictionary.Add("3_2", 3);
+        orderDictionary.Add("3_3", 6);
+        orderDictionary.Add("3_4", 2);
+        orderDictionary.Add("3_5", 7);
+        orderDictionary.Add("3_6", 1);
+        orderDictionary.Add("3_7", 8);
+
+        orderDictionary.Add("4_0", 5);
+        orderDictionary.Add("4_1", 6);
+        orderDictionary.Add("4_2", 4);
+        orderDictionary.Add("4_3", 7);
+        orderDictionary.Add("4_4", 3);
+        orderDictionary.Add("4_5", 8);
+        orderDictionary.Add("4_6", 2);
+        orderDictionary.Add("4_7", 1);
+
+        orderDictionary.Add("5_0", 6);
+        orderDictionary.Add("5_1", 7);
+        orderDictionary.Add("5_2", 5);
+        orderDictionary.Add("5_3", 8);
+        orderDictionary.Add("5_4", 4);
+        orderDictionary.Add("5_5", 1);
+        orderDictionary.Add("5_6", 3);
+        orderDictionary.Add("5_7", 2);
+   
+        orderDictionary.Add("6_0", 7);
+        orderDictionary.Add("6_1", 8);
+        orderDictionary.Add("6_2", 6);
+        orderDictionary.Add("6_3", 1);
+        orderDictionary.Add("6_4", 5);
+        orderDictionary.Add("6_5", 2);
+        orderDictionary.Add("6_6", 4);
+        orderDictionary.Add("6_7", 3);
+
+        orderDictionary.Add("7_0", 8);
+        orderDictionary.Add("7_1", 1);
+        orderDictionary.Add("7_2", 7);
+        orderDictionary.Add("7_3", 2);
+        orderDictionary.Add("7_4", 6);
+        orderDictionary.Add("7_5", 3);
+        orderDictionary.Add("7_6", 5);
+        orderDictionary.Add("7_7", 4);
+    }
+
+    public void AutoInit()
+    {
+        auto = true;
+        autoConditionCounter = 0;
+        currentTrial = 0;
+
+        string s = currentUser % numOfConditions + "_" + autoConditionCounter;
+
+        int c = OrderDictionary[s] - 1;
+
+        currentCondition = c;
+
+        TaskSetup(currentCondition, currentTrial);
+    }
+
+    public void AutoSetNextTask()
+    {
+        if (!auto)
+            return;
+
+        currentTrial++;
+
+        if (currentTrial == numOfTrials)
+        {
+            AudioManager.Instance.PlaySound(2);
+
+            currentTrial = 0;
+
+            autoConditionCounter++;
+
+            // check count, if all done, return
+            if (autoConditionCounter >= numOfConditions)
+            {
+                return;
+            }
+
+            // get new condition
+            string s = currentUser % numOfConditions + "_" + autoConditionCounter;
+
+            int c = OrderDictionary[s] - 1;
+
+            currentCondition = c;
+        }
+
+        TaskSetup(currentCondition, currentTrial);
+    }
+
+
+    public void TaskSetup(int condition, int trial)
     {
         practice = false;
         currentCondition = condition;
         currentTrial = trial;
 
         // TODO init for a new trial
+        if (ConditionManager.Instance != null)
+            ConditionManager.Instance.SetCondition(condition);
+
         if (DockingManager.Instance != null)
             DockingManager.Instance.Init();
+
 
         Log("Current User: " + (currentUser + 1) +
             " Current Condition: " + (currentCondition + 1) +
@@ -187,8 +319,8 @@ public class UserStudyManager : MonoBehaviour
             sb.Append("\n");
         }
 
-        string fileNameStr = string.Format(fileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
-        File.WriteAllText(path + fileNameStr, sb.ToString());
+        string fileNameStr = string.Format(kFileNameFormat, k, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        File.WriteAllText(kPath + fileNameStr, sb.ToString());
         AssetDatabase.Refresh();
     }
 
@@ -219,15 +351,15 @@ public class UserStudyManager : MonoBehaviour
             sb.Append("\n");
         }
 
-        string fileNameStr = string.Format(fileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
-        File.WriteAllText(path + fileNameStr, sb.ToString());
+        string fileNameStr = string.Format(kFileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        File.WriteAllText(kPath + fileNameStr, sb.ToString());
         AssetDatabase.Refresh();
     }
 
     public void SaveXML()
     {
         var serializer = new XmlSerializer(typeof(List<UserSession>));
-        using (var stream = new FileStream(path + xmlFilename, FileMode.Truncate))
+        using (var stream = new FileStream(kPath + kXmlFileName, FileMode.Truncate))
         {
             serializer.Serialize(stream, userSessions);
         }
@@ -238,7 +370,7 @@ public class UserStudyManager : MonoBehaviour
     public void LoadXML()
     {
         var serializer = new XmlSerializer(typeof(List<UserSession>));
-        using (var stream = File.OpenRead(path + xmlFilename))
+        using (var stream = File.OpenRead(kPath + kXmlFileName))
         {
             userSessions = (List<UserSession>)(serializer.Deserialize(stream));
         }
@@ -258,6 +390,7 @@ public class UserStudyManager : MonoBehaviour
         var m = t[0].data;
         numOfMetrics = m.Count;
 
+        auto = false;
         initialized = true;
     }
 
@@ -267,7 +400,7 @@ public class UserStudyManager : MonoBehaviour
 
 
 
-        Log(NEEDINIT);
+        Log(kNeedInit);
         // to sth else to clear
         userSessions = new List<UserSession>();
     }
