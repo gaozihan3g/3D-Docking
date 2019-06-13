@@ -15907,26 +15907,26 @@
         <trials>
           <Trial>
             <data>
-              <float>62.0385742</float>
-              <float>68.96387</float>
-              <float>6.62726974</float>
-              <float>5.525584</float>
-              <float>0.0150900455</float>
-              <float>0.00752180535</float>
-              <float>3</float>
-              <float>5</float>
-              <float>5.23178768</float>
-              <float>5.61510754</float>
-              <float>939.781555</float>
-              <float>970.039368</float>
-              <float>0.7288692</float>
-              <float>0.8748223</float>
-              <float>444.827057</float>
-              <float>642.95874</float>
-              <float>0.310958117</float>
-              <float>0.23609139</float>
-              <float>0.301211119</float>
-              <float>0.205398083</float>
+              <float>11.0037842</float>
+              <float>17.258873</float>
+              <float>14.5654659</float>
+              <float>1.04153967</float>
+              <float>0.0103613595</float>
+              <float>0.00346701383</float>
+              <float>6</float>
+              <float>9</float>
+              <float>0</float>
+              <float>0.3284575</float>
+              <float>20.0605888</float>
+              <float>61.0546265</float>
+              <float>0.8063654</float>
+              <float>0.8131004</float>
+              <float>595.733948</float>
+              <float>652.087</float>
+              <float>0.295411646</float>
+              <float>0.25658378</float>
+              <float>0.2137931</float>
+              <float>0.209711879</float>
             </data>
           </Trial>
           <Trial>
