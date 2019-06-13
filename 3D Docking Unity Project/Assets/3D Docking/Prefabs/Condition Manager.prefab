@@ -45,6 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curCondition: 1
   cam: {fileID: 0}
+  hands:
+  - {fileID: 0}
+  - {fileID: 0}
+  grid: {fileID: 0}
   obj: {fileID: 0}
-  iso: 1
-  non_iso: 3
+  normal: 1
+  fast: 3
+  initDist: 0.3

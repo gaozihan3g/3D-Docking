@@ -49,6 +49,7 @@ public class UserStudyWindow : EditorWindow
 
     void OnGUI()
     {
+        
         if (usm == null)
         {
             if (GUILayout.Button("GetUserStudyManager"))
@@ -144,17 +145,20 @@ public class UserStudyWindow : EditorWindow
 
             usm.currentUser = gridIndex;
 
-
-            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-
-
             // auto button
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Auto", GUILayout.Width(100)))
+
+            usm.auto = EditorGUILayout.ToggleLeft("Auto", usm.auto);
+
+            if (GUILayout.Button("Start Auto Test", GUILayout.Width(100)))
             {
                 usm.AutoInit();
             }
+
             GUILayout.EndHorizontal();
+
+
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
             // each condition
             for (int j = 0; j < usm.numOfConditions; ++j)
@@ -186,7 +190,7 @@ public class UserStudyWindow : EditorWindow
                     // each task
                     for (int i = 0; i < usm.numOfTrials; ++i)
                     {
-                        TaskGUI(c, i);
+                        TaskGUI(c, i, j);
                     }
                     EditorGUILayout.EndVertical();
 
@@ -209,15 +213,15 @@ public class UserStudyWindow : EditorWindow
         GUILayout.EndHorizontal();
     }
 
-    void TaskGUI(int con, int tri)
+    void TaskGUI(int con, int tri, int order)
     {
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button(((ConditionManager.Condition)con).ToString() + " #" + (tri + 1), GUILayout.Width(150)))
+        if (GUILayout.Button(((ConditionManager.Condition)con).ToString() + " #" + (tri + 1), GUILayout.Width(120)))
         {
             usm.TaskSetup(con, tri);
+            usm.autoConditionCounter = order;
         }
-
 
         for (int i = 0; i < usm.numOfMetrics; ++i)
         {
@@ -225,6 +229,18 @@ public class UserStudyWindow : EditorWindow
                 return;
 
             usm.GetCurrentUser().GetTask(con, tri).data[i] = EditorGUILayout.FloatField(usm.GetCurrentUser().GetTask(con, tri).data[i], GUILayout.Width(30));
+        }
+
+        if (GUILayout.Button("X", GUILayout.Width(20)))
+        {
+            // clear data
+            for (int i = 0; i < usm.numOfMetrics; ++i)
+            {
+                if (usm.GetCurrentUser() == null)
+                    return;
+
+                usm.GetCurrentUser().GetTask(con, tri).data[i] = 0f;
+            }
         }
 
         GUILayout.EndHorizontal();

@@ -32,7 +32,7 @@ public class ConditionManager : MonoBehaviour
     public static ConditionManager Instance;
 
     public Camera cam;
-    public GameObject hand;
+    public GameObject[] hands;
     public GameObject grid;
 
     //public GameObject[] highResObjects;
@@ -135,7 +135,7 @@ public class ConditionManager : MonoBehaviour
         if (cam == null)
             return;
 
-        if (hand == null)
+        if (hands == null)
             return;
 
         switch (i)
@@ -144,14 +144,18 @@ public class ConditionManager : MonoBehaviour
                 // cam
                 cam.clearFlags = CameraClearFlags.SolidColor;
                 // hand
-                hand.SetActive(false);
+                foreach (var h in hands)
+                    h.SetActive(false);
+
                 grid.SetActive(true);
                 break;
             case 1:
                 // cam
                 cam.clearFlags = CameraClearFlags.Skybox;
                 // hand
-                hand.SetActive(true);
+                foreach (var h in hands)
+                    h.SetActive(true);
+
                 grid.SetActive(false);
                 break;
         }

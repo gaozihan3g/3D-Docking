@@ -9,7 +9,9 @@ public class DockingManager : MonoBehaviour
     public Transform fromObject;
     public Transform toObject;
     public Transform head;
-    public Transform hand;
+    public Transform[] hands;
+    public bool IsRightHand = true;
+    Transform hand;
 
     public float randomOffsetRadius = 1f;
     public float initDist = 1f;
@@ -83,8 +85,6 @@ public class DockingManager : MonoBehaviour
     Vector3 orgFromObjPos;
     Quaternion orgFromObjRot;
 
-    public string timeFormatStr = "Completion Time: {0:F2}s";
-
     public static DockingManager Instance;
 
     const float minMovementValue = 0.001f;
@@ -94,6 +94,8 @@ public class DockingManager : MonoBehaviour
         isFirstTouch = true;
         isTimeCounting = false;
         easyThresholdMet = false;
+
+        UpdateHand();
 
         startTime = 0f;
         timer = 0f;
@@ -141,6 +143,19 @@ public class DockingManager : MonoBehaviour
         // reset UI
         //if (UIManager.Instance != null)
         //    UIManager.Instance.SetText("Ready");
+    }
+
+    void OnValidate()
+    {
+        UpdateHand();
+    }
+
+    void UpdateHand()
+    {
+        if (IsRightHand)
+            hand = hands[0];
+        else
+            hand = hands[1];
     }
 
     public void RandomPosition()
