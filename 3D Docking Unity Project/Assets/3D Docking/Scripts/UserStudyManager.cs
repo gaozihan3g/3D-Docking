@@ -297,32 +297,83 @@ public class UserStudyManager : MonoBehaviour
         StringBuilder sb = new StringBuilder();
 
         // metric names
-        for (int i = 0; i < numOfConditions; ++i)
+        sb.Append("u");
+        sb.Append("\t");
+
+        sb.Append("c");
+        sb.Append("\t");
+
+        for (int j = 0; j < numOfTrials; ++j)
         {
-            for (int j = 0; j < numOfTrials; ++j)
-            {
-                string s = "c" + i + "t" + j + "v" + k;
-                sb.Append(s);
-                sb.Append("\t");
-            }
+            string s = "t" + j + "v" + k;
+            sb.Append(s);
+            sb.Append("\t");
         }
 
         sb.Append("\n");
 
-        // values
-        for (int i = 0; i < userSessions.Count; ++i)
+
+
+        for (int i = 0; i < numOfUsers; ++i)
         {
-            var dataStr = userSessions[i].GetDataString(k);
+            for (int ii = 0; ii < numOfConditions; ++ii)
+            {
+                sb.Append(i + 1);
+                sb.Append("\t");
 
+                sb.Append(ii + 1);
+                sb.Append("\t");
 
-            sb.Append(dataStr);
-            sb.Append("\n");
+                for (int iii = 0; iii < numOfTrials; ++iii)
+                {
+                    sb.Append(userSessions[i].conditions[ii].trials[iii].data[k].ToString("F3"));
+                    sb.Append("\t");
+                }
+
+                sb.Append("\n");
+            }
         }
+
+        // values
+
 
         string fileNameStr = string.Format(kFileNameFormat, k, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
         File.WriteAllText(kPath + fileNameStr, sb.ToString());
         AssetDatabase.Refresh();
     }
+
+
+    //public void ExportData(int k)
+    //{
+    //    StringBuilder sb = new StringBuilder();
+
+    //    // metric names
+    //    for (int i = 0; i < numOfConditions; ++i)
+    //    {
+    //        for (int j = 0; j < numOfTrials; ++j)
+    //        {
+    //            string s = "c" + i + "t" + j + "v" + k;
+    //            sb.Append(s);
+    //            sb.Append("\t");
+    //        }
+    //    }
+
+    //    sb.Append("\n");
+
+    //    // values
+    //    for (int i = 0; i < userSessions.Count; ++i)
+    //    {
+    //        var dataStr = userSessions[i].GetDataString(k);
+
+
+    //        sb.Append(dataStr);
+    //        sb.Append("\n");
+    //    }
+
+    //    string fileNameStr = string.Format(kFileNameFormat, k, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+    //    File.WriteAllText(kPath + fileNameStr, sb.ToString());
+    //    AssetDatabase.Refresh();
+    //}
 
     public void ExportData()
     {

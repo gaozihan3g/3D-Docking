@@ -10,15 +10,20 @@ public class CDGainTest : MonoBehaviour
 
     public float angularSpeed;
 
-    public float minSpeed = 1f;
+
+    const float MinS = 5f;
+    const float SC = 30f;
+    const float MaxS = 90f;
+
+    const float smallRS = 0.3f;
+    const float midRS = 1f;
+    const float largeRS = 3f;
 
     public float rotationScaleFactor;
 
-    public float ratio = 2f;
+    Quaternion pControllerRot;
 
-    public Quaternion pControllerRot;
-
-    public Quaternion oTargetRot;
+    Quaternion pTargetRot;
 
     float GetRotationFactor(float s)
     {
@@ -27,10 +32,14 @@ public class CDGainTest : MonoBehaviour
 
         float r = 0f;
 
-        if (s < minSpeed)
-            r = 1f;
+        if (s < MinS)
+            r = 0f;
+        else if (s < SC)
+            r = smallRS;
+        else if (s < MaxS)
+            r = midRS;
         else
-            r = ratio * s;
+            r = largeRS;
 
         return r;
     }
@@ -44,13 +53,13 @@ public class CDGainTest : MonoBehaviour
     void Start()
     {
         pControllerRot = controller.rotation;
-        oTargetRot = target.rotation;
+        pTargetRot = target.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        angularSpeed = Quaternion.Angle(controller.rotation, pControllerRot);
+        angularSpeed = Quaternion.Angle(controller.rotation, pControllerRot) / Time.deltaTime;
 
         rotationScaleFactor = GetRotationFactor(angularSpeed);
 
@@ -59,9 +68,10 @@ public class CDGainTest : MonoBehaviour
 
         Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
 
-        target.rotation = diff * oTargetRot;
+        target.rotation = diff * pTargetRot;
 
         pControllerRot = controller.rotation;
+        pTargetRot = target.rotation;
     }
 
     static Quaternion GetDeltaQuaternion(Quaternion from, Quaternion to)

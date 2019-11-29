@@ -18,7 +18,16 @@ public class Manipulatable : MonoBehaviour
     public bool translationEnabled;
     public bool rotationEnabled;
     public bool showHighlight = false;
+    public bool dynamicScale = false;
     public GameObject highlight;
+
+    const float MinS = 5f;
+    const float SC = 30f;
+    const float MaxS = 90f;
+
+    const float smallRS = 0.3f;
+    const float midRS = 1f;
+    const float largeRS = 3f;
 
     [SerializeField]
     private ColliderButtonEventData.InputButton m_manipulateButton = ColliderButtonEventData.InputButton.Trigger;
@@ -31,8 +40,6 @@ public class Manipulatable : MonoBehaviour
 
     private RigidPose m_orgCasterPose = RigidPose.identity;
     private RigidPose m_orgPose = RigidPose.identity;
-
-
 
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
@@ -66,6 +73,13 @@ public class Manipulatable : MonoBehaviour
             // rotation
             Quaternion delta = GetDeltaQuaternion(m_orgCasterPose.rot, curCasterPose.rot);
 
+
+            // get scale factor based on rotation speed
+
+            float angularSpeed = Quaternion.Angle(m_orgCasterPose.rot, curCasterPose.rot) / Time.deltaTime;
+
+            rotationScaleFactor = dynamicScale ? GetRotationFactor(angularSpeed) : rotationScaleFactor;
+
             Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
 
             transform.rotation = diff * m_orgPose.rot;
@@ -93,9 +107,12 @@ public class Manipulatable : MonoBehaviour
         return d;
     }
 
-    public void SetRotationFactor(float f)
+
+
+    public void RotationSetup(float f, bool b = false)
     {
         rotationScaleFactor = f;
+        dynamicScale = b;
     }
 
     public void OnColliderEventHoverEnter(ColliderHoverEventData eventData)
@@ -122,5 +139,24 @@ public class Manipulatable : MonoBehaviour
 
         if (showHighlight)
             highlight.SetActive(false);
+    }
+
+    float GetRotationFactor(float s)
+    {
+        // cd = c/d
+        // rf = d/c
+
+        float r = 0f;
+
+        if (s < MinS)
+            r = 0f;
+        else if (s < SC)
+            r = smallRS;
+        else if (s < MaxS)
+            r = midRS;
+        else
+            r = largeRS;
+
+        return r;
     }
 }

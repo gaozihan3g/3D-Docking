@@ -169,10 +169,13 @@ public class ConditionManager : MonoBehaviour
         switch (i)
         {
             case 0:
-                obj.SetRotationFactor(normal);
+                obj.RotationSetup(normal);
                 break;
             case 1:
-                obj.SetRotationFactor(fast);
+                obj.RotationSetup(fast);
+                break;
+            case 2:
+                obj.RotationSetup(0f, true);
                 break;
         }
     }
