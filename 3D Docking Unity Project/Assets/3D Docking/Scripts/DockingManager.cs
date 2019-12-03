@@ -49,6 +49,9 @@ public class DockingManager : MonoBehaviour
     public float totalHandDistance = 0f;
     public float totalHandAngle = 0f;
 
+    const float minMovementValue = 0.001f;
+    const float minHandAngle = 0.01f;
+
     public float totalObjDistance = 0f;
     public float totalObjAngle = 0f;
 
@@ -87,7 +90,7 @@ public class DockingManager : MonoBehaviour
 
     public static DockingManager Instance;
 
-    const float minMovementValue = 0.001f;
+    
 
     public void Init()
     {
@@ -266,11 +269,13 @@ public class DockingManager : MonoBehaviour
             {
                 float deltaHandD = Vector3.Distance(hand.position, preHandPos);
 
-                if (deltaHandD > minMovementValue)
+                if (deltaHandD >= minMovementValue)
                     totalHandDistance += deltaHandD;
 
                 float deltaHandA = Quaternion.Angle(hand.rotation, preHandRot);
-                totalHandAngle += deltaHandA;
+
+                if (deltaHandA >= minHandAngle)
+                    totalHandAngle += deltaHandA;
             }
 
             // obj
@@ -407,31 +412,37 @@ public class DockingManager : MonoBehaviour
         // fill data
 
         data.Add(timer_0);
-        data.Add(timer);
+        // get fine-tuning time
+        var timer_1 = timer - timer_0;
+        data.Add(timer_1);
 
         data.Add(angle0);
         data.Add(angle);
 
-        data.Add(distance0);
-        data.Add(distance);
+        //data.Add(distance0);
+        //data.Add(distance);
 
         data.Add(clutch_0);
-        data.Add(clutch);
+        // get fine-tuning clutch
+        var clutch_1 = clutch - clutch_0;
+        data.Add(clutch_1);
 
-        data.Add(totalHeadDistance_0);
-        data.Add(totalHeadDistance);
+        //data.Add(totalHeadDistance_0);
+        //data.Add(totalHeadDistance);
 
-        data.Add(totalHeadAngle_0);
-        data.Add(totalHeadAngle);
+        //data.Add(totalHeadAngle_0);
+        //data.Add(totalHeadAngle);
 
-        data.Add(totalHandDistance_0);
-        data.Add(totalHandDistance);
+        //data.Add(totalHandDistance_0);
+        //data.Add(totalHandDistance);
 
         data.Add(totalHandAngle_0);
-        data.Add(totalHandAngle);
+        // get fine-tuning angle
+        var totalHandAngle_1 = totalHandAngle - totalHandAngle_0;
+        data.Add(totalHandAngle_1);
 
-        data.Add(translationEfficiency_0);
-        data.Add(translationEfficiency);
+        //data.Add(translationEfficiency_0);
+        //data.Add(translationEfficiency);
 
         data.Add(rotationEfficiency_0);
         data.Add(rotationEfficiency);

@@ -250,39 +250,6 @@ public class UserStudyManager : MonoBehaviour
         AssetDatabase.Refresh();
     }
 
-
-    //public void ExportData(int k)
-    //{
-    //    StringBuilder sb = new StringBuilder();
-
-    //    // metric names
-    //    for (int i = 0; i < numOfConditions; ++i)
-    //    {
-    //        for (int j = 0; j < numOfTrials; ++j)
-    //        {
-    //            string s = "c" + i + "t" + j + "v" + k;
-    //            sb.Append(s);
-    //            sb.Append("\t");
-    //        }
-    //    }
-
-    //    sb.Append("\n");
-
-    //    // values
-    //    for (int i = 0; i < userSessions.Count; ++i)
-    //    {
-    //        var dataStr = userSessions[i].GetDataString(k);
-
-
-    //        sb.Append(dataStr);
-    //        sb.Append("\n");
-    //    }
-
-    //    string fileNameStr = string.Format(kFileNameFormat, k, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
-    //    File.WriteAllText(kPath + fileNameStr, sb.ToString());
-    //    AssetDatabase.Refresh();
-    //}
-
     public void ExportData()
     {
         StringBuilder sb = new StringBuilder();
