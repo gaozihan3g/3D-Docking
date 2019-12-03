@@ -11,19 +11,19 @@ public class Manipulatable : MonoBehaviour
 , IColliderEventHoverEnterHandler
 , IColliderEventHoverExitHandler
 , IColliderEventDragStartHandler
-, IColliderEventDragUpdateHandler
+, IColliderEventDragFixedUpdateHandler
 , IColliderEventDragEndHandler
 {
-
     public bool translationEnabled;
     public bool rotationEnabled;
     public bool showHighlight = false;
     public bool dynamicScale = false;
     public GameObject highlight;
 
-    const float MinS = 5f;
+
+    const float MinS = 1f;
     const float SC = 30f;
-    const float MaxS = 90f;
+    const float MaxS = 45f;
 
     const float smallRS = 0.3f;
     const float midRS = 1f;
@@ -38,21 +38,21 @@ public class Manipulatable : MonoBehaviour
     [SerializeField]
     private float rotationScaleFactor = 1.0f;
 
-    private RigidPose m_orgCasterPose = RigidPose.identity;
-    private RigidPose m_orgPose = RigidPose.identity;
+    private RigidPose pCasterPose = RigidPose.identity;
+    private RigidPose pObjPose = RigidPose.identity;
 
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
         if (eventData.button != m_manipulateButton) { return; }
 
-        m_orgCasterPose = GetEventPose(eventData);
-        m_orgPose = new RigidPose(transform);
+        pCasterPose = GetEventPose(eventData);
+        pObjPose = new RigidPose(transform);
 
         DockingManager.Instance.TouchStart();
 
     }
 
-    public void OnColliderEventDragUpdate(ColliderButtonEventData eventData)
+    public void OnColliderEventDragFixedUpdate(ColliderButtonEventData eventData)
     {
         if (eventData.button != m_manipulateButton) { return; }
 
@@ -61,33 +61,33 @@ public class Manipulatable : MonoBehaviour
         if (translationEnabled)
         {
             // translation
-            Vector3 deltaPos = curCasterPose.pos - m_orgCasterPose.pos;
+            Vector3 deltaPos = curCasterPose.pos - pCasterPose.pos;
 
             Vector3 diffPos = deltaPos * positionScaleFactor;
 
-            transform.position = diffPos + m_orgPose.pos;
+            transform.position = diffPos + pObjPose.pos;
         }
 
         if (rotationEnabled)
         {
             // rotation
-            Quaternion delta = GetDeltaQuaternion(m_orgCasterPose.rot, curCasterPose.rot);
-
+            Quaternion delta = GetDeltaQuaternion(pCasterPose.rot, curCasterPose.rot);
 
             // get scale factor based on rotation speed
-
-            float angularSpeed = Quaternion.Angle(m_orgCasterPose.rot, curCasterPose.rot) / Time.deltaTime;
+            float angularSpeed = Quaternion.Angle(pCasterPose.rot, curCasterPose.rot) / Time.fixedDeltaTime;
 
             rotationScaleFactor = dynamicScale ? GetRotationFactor(angularSpeed) : rotationScaleFactor;
 
             Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
 
-            transform.rotation = diff * m_orgPose.rot;
+            transform.rotation = diff * pObjPose.rot;
         }
 
         DockingManager.Instance.TouchUpdate();
-    }
 
+        pCasterPose = curCasterPose;
+        pObjPose = new RigidPose(transform);
+    }
 
     public void OnColliderEventDragEnd(ColliderButtonEventData eventData)
     {
@@ -145,6 +145,7 @@ public class Manipulatable : MonoBehaviour
     {
         // cd = c/d
         // rf = d/c
+        // TODO tweak it
 
         float r = 0f;
 

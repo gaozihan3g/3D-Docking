@@ -173,7 +173,7 @@ public class UserStudyWindow : EditorWindow
                     if (usm.OrderDictionary == null)
                         usm.InitOrderDict();
 
-                    int c = usm.OrderDictionary[s] - 1;
+                    int c = usm.OrderDictionary[s];
 
                     EditorGUILayout.BeginHorizontal();
                     // practice

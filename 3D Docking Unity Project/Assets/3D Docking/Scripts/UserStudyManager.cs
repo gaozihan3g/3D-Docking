@@ -99,130 +99,38 @@ public class UserStudyManager : MonoBehaviour
         Log("Initialized.");
     }
 
-    public void InitOrderDict6()
-    {
-        orderDictionary = new Dictionary<string, int>();
-
-        orderDictionary.Add("0_0", 0);
-        orderDictionary.Add("0_1", 1);
-        orderDictionary.Add("0_2", 5);
-        orderDictionary.Add("0_3", 2);
-        orderDictionary.Add("0_4", 4);
-        orderDictionary.Add("0_5", 3);
-
-        orderDictionary.Add("1_0", 1);
-        orderDictionary.Add("1_1", 2);
-        orderDictionary.Add("1_2", 0);
-        orderDictionary.Add("1_3", 3);
-        orderDictionary.Add("1_4", 5);
-        orderDictionary.Add("1_5", 4);
-
-        orderDictionary.Add("2_0", 2);
-        orderDictionary.Add("2_1", 3);
-        orderDictionary.Add("2_2", 1);
-        orderDictionary.Add("2_3", 4);
-        orderDictionary.Add("2_4", 0);
-        orderDictionary.Add("2_5", 5);
-
-        orderDictionary.Add("3_0", 3);
-        orderDictionary.Add("3_1", 4);
-        orderDictionary.Add("3_2", 2);
-        orderDictionary.Add("3_3", 5);
-        orderDictionary.Add("3_4", 1);
-        orderDictionary.Add("3_5", 0);
-
-        orderDictionary.Add("4_0", 4);
-        orderDictionary.Add("4_1", 5);
-        orderDictionary.Add("4_2", 3);
-        orderDictionary.Add("4_3", 0);
-        orderDictionary.Add("4_4", 2);
-        orderDictionary.Add("4_5", 1);
-
-        orderDictionary.Add("5_0", 5);
-        orderDictionary.Add("5_1", 0);
-        orderDictionary.Add("5_2", 4);
-        orderDictionary.Add("5_3", 1);
-        orderDictionary.Add("5_4", 3);
-        orderDictionary.Add("5_5", 2);
-    }
-
-
     public void InitOrderDict()
     {
+        InitOrderDict(numOfConditions);
+    }
+
+    void InitOrderDict(int noc)
+    {
         orderDictionary = new Dictionary<string, int>();
 
-        orderDictionary.Add("0_0", 1);
-        orderDictionary.Add("0_1", 2);
-        orderDictionary.Add("0_2", 8);
-        orderDictionary.Add("0_3", 3);
-        orderDictionary.Add("0_4", 7);
-        orderDictionary.Add("0_5", 4);
-        orderDictionary.Add("0_6", 6);
-        orderDictionary.Add("0_7", 5);
+        List<int> index = new List<int>();
 
-        orderDictionary.Add("1_0", 2);
-        orderDictionary.Add("1_1", 3);
-        orderDictionary.Add("1_2", 1);
-        orderDictionary.Add("1_3", 4);
-        orderDictionary.Add("1_4", 8);
-        orderDictionary.Add("1_5", 5);
-        orderDictionary.Add("1_6", 7);
-        orderDictionary.Add("1_7", 6);
+        index.Add(0);
+        index.Add(1);
 
-        orderDictionary.Add("2_0", 3);
-        orderDictionary.Add("2_1", 4);
-        orderDictionary.Add("2_2", 2);
-        orderDictionary.Add("2_3", 5);
-        orderDictionary.Add("2_4", 1);
-        orderDictionary.Add("2_5", 6);
-        orderDictionary.Add("2_6", 8);
-        orderDictionary.Add("2_7", 7);
+        int n = noc - 1;
+        int m = 2;
 
-        orderDictionary.Add("3_0", 4);
-        orderDictionary.Add("3_1", 5);
-        orderDictionary.Add("3_2", 3);
-        orderDictionary.Add("3_3", 6);
-        orderDictionary.Add("3_4", 2);
-        orderDictionary.Add("3_5", 7);
-        orderDictionary.Add("3_6", 1);
-        orderDictionary.Add("3_7", 8);
+        while (index.Count < noc)
+        {
+            index.Add(n--);
+            index.Add(m++);
+        }
 
-        orderDictionary.Add("4_0", 5);
-        orderDictionary.Add("4_1", 6);
-        orderDictionary.Add("4_2", 4);
-        orderDictionary.Add("4_3", 7);
-        orderDictionary.Add("4_4", 3);
-        orderDictionary.Add("4_5", 8);
-        orderDictionary.Add("4_6", 2);
-        orderDictionary.Add("4_7", 1);
-
-        orderDictionary.Add("5_0", 6);
-        orderDictionary.Add("5_1", 7);
-        orderDictionary.Add("5_2", 5);
-        orderDictionary.Add("5_3", 8);
-        orderDictionary.Add("5_4", 4);
-        orderDictionary.Add("5_5", 1);
-        orderDictionary.Add("5_6", 3);
-        orderDictionary.Add("5_7", 2);
-   
-        orderDictionary.Add("6_0", 7);
-        orderDictionary.Add("6_1", 8);
-        orderDictionary.Add("6_2", 6);
-        orderDictionary.Add("6_3", 1);
-        orderDictionary.Add("6_4", 5);
-        orderDictionary.Add("6_5", 2);
-        orderDictionary.Add("6_6", 4);
-        orderDictionary.Add("6_7", 3);
-
-        orderDictionary.Add("7_0", 8);
-        orderDictionary.Add("7_1", 1);
-        orderDictionary.Add("7_2", 7);
-        orderDictionary.Add("7_3", 2);
-        orderDictionary.Add("7_4", 6);
-        orderDictionary.Add("7_5", 3);
-        orderDictionary.Add("7_6", 5);
-        orderDictionary.Add("7_7", 4);
+        for (int i = 0; i < noc; i++)
+        {
+            for (int j = 0; j < noc; j++)
+            {
+                orderDictionary.Add(i + "_" + j, (index[j] + i) % noc);
+            }
+        }
     }
+
 
     public void AutoInit()
     {
@@ -232,7 +140,7 @@ public class UserStudyManager : MonoBehaviour
 
         string s = currentUser % numOfConditions + "_" + autoConditionCounter;
 
-        int c = OrderDictionary[s] - 1;
+        int c = OrderDictionary[s];
 
         currentCondition = c;
 
@@ -263,7 +171,7 @@ public class UserStudyManager : MonoBehaviour
             // get new condition
             string s = currentUser % numOfConditions + "_" + autoConditionCounter;
 
-            int c = OrderDictionary[s] - 1;
+            int c = OrderDictionary[s];
 
             currentCondition = c;
         }
@@ -410,7 +318,7 @@ public class UserStudyManager : MonoBehaviour
     public void SaveXML()
     {
         var serializer = new XmlSerializer(typeof(List<UserSession>));
-        using (var stream = new FileStream(kPath + kXmlFileName, FileMode.Truncate))
+        using (var stream = new FileStream(kPath + kXmlFileName, FileMode.Create))
         {
             serializer.Serialize(stream, userSessions);
         }

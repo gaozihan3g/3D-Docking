@@ -5,26 +5,26 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ConditionManager : MonoBehaviour
 {
-    //public enum Condition
-    //{
-    //    VR_SLOW,
-    //    VR_NORMAL,
-    //    VR_FAST,
-    //    AR_SLOW,
-    //    AR_NORMAL,
-    //    AR_FAST
-    //};
-
+    /// <summary>
+    /// 2 * 3 * 2
+    /// env - VR, AR
+    /// tec - ISO, NON, DYN
+    /// tsk - N,Y
+    /// </summary>
     public enum Condition
     {
         VR_ISO_N,
         VR_ISO_Y,
         VR_NON_N,
         VR_NON_Y,
+        VR_DYN_N,
+        VR_DYN_Y,
         AR_ISO_N,
         AR_ISO_Y,
         AR_NON_N,
         AR_NON_Y,
+        AR_DYN_N,
+        AR_DYN_Y
     };
 
 
@@ -89,42 +89,62 @@ public class ConditionManager : MonoBehaviour
         {
             case Condition.VR_ISO_N:
                 SetMR(0);
-                SetSpeedLevel(0);
+                SetRotationTech(0);
                 SetTranslation(0);
                 break;
             case Condition.VR_ISO_Y:
                 SetMR(0);
-                SetSpeedLevel(0);
+                SetRotationTech(0);
                 SetTranslation(1);
                 break;
             case Condition.VR_NON_N:
                 SetMR(0);
-                SetSpeedLevel(1);
+                SetRotationTech(1);
                 SetTranslation(0);
                 break;
             case Condition.VR_NON_Y:
                 SetMR(0);
-                SetSpeedLevel(1);
+                SetRotationTech(1);
+                SetTranslation(1);
+                break;
+            case Condition.VR_DYN_N:
+                SetMR(0);
+                SetRotationTech(2);
+                SetTranslation(0);
+                break;
+            case Condition.VR_DYN_Y:
+                SetMR(0);
+                SetRotationTech(2);
                 SetTranslation(1);
                 break;
             case Condition.AR_ISO_N:
                 SetMR(1);
-                SetSpeedLevel(0);
+                SetRotationTech(0);
                 SetTranslation(0);
                 break;
             case Condition.AR_ISO_Y:
                 SetMR(1);
-                SetSpeedLevel(0);
+                SetRotationTech(0);
                 SetTranslation(1);
                 break;
             case Condition.AR_NON_N:
                 SetMR(1);
-                SetSpeedLevel(1);
+                SetRotationTech(1);
                 SetTranslation(0);
                 break;
             case Condition.AR_NON_Y:
                 SetMR(1);
-                SetSpeedLevel(1);
+                SetRotationTech(1);
+                SetTranslation(1);
+                break;
+            case Condition.AR_DYN_N:
+                SetMR(1);
+                SetRotationTech(2);
+                SetTranslation(0);
+                break;
+            case Condition.AR_DYN_Y:
+                SetMR(1);
+                SetRotationTech(2);
                 SetTranslation(1);
                 break;
         }
@@ -161,7 +181,7 @@ public class ConditionManager : MonoBehaviour
         }
     }
 
-    void SetSpeedLevel(int i)
+    void SetRotationTech(int i)
     {
         if (obj == null)
             return;
