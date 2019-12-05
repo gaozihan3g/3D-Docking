@@ -49,8 +49,8 @@ public class DockingManager : MonoBehaviour
     public float totalHandDistance = 0f;
     public float totalHandAngle = 0f;
 
-    const float minMovementValue = 0.001f;
-    const float minHandAngle = 0.01f;
+    const float minStatDist = 0.001f;
+    const float minStatAngle = 0.001f;
 
     public float totalObjDistance = 0f;
     public float totalObjAngle = 0f;
@@ -248,7 +248,7 @@ public class DockingManager : MonoBehaviour
             // head
             float deltaHD = Vector3.Distance(head.position, preHeadPos);
 
-            if (deltaHD > minMovementValue)
+            if (deltaHD > minStatDist)
                 totalHeadDistance += deltaHD;
 
             float deltaHA = Quaternion.Angle(head.rotation, preHeadRot);
@@ -260,21 +260,23 @@ public class DockingManager : MonoBehaviour
             {
                 float deltaHandD = Vector3.Distance(hand.position, preHandPos);
 
-                if (deltaHandD >= minMovementValue)
+                if (deltaHandD >= minStatDist)
                     totalHandDistance += deltaHandD;
 
                 float deltaHandA = Quaternion.Angle(hand.rotation, preHandRot);
-
-                if (deltaHandA >= minHandAngle)
+                print("deltaHandA " + deltaHandA.ToString("F3"));
+                if (deltaHandA >= minStatAngle)
                     totalHandAngle += deltaHandA;
             }
 
             // obj
             float deltaOD = Vector3.Distance(fromObject.position, preFromObjPos);
-            totalObjDistance += deltaOD;
+            if (deltaOD >= minStatDist)
+                totalObjDistance += deltaOD;
 
             float deltaOA = Quaternion.Angle(fromObject.rotation, preFromObjRot);
-            totalObjAngle += deltaOA;
+            if (deltaOA >= minStatAngle)
+                totalObjAngle += deltaOA;
 
         }
 

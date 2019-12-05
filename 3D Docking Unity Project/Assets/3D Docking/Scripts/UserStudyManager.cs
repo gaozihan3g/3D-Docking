@@ -39,6 +39,8 @@ public class UserStudyManager : MonoBehaviour
     [HideInInspector]
     public int numOfMetrics = 20;
 
+    public List<string> metricNames = new List<string>();
+
     [HideInInspector]
     public string log;
     [HideInInspector]
@@ -351,6 +353,8 @@ public class UserStudyManager : MonoBehaviour
         SaveXML();
     }
 
+    // user * condition * metric
+    // 24 * 12 * 10
 
     [Serializable]
     public class UserSession
@@ -414,16 +418,36 @@ public class UserStudyManager : MonoBehaviour
     public class Condition
     {
         public List<Trial> trials;
-
+        public List<float> average;
         public Condition()
         { }
 
         public Condition(int not, int nom)
         {
             trials = new List<Trial>();
+            average = new List<float>();
 
             for (int i = 0; i < not; ++i)
                 trials.Add(new Trial(nom));
+
+            for (int i = 0; i < nom; i++)
+                average.Add(0f);
+        }
+
+        public void GetAvgData()
+        {
+            for (int i = 0; i < average.Count; i++)
+            {
+                float avg = 0f;
+
+                for (int j = 0; j < trials.Count; j++)
+                {
+                    avg += trials[j].data[i];
+                }
+
+                avg /= trials.Count;
+                average[i] = avg;
+            }
         }
 
         public string GetDataString(int k)

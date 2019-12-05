@@ -11,7 +11,7 @@ public class Manipulatable : MonoBehaviour
 , IColliderEventHoverEnterHandler
 , IColliderEventHoverExitHandler
 , IColliderEventDragStartHandler
-, IColliderEventDragFixedUpdateHandler
+, IColliderEventDragUpdateHandler
 , IColliderEventDragEndHandler
 {
     public bool translationEnabled;
@@ -21,13 +21,20 @@ public class Manipulatable : MonoBehaviour
     public GameObject highlight;
 
 
-    const float MinS = 1f;
-    const float SC = 30f;
-    const float MaxS = 45f;
+    //public float MinS = 0f;
 
-    const float smallRS = 0.3f;
-    const float midRS = 1f;
-    const float largeRS = 3f;
+    /// <summary>
+    /// threshold between iso and non-iso
+    /// </summary>
+    public float SC = 100f;
+
+    //public float MaxS = 200f;
+
+    public float smallRS = 1f;
+
+    //public float midRS = 3f;
+
+    public float largeRS = 3f;
 
     [SerializeField]
     private ColliderButtonEventData.InputButton m_manipulateButton = ColliderButtonEventData.InputButton.Trigger;
@@ -41,6 +48,8 @@ public class Manipulatable : MonoBehaviour
     private RigidPose pCasterPose = RigidPose.identity;
     private RigidPose pObjPose = RigidPose.identity;
 
+    public float angularSpeed;
+
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
         if (eventData.button != m_manipulateButton) { return; }
@@ -52,7 +61,7 @@ public class Manipulatable : MonoBehaviour
 
     }
 
-    public void OnColliderEventDragFixedUpdate(ColliderButtonEventData eventData)
+    public void OnColliderEventDragUpdate(ColliderButtonEventData eventData)
     {
         if (eventData.button != m_manipulateButton) { return; }
 
@@ -74,7 +83,9 @@ public class Manipulatable : MonoBehaviour
             Quaternion delta = GetDeltaQuaternion(pCasterPose.rot, curCasterPose.rot);
 
             // get scale factor based on rotation speed
-            float angularSpeed = Quaternion.Angle(pCasterPose.rot, curCasterPose.rot) / Time.fixedDeltaTime;
+            angularSpeed = Quaternion.Angle(pCasterPose.rot, curCasterPose.rot) / Time.deltaTime;
+
+            print(angularSpeed);
 
             rotationScaleFactor = dynamicScale ? GetRotationFactor(angularSpeed) : rotationScaleFactor;
 
@@ -134,6 +145,10 @@ public class Manipulatable : MonoBehaviour
     }
     void Start()
     {
+
+        print(Time.deltaTime);
+        print(Time.fixedDeltaTime);
+
         if (highlight == null)
             return;
 
@@ -149,12 +164,12 @@ public class Manipulatable : MonoBehaviour
 
         float r = 0f;
 
-        if (s < MinS)
-            r = 0f;
-        else if (s < SC)
+        //if (s < MinS)
+        //    r = 0f;
+        //else 
+        
+        if (s < SC)
             r = smallRS;
-        else if (s < MaxS)
-            r = midRS;
         else
             r = largeRS;
 

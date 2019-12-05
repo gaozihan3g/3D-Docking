@@ -13,6 +13,11 @@ public class UserStudyWindow : EditorWindow
     int exportIndex = 0;
     public string[] options;
 
+    int userPerRow = 4;
+    int dataWidth = 30;
+
+    List<float> avg;
+
 
     [MenuItem("Window/User Study Window")]
     static void Init()
@@ -136,16 +141,16 @@ public class UserStudyWindow : EditorWindow
     {
         if (usm.userSessions.Count != 0)
         {
-            // user buttons
-            List<string> gridStrings = new List<string>();
-            for (int i = 0; i < usm.userSessions.Count; ++i)
-                gridStrings.Add("#" + (i + 1).ToString());
-
-            gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), 8);
-
-            usm.currentUser = gridIndex;
 
             // auto button
+            GUILayout.BeginHorizontal();
+
+            userPerRow = EditorGUILayout.IntSlider("User Per Row", userPerRow, 1, usm.userSessions.Count);
+
+            dataWidth = EditorGUILayout.IntSlider("Data Width", dataWidth, 1, 200);
+
+            GUILayout.EndHorizontal();
+
             GUILayout.BeginHorizontal();
 
             usm.auto = EditorGUILayout.ToggleLeft("Auto", usm.auto);
@@ -157,27 +162,35 @@ public class UserStudyWindow : EditorWindow
 
             GUILayout.EndHorizontal();
 
+            // user buttons
+            List<string> gridStrings = new List<string>();
+            for (int i = 0; i < usm.userSessions.Count; ++i)
+                gridStrings.Add("#" + (i + 1).ToString());
+
+            gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), userPerRow);
+
+            usm.currentUser = gridIndex;
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
             // each condition
             for (int j = 0; j < usm.numOfConditions; ++j)
             {
-                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], "Condition #" + (j + 1));
+                if (usm.OrderDictionary == null)
+                    usm.InitOrderDict();
+
+                string s = gridIndex % usm.numOfConditions + "_" + j;
+                int c = usm.OrderDictionary[s];
+
+                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("Condition #{0} - {1} ({2})", (j + 1), ((ConditionManager.Condition)c).ToString(), c));
 
                 if (showCondition[j])
                 {
+                    EditorGUILayout.BeginVertical();
 
-                    string s = gridIndex % usm.numOfConditions + "_" + j;
+                    GUILayout.BeginHorizontal();
 
-                    if (usm.OrderDictionary == null)
-                        usm.InitOrderDict();
-
-                    int c = usm.OrderDictionary[s];
-
-                    EditorGUILayout.BeginHorizontal();
-                    // practice
-                    if (GUILayout.Button("Practice #" + (c + 1) + "\n" + ((ConditionManager.Condition)c).ToString(), GUILayout.ExpandHeight(true), GUILayout.Width(100)))
+                    if (GUILayout.Button("Practice", GUILayout.Width(120)))
                     {
                         //change condition
                         if (ConditionManager.Instance != null)
@@ -186,15 +199,36 @@ public class UserStudyWindow : EditorWindow
                         usm.PracticeMode();
                     }
 
-                    EditorGUILayout.BeginVertical();
+                    for (int i = 0; i < usm.numOfMetrics; ++i)
+                        GUILayout.Label(usm.metricNames[i], GUILayout.Width(dataWidth));
+
+                    GUILayout.EndHorizontal();
+
                     // each task
                     for (int i = 0; i < usm.numOfTrials; ++i)
                     {
                         TaskGUI(c, i, j);
                     }
-                    EditorGUILayout.EndVertical();
 
-                    EditorGUILayout.EndHorizontal();
+
+                    GUILayout.BeginHorizontal();
+
+                    if (GUILayout.Button("Average", GUILayout.Width(120)))
+                    {
+                        // calculate mean based on:
+                        //user:
+                        //condition: c
+                        usm.GetCurrentUser().conditions[c].GetAvgData();
+                    }
+
+                    var avg = usm.GetCurrentUser().conditions[c].average;
+                    for (int i = 0; i < avg.Count; ++i)
+                        GUILayout.Label(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
+
+                    GUILayout.EndHorizontal();
+
+
+                    EditorGUILayout.EndVertical();
                 }
             }
 
@@ -228,7 +262,7 @@ public class UserStudyWindow : EditorWindow
             if (usm.GetCurrentUser() == null)
                 return;
 
-            usm.GetCurrentUser().GetTask(con, tri).data[i] = EditorGUILayout.FloatField(usm.GetCurrentUser().GetTask(con, tri).data[i], GUILayout.Width(30));
+            usm.GetCurrentUser().GetTask(con, tri).data[i] = EditorGUILayout.FloatField(usm.GetCurrentUser().GetTask(con, tri).data[i], GUILayout.Width(dataWidth));
         }
 
         if (GUILayout.Button("X", GUILayout.Width(20)))

@@ -51,10 +51,12 @@ public class UIManager : MonoBehaviour
         if (DockingManager.Instance == null)
             return;
 
-        text.text = string.Format("Condition: {0}\nCondition: {1} / 8\nTrial: {2} / 10\n\nCompletion Time: {3:F2}s",
+        text.text = string.Format("Condition: {0}\nProgress: {1} / {2}\nTrial: {3} / {4}\n\nCompletion Time: {5:F2}s",
             ConditionManager.Instance.curCondition.ToString(),
             UserStudyManager.Instance.autoConditionCounter + 1,
+            UserStudyManager.Instance.numOfConditions,
             UserStudyManager.Instance.currentTrial + 1,
+            UserStudyManager.Instance.numOfTrials,
             DockingManager.Instance.timer
             );
     }
