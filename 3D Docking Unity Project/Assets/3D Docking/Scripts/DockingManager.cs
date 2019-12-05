@@ -38,7 +38,7 @@ public class DockingManager : MonoBehaviour
     float startTime;
 
     public float timer = 0f;
-    public int clutch = 0;
+    public int clutch = -1;
 
     public float distance;
     public float angle;
@@ -102,7 +102,9 @@ public class DockingManager : MonoBehaviour
 
         startTime = 0f;
         timer = 0f;
-        clutch = 0;
+
+        // clutch = 0 means no clutch
+        clutch = -1;
 
         totalHeadDistance = 0f;
         totalHeadAngle = 0f;
@@ -199,8 +201,7 @@ public class DockingManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateDiffs();
         UpdateAccuracy();
@@ -208,19 +209,9 @@ public class DockingManager : MonoBehaviour
         UpdateStats();
     }
 
-
-
     void UpdateAccuracy()
     {
-        //float distAccuracy = Map(distance, initDist, 0f, 0f, 1f, true);
         float angleAccuracy = Map(angle, initAngle, 0f, 0f, 1f, true);
-
-        //float totalAccuracy = 0f;
-
-        //if (updateDistance)
-        //    totalAccuracy = 0.5f * distAccuracy + 0.5f * angleAccuracy;
-        //else
-        //    totalAccuracy = angleAccuracy;
 
         if (UIManager.Instance != null)
             UIManager.Instance.SetColor(angleAccuracy);
@@ -300,6 +291,10 @@ public class DockingManager : MonoBehaviour
     public void TouchStart()
     {
         isTouching = true;
+
+        // clutch +1
+        clutch++;
+
         // touch check
         if (isFirstTouch)
         {
@@ -312,20 +307,18 @@ public class DockingManager : MonoBehaviour
 
     public void TouchUpdate()
     {
-        // update sths 
+        // update sths
+        EasyAccuracyCheck();
     }
 
     public void TouchEnd()
     {
         isTouching = false;
-        // clutch +1
-        clutch++;
         // accuracy check
-        AccuracyCheck();
+        HardAccuracyCheck();
     }
 
-
-    void AccuracyCheck()
+    void EasyAccuracyCheck()
     {
         // check easy
         if (distance > easyDistThreshold)
@@ -355,7 +348,9 @@ public class DockingManager : MonoBehaviour
 
             // calculate efficiency
             translationEfficiency_0 = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance_0;
-            rotationEfficiency_0 = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle_0;
+            rotationEfficiency_0 = (initAngle - easyAngleThreshold) / totalObjAngle_0;
+
+            // record sth
 
 
             // audio feedback
@@ -363,7 +358,10 @@ public class DockingManager : MonoBehaviour
 
             easyThresholdMet = true;
         }
+    }
 
+    void HardAccuracyCheck()
+    {
         // check hard
         if (distance > distThreshold)
             return;
@@ -380,18 +378,15 @@ public class DockingManager : MonoBehaviour
 
         // calculate efficiency
         translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance;
-        rotationEfficiency = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle;
+        rotationEfficiency = (easyAngleThreshold - angleThreshold) / (totalObjAngle - totalObjAngle_0);
 
         // send data
         SendData();
 
         // auto start next trial
         AutoStartNextTrial();
-
     }
 
-
-    //TODO
     void AutoStartNextTrial()
     {
         UserStudyManager.Instance.AutoSetNextTask();
