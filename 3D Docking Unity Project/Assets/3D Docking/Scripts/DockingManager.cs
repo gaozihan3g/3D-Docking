@@ -264,7 +264,6 @@ public class DockingManager : MonoBehaviour
                     totalHandDistance += deltaHandD;
 
                 float deltaHandA = Quaternion.Angle(hand.rotation, preHandRot);
-                print("deltaHandA " + deltaHandA.ToString("F3"));
                 if (deltaHandA >= minStatAngle)
                     totalHandAngle += deltaHandA;
             }
@@ -413,7 +412,9 @@ public class DockingManager : MonoBehaviour
         var timer_1 = timer - timer_0;
         data.Add(timer_1);
 
-        data.Add(angle0);
+        data.Add(timer);
+
+        //data.Add(angle0);
         data.Add(angle);
 
         //data.Add(distance0);

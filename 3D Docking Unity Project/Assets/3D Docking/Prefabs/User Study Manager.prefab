@@ -43,9 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e17a41cebfb245788abf260eacf9894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: Assets/
-  filename: output.txt
-  xmlFilename: data.xml
+  mySkin: {fileID: 11400000, guid: 910d8bf3ce8eb1845a3142f07c277d2e, type: 2}
+  practice: 1
+  auto: 0
+  autoConditionCounter: 0
   numOfUsers: 40
   userSessions: []
   currentUser: 0
@@ -54,5 +55,6 @@ MonoBehaviour:
   numOfTrials: 5
   currentTrial: 0
   numOfMetrics: 5
+  metricNames: []
   log: 
   initialized: 0

@@ -16,9 +16,6 @@ public class UserStudyWindow : EditorWindow
     int userPerRow = 4;
     int dataWidth = 30;
 
-    List<float> avg;
-
-
     [MenuItem("Window/User Study Window")]
     static void Init()
     {
@@ -54,7 +51,6 @@ public class UserStudyWindow : EditorWindow
 
     void OnGUI()
     {
-        
         if (usm == null)
         {
             if (GUILayout.Button("GetUserStudyManager"))
@@ -182,7 +178,7 @@ public class UserStudyWindow : EditorWindow
                 string s = gridIndex % usm.numOfConditions + "_" + j;
                 int c = usm.OrderDictionary[s];
 
-                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("Condition #{0} - {1} ({2})", (j + 1), ((ConditionManager.Condition)c).ToString(), c));
+                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("Condition #{0:00} - [{1:00}] {2}", (j + 1), c, ((ConditionManager.Condition)c).ToString()));
 
                 if (showCondition[j])
                 {

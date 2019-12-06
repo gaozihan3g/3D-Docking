@@ -21,7 +21,7 @@ public class Manipulatable : MonoBehaviour
     public GameObject highlight;
 
 
-    //public float MinS = 0f;
+    public float MinS = 1f;
 
     /// <summary>
     /// threshold between iso and non-iso
@@ -85,9 +85,9 @@ public class Manipulatable : MonoBehaviour
             // get scale factor based on rotation speed
             angularSpeed = Quaternion.Angle(pCasterPose.rot, curCasterPose.rot) / Time.deltaTime;
 
-            print(angularSpeed);
+            //rotationScaleFactor = dynamicScale ? GetRotationFactor(angularSpeed) : rotationScaleFactor;
 
-            rotationScaleFactor = dynamicScale ? GetRotationFactor(angularSpeed) : rotationScaleFactor;
+            rotationScaleFactor = dynamicScale ? DockingManager.Map(angularSpeed, MinS, SC, 0f, largeRS, true) : rotationScaleFactor;
 
             Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
 

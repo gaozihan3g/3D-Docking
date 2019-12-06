@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 public class UserStudyManager : MonoBehaviour
 {
     public static UserStudyManager Instance;
+    public GUISkin mySkin;
 
     const string kPath = "Assets/Output/";
     const string kXmlFileName = "data.xml";
