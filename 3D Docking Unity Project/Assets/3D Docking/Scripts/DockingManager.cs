@@ -90,7 +90,8 @@ public class DockingManager : MonoBehaviour
 
     public static DockingManager Instance;
 
-    
+    //public List<Transform> froms;
+    //public List<Transform> tos;
 
     public void Init()
     {
@@ -167,7 +168,7 @@ public class DockingManager : MonoBehaviour
     {
         fromObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
 
-        var theta = Random.Range(0f, 2 * Mathf.PI);
+        var theta = Random.Range(0.25f * Mathf.PI, 0.75f * Mathf.PI);
         Vector3 d = new Vector3(Mathf.Cos(theta), 0f, Mathf.Sin(theta));
         toObject.position = fromObject.position + d * initDist;
     }
@@ -349,10 +350,11 @@ public class DockingManager : MonoBehaviour
 
             // calculate efficiency
             translationEfficiency_0 = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance_0;
-            rotationEfficiency_0 = (initAngle - easyAngleThreshold) / totalObjAngle_0;
+            rotationEfficiency_0 = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / totalObjAngle_0;
 
             // record sth
-
+            orgFromObjPos = fromObject.position;
+            orgFromObjRot = fromObject.rotation;
 
             // audio feedback
             AudioManager.Instance.PlaySound(0);
@@ -378,8 +380,8 @@ public class DockingManager : MonoBehaviour
         AudioManager.Instance.PlaySound(1);
 
         // calculate efficiency
-        translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / totalObjDistance;
-        rotationEfficiency = (easyAngleThreshold - angleThreshold) / (totalObjAngle - totalObjAngle_0);
+        translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / (totalObjDistance - totalObjDistance_0);
+        rotationEfficiency = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / (totalObjAngle - totalObjAngle_0);
 
         // send data
         SendData();
@@ -452,6 +454,16 @@ public class DockingManager : MonoBehaviour
         UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Trial(data));
 
     }
+
+    //public void AddPredefined()
+    //{
+    //    var go = new GameObject("go");
+    //    go.transform.parent = transform;
+    //    go.transform.localPosition = fromObject.localPosition;
+    //    go.transform.localRotation = fromObject.localRotation;
+
+    //    froms.Add(go.transform);
+    //}
 
     public static float Map(float v, float fmin, float fmax, float tmin, float tmax, bool clamp = false)
     {

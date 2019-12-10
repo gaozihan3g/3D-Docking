@@ -4,9 +4,7 @@ using System.Collections.Generic;
 
 public class UserStudyWindow : EditorWindow
 {
-
-    public UserStudyManager usm;
-
+    UserStudyManager usm;
     int gridIndex = 0;
     Vector2 scrollPos;
     bool[] showCondition;
@@ -15,6 +13,7 @@ public class UserStudyWindow : EditorWindow
 
     int userPerRow = 4;
     int dataWidth = 30;
+    int activeUserId = -1;
 
     [MenuItem("Window/User Study Window")]
     static void Init()
@@ -51,9 +50,14 @@ public class UserStudyWindow : EditorWindow
 
     void OnGUI()
     {
+        GUI.backgroundColor = Color.white;
+        GUI.color = Color.white;
+
+        usm = (UserStudyManager)EditorGUILayout.ObjectField("UserStudyManager", usm, typeof(UserStudyManager), true);
+
         if (usm == null)
         {
-            if (GUILayout.Button("GetUserStudyManager"))
+            if (GUILayout.Button("GetManagers"))
             {
                 if (UserStudyManager.Instance != null)
                     usm = UserStudyManager.Instance;
@@ -147,17 +151,6 @@ public class UserStudyWindow : EditorWindow
 
             GUILayout.EndHorizontal();
 
-            GUILayout.BeginHorizontal();
-
-            usm.auto = EditorGUILayout.ToggleLeft("Auto", usm.auto);
-
-            if (GUILayout.Button("Start Auto Test", GUILayout.Width(100)))
-            {
-                usm.AutoInit();
-            }
-
-            GUILayout.EndHorizontal();
-
             // user buttons
             List<string> gridStrings = new List<string>();
             for (int i = 0; i < usm.userSessions.Count; ++i)
@@ -166,6 +159,34 @@ public class UserStudyWindow : EditorWindow
             gridIndex = GUILayout.SelectionGrid(gridIndex, gridStrings.ToArray(), userPerRow);
 
             usm.currentUser = gridIndex;
+
+
+            GUILayout.BeginHorizontal();
+
+            if (GUILayout.Button("Start Auto Test", GUILayout.Width(100)))
+            {
+                activeUserId = usm.currentUser;
+                usm.AutoInit();
+            }
+
+            usm.auto = EditorGUILayout.ToggleLeft("Auto", usm.auto);
+
+
+            if (GUILayout.Button("Show All", GUILayout.Width(100)))
+            {
+                for (int i = 0; i < showCondition.Length; ++i)
+                    showCondition[i] = true;
+            }
+
+            if (GUILayout.Button("Hide All", GUILayout.Width(100)))
+            {
+                for (int i = 0; i < showCondition.Length; ++i)
+                    showCondition[i] = false;
+            }
+
+            GUILayout.EndHorizontal();
+
+
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
@@ -180,25 +201,25 @@ public class UserStudyWindow : EditorWindow
 
                 showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("Condition #{0:00} - [{1:00}] {2}", (j + 1), c, ((ConditionManager.Condition)c).ToString()));
 
+                GUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("Practice", GUILayout.Width(120)))
+                {
+                    //change condition
+                    if (ConditionManager.Instance != null)
+                        ConditionManager.Instance.SetCondition(c);
+
+                    usm.PracticeMode();
+                }
+
+                for (int i = 0; i < usm.numOfMetrics; ++i)
+                    GUILayout.Label(usm.metricNames[i], GUILayout.Width(dataWidth));
+
+                GUILayout.EndHorizontal();
+
                 if (showCondition[j])
                 {
                     EditorGUILayout.BeginVertical();
-
-                    GUILayout.BeginHorizontal();
-
-                    if (GUILayout.Button("Practice", GUILayout.Width(120)))
-                    {
-                        //change condition
-                        if (ConditionManager.Instance != null)
-                            ConditionManager.Instance.SetCondition(c);
-
-                        usm.PracticeMode();
-                    }
-
-                    for (int i = 0; i < usm.numOfMetrics; ++i)
-                        GUILayout.Label(usm.metricNames[i], GUILayout.Width(dataWidth));
-
-                    GUILayout.EndHorizontal();
 
                     // each task
                     for (int i = 0; i < usm.numOfTrials; ++i)
@@ -206,26 +227,26 @@ public class UserStudyWindow : EditorWindow
                         TaskGUI(c, i, j);
                     }
 
-
-                    GUILayout.BeginHorizontal();
-
-                    if (GUILayout.Button("Average", GUILayout.Width(120)))
-                    {
-                        // calculate mean based on:
-                        //user:
-                        //condition: c
-                        usm.GetCurrentUser().conditions[c].GetAvgData();
-                    }
-
-                    var avg = usm.GetCurrentUser().conditions[c].average;
-                    for (int i = 0; i < avg.Count; ++i)
-                        GUILayout.Label(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
-
-                    GUILayout.EndHorizontal();
-
-
                     EditorGUILayout.EndVertical();
                 }
+
+                GUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("AVERAGE", GUILayout.Width(120)))
+                {
+                    // calculate mean based on:
+                    //user:
+                    //condition: c
+                    usm.GetCurrentUser().conditions[c].GetAvgData();
+                }
+
+                var avg = usm.GetCurrentUser().conditions[c].average;
+
+                for (int i = 0; i < avg.Count; ++i)
+                    GUILayout.Label(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
+
+                GUILayout.EndHorizontal();
+
             }
 
             EditorGUILayout.EndScrollView();
@@ -247,9 +268,15 @@ public class UserStudyWindow : EditorWindow
     {
         GUILayout.BeginHorizontal();
 
+        if (usm.currentUser == activeUserId && usm.currentTrial == tri && usm.currentCondition == con)
+            GUI.backgroundColor = Color.HSVToRGB(0.25f, 0.5f, 1f);
+        else
+            GUI.backgroundColor = Color.white;
+
         if (GUILayout.Button(((ConditionManager.Condition)con).ToString() + " #" + (tri + 1), GUILayout.Width(120)))
         {
             usm.TaskSetup(con, tri);
+            activeUserId = usm.currentUser;
             usm.autoConditionCounter = order;
         }
 
@@ -261,6 +288,7 @@ public class UserStudyWindow : EditorWindow
             usm.GetCurrentUser().GetTask(con, tri).data[i] = EditorGUILayout.FloatField(usm.GetCurrentUser().GetTask(con, tri).data[i], GUILayout.Width(dataWidth));
         }
 
+        GUI.backgroundColor = Color.HSVToRGB(0f, 0.5f, 1f);
         if (GUILayout.Button("X", GUILayout.Width(20)))
         {
             // clear data
@@ -272,7 +300,7 @@ public class UserStudyWindow : EditorWindow
                 usm.GetCurrentUser().GetTask(con, tri).data[i] = 0f;
             }
         }
-
+        GUI.backgroundColor = Color.white;
         GUILayout.EndHorizontal();
     }
 }

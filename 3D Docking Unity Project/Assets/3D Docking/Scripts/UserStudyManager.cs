@@ -10,7 +10,6 @@ using System.Xml.Serialization;
 public class UserStudyManager : MonoBehaviour
 {
     public static UserStudyManager Instance;
-    public GUISkin mySkin;
 
     const string kPath = "Assets/Output/";
     const string kXmlFileName = "data.xml";
@@ -33,7 +32,7 @@ public class UserStudyManager : MonoBehaviour
     public int currentCondition = 0;
 
     [HideInInspector]
-    public int numOfTrials = 5;
+    public int numOfTrials = 10;
     [HideInInspector]
     public int currentTrial = 0;
 
@@ -160,6 +159,9 @@ public class UserStudyManager : MonoBehaviour
         if (currentTrial == numOfTrials)
         {
             AudioManager.Instance.PlaySound(2);
+
+            // get avg based on currentCondition
+            GetCurrentUser().conditions[currentCondition].GetAvgData();
 
             currentTrial = 0;
 

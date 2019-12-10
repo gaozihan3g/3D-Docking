@@ -22,6 +22,11 @@ public class DockingManagerEditor : Editor
             dm.Init();
         }
 
+        //if (GUILayout.Button("Add Predefined"))
+        //{
+        //    dm.AddPredefined();
+        //}
+
         if (GUILayout.Button("Send Data"))
         {
             dm.SendData();

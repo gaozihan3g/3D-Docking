@@ -20,25 +20,8 @@ public class Manipulatable : MonoBehaviour
     public bool dynamicScale = false;
     public GameObject highlight;
 
-
-    public float MinS = 1f;
-
-    /// <summary>
-    /// threshold between iso and non-iso
-    /// </summary>
-    public float SC = 100f;
-
-    //public float MaxS = 200f;
-
-    public float smallRS = 1f;
-
-    //public float midRS = 3f;
-
-    public float largeRS = 3f;
-
     [SerializeField]
     private ColliderButtonEventData.InputButton m_manipulateButton = ColliderButtonEventData.InputButton.Trigger;
-
 
     [SerializeField]
     private float positionScaleFactor = 1.0f;
@@ -49,6 +32,17 @@ public class Manipulatable : MonoBehaviour
     private RigidPose pObjPose = RigidPose.identity;
 
     public float angularSpeed;
+
+    public float MinS = 1f;
+
+    /// <summary>
+    /// threshold between iso and non-iso
+    /// </summary>
+    public float SC = 100f;
+
+    public float smallRS = 1f;
+
+    public float largeRS = 3f;
 
     public void OnColliderEventDragStart(ColliderButtonEventData eventData)
     {
@@ -85,9 +79,7 @@ public class Manipulatable : MonoBehaviour
             // get scale factor based on rotation speed
             angularSpeed = Quaternion.Angle(pCasterPose.rot, curCasterPose.rot) / Time.deltaTime;
 
-            //rotationScaleFactor = dynamicScale ? GetRotationFactor(angularSpeed) : rotationScaleFactor;
-
-            rotationScaleFactor = dynamicScale ? DockingManager.Map(angularSpeed, MinS, SC, 0f, largeRS, true) : rotationScaleFactor;
+            rotationScaleFactor = dynamicScale ? DockingManager.Map(angularSpeed, MinS, SC, smallRS, largeRS, true) : rotationScaleFactor;
 
             Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
 
@@ -105,7 +97,6 @@ public class Manipulatable : MonoBehaviour
         DockingManager.Instance.TouchEnd();
     }
 
-
     private RigidPose GetEventPose(ColliderButtonEventData eventData)
     {
         var grabberTransform = eventData.eventCaster.transform;
@@ -117,9 +108,6 @@ public class Manipulatable : MonoBehaviour
         Quaternion d = to * Quaternion.Inverse(from);
         return d;
     }
-
-
-
     public void RotationSetup(float f, bool b = false)
     {
         rotationScaleFactor = f;
@@ -154,25 +142,5 @@ public class Manipulatable : MonoBehaviour
 
         if (showHighlight)
             highlight.SetActive(false);
-    }
-
-    float GetRotationFactor(float s)
-    {
-        // cd = c/d
-        // rf = d/c
-        // TODO tweak it
-
-        float r = 0f;
-
-        //if (s < MinS)
-        //    r = 0f;
-        //else 
-        
-        if (s < SC)
-            r = smallRS;
-        else
-            r = largeRS;
-
-        return r;
     }
 }
