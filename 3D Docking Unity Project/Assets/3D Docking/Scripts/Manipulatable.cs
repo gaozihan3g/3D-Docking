@@ -74,12 +74,12 @@ public class Manipulatable : MonoBehaviour
         if (rotationEnabled)
         {
             // rotation
-            Quaternion delta = GetDeltaQuaternion(pCasterPose.rot, curCasterPose.rot);
+            Quaternion delta = DockingHelper.GetDeltaQuaternion(pCasterPose.rot, curCasterPose.rot);
 
             // get scale factor based on rotation speed
             angularSpeed = Quaternion.Angle(pCasterPose.rot, curCasterPose.rot) / Time.deltaTime;
 
-            rotationScaleFactor = dynamicScale ? DockingManager.Map(angularSpeed, MinS, SC, smallRS, largeRS, true) : rotationScaleFactor;
+            rotationScaleFactor = dynamicScale ? DockingHelper.Map(angularSpeed, MinS, SC, smallRS, largeRS, true) : rotationScaleFactor;
 
             Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
 
@@ -103,11 +103,7 @@ public class Manipulatable : MonoBehaviour
         return new RigidPose(grabberTransform);
     }
 
-    static Quaternion GetDeltaQuaternion(Quaternion from, Quaternion to)
-    {
-        Quaternion d = to * Quaternion.Inverse(from);
-        return d;
-    }
+
     public void RotationSetup(float f, bool b = false)
     {
         rotationScaleFactor = f;
