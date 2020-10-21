@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public Color32 colorC;
     public Color32 outColor;
     public Material mat;
+    public Material cursorMat;
     [Range(0f, 1f)]
     public float t;
 
@@ -90,5 +91,13 @@ public class UIManager : MonoBehaviour
             outColor = Color32.Lerp(colorB, colorC, 2f * t - 1f);
 
         mat.SetColor(Shader.PropertyToID("g_vOutlineColor"), outColor);
+    }
+
+    public void SetCursorColor(Color c)
+    {
+        if (cursorMat == null)
+            return;
+
+        cursorMat.SetColor(Shader.PropertyToID("g_vOutlineColor"), c);
     }
 }

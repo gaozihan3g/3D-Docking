@@ -52,7 +52,9 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     Vector3 HmdOffset;
     public Vector3 origin;
-
+    Vector3 wandO;
+    Vector3 objO;
+    public float ratio;
     public float gizmosR = 0.1f;
 
     // Start is called before the first frame update
@@ -95,7 +97,7 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
             t.Add(transform);
             line.Setup(t);
         }
-            
+
     }
 
     void OnDeselected()
@@ -121,7 +123,6 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (!magicStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
         {
             OnMagicStart();
-            magicStarted = true;
         }
 
         if (magicStarted)
@@ -130,7 +131,6 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (magicStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
         {
             OnMagicEnd();
-            magicStarted = false;
         }
 
 
@@ -150,6 +150,7 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     void OnMagicStart()
     {
+        magicStarted = true;
         // record data
         //Debug.Log("# OnMagicStart");
         pWandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
@@ -157,7 +158,7 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         cHmdPose = VivePose.GetPoseEx(DeviceRole.Hmd);
         origin = cHmdPose.pos;
-        origin.y = pWandRigidPose.pos.y;
+        //origin.y = pWandRigidPose.pos.y;
     }
 
     void OnMagicUpdate()
@@ -206,18 +207,24 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
                     break;
                 case TranslationType.Spherical:
 
-                    Vector3 cWandSph = DockingHelper.CartesianToShpherical(cWandRigidPose.pos, origin);
-                    Vector3 pWandSph = DockingHelper.CartesianToShpherical(pWandRigidPose.pos, origin);
+                    wandO = new Vector3(origin.x, pWandRigidPose.pos.y, origin.z);
+                    Vector3 cWandSph = DockingHelper.CartesianToShpherical(cWandRigidPose.pos, wandO);
+                    Vector3 pWandSph = DockingHelper.CartesianToShpherical(pWandRigidPose.pos, wandO);
 
                     Vector3 deltaSph = cWandSph - pWandSph;
 
-                    Vector3 pSph = DockingHelper.CartesianToShpherical(pRigidPose.pos, origin);
+                    objO = new Vector3(origin.x, pRigidPose.pos.y, origin.z);
+                    Vector3 pSph = DockingHelper.CartesianToShpherical(pRigidPose.pos, objO);
 
-                    deltaSph.x *= translationScaleFactor;
+
+                    ratio = pSph.x / pWandSph.x;
+
+
+                    deltaSph.x *= ratio;
 
                     Vector3 finalSph = pSph + deltaSph;
 
-                    transform.position = DockingHelper.ShphericalToCartesian(finalSph, origin);
+                    transform.position = DockingHelper.ShphericalToCartesian(finalSph, objO);
 
                     break;
             }
@@ -239,37 +246,54 @@ public class MagicManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         }
 
-        pWandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
-        pRigidPose = new RigidPose(transform);
+        //pWandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
+        //pRigidPose = new RigidPose(transform);
 
     }
 
+
     void OnMagicEnd()
     {
+        magicStarted = false;
         //Debug.Log("# OnMagicEnd");
     }
 
     private void OnDrawGizmos()
     {
         // origin
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(origin, gizmosR);
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(origin + Vector3.up, origin + Vector3.down);
+        //Gizmos.DrawSphere(origin, gizmosR);
 
         // hand
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(cWandRigidPose.pos, gizmosR);
         // hand to origin
-        Gizmos.DrawLine(origin, cWandRigidPose.pos);
+        Gizmos.DrawLine(wandO, cWandRigidPose.pos);
 
         // object
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(cRigidPose.pos, gizmosR);
         // object to origin
-        Gizmos.DrawLine(origin, cRigidPose.pos);
+        Gizmos.DrawLine(objO, cRigidPose.pos);
 
         // hand to object
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(cWandRigidPose.pos, cRigidPose.pos);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawLine(cWandRigidPose.pos, cRigidPose.pos);
     }
 }
 
+
+
+//Vector3 cWandSph = DockingHelper.CartesianToShpherical(cWandRigidPose.pos, origin);
+//Vector3 pWandSph = DockingHelper.CartesianToShpherical(pWandRigidPose.pos, origin);
+
+//Vector3 deltaSph = cWandSph - pWandSph;
+
+//Vector3 pSph = DockingHelper.CartesianToShpherical(pRigidPose.pos, origin);
+
+//deltaSph.x *= translationScaleFactor;
+
+//                    Vector3 finalSph = pSph + deltaSph;
+
+//transform.position = DockingHelper.ShphericalToCartesian(finalSph, origin);
