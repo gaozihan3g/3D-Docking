@@ -199,7 +199,7 @@ public class UserStudyWindow : EditorWindow
                 string s = gridIndex % usm.numOfConditions + "_" + j;
                 int c = usm.OrderDictionary[s];
 
-                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("Condition #{0:00} - [{1:00}] {2}", (j + 1), c, ((ConditionManager.Condition)c).ToString()));
+                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("Condition #{0:00} - [{1:00}] {2}", (j + 1), c, ConditionManager.Instance.GetConditionName(c)));
 
                 GUILayout.BeginHorizontal();
 
@@ -207,7 +207,7 @@ public class UserStudyWindow : EditorWindow
                 {
                     //change condition
                     if (ConditionManager.Instance != null)
-                        ConditionManager.Instance.SetCondition(c);
+                        ConditionManager.Instance.CurrentCondition = c;
 
                     usm.PracticeMode();
                 }
@@ -273,7 +273,7 @@ public class UserStudyWindow : EditorWindow
         else
             GUI.backgroundColor = Color.white;
 
-        if (GUILayout.Button(((ConditionManager.Condition)con).ToString() + " #" + (tri + 1), GUILayout.Width(120)))
+        if (GUILayout.Button(ConditionManager.Instance.GetConditionName(con) + " #" + (tri + 1), GUILayout.Width(120)))
         {
             usm.TaskSetup(con, tri);
             activeUserId = usm.currentUser;

@@ -193,7 +193,7 @@ public class UserStudyManager : MonoBehaviour
 
         // TODO init for a new trial
         if (ConditionManager.Instance != null)
-            ConditionManager.Instance.SetCondition(condition);
+            ConditionManager.Instance.CurrentCondition = condition;
 
         if (DockingManager.Instance != null)
             DockingManager.Instance.Init();

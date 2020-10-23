@@ -19,6 +19,41 @@ public class UIManager : MonoBehaviour
     [Range(0f, 1f)]
     public float t;
 
+    public bool updateCamPos = false;
+    [Range(0f, 1f)]
+    public float camPosT;
+    public Transform origin;
+    public Transform obj;
+    public Transform cam;
+    public Transform camRoot;
+    public float camDist = 1f;
+
+
+    public void CamZoom(bool on)
+    {
+        if (!on)
+        {
+            camPosT = 1f;
+        }
+        else
+        {
+            float d = Vector3.Distance(origin.position, obj.position);
+            camPosT = Mathf.Clamp01(camDist / d);
+        }
+
+        camRoot.position = Vector3.Lerp(obj.position + (camRoot.position - cam.position), origin.position, camPosT);
+    }
+
+    void UpdateCamPos()
+    {
+        if (updateCamPos)
+        {
+            camRoot.position = Vector3.Lerp(obj.position + (camRoot.position - cam.position), origin.position, camPosT);
+        }
+    }
+
+
+
     void Awake()
     {
         if (Instance == null)
@@ -41,6 +76,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UpdateText();
+
+        //UpdateCamPos();
     }
 
     void UpdateText()
@@ -53,7 +90,7 @@ public class UIManager : MonoBehaviour
             return;
 
         text.text = string.Format("Condition: {0}\nProgress: {1} / {2}\nTrial: {3} / {4}\n\nCompletion Time: {5:F2}s",
-            ConditionManager.Instance.curCondition.ToString(),
+            ConditionManager.Instance.CurrentCondition.ToString(),
             UserStudyManager.Instance.autoConditionCounter + 1,
             UserStudyManager.Instance.numOfConditions,
             UserStudyManager.Instance.currentTrial + 1,

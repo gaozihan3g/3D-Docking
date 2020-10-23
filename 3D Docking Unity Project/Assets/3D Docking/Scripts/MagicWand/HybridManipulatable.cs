@@ -7,10 +7,15 @@ using HTC.UnityPlugin.Utility;
 
 public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public bool calibrated = false;
     public SelectionMode selectionMode;
-    public ManipulationType manipulationType = ManipulationType.Translation & ManipulationType.Rotation;
+
+    //public ManipulationMode manipulationMode;
+
     [SerializeField]
     private ManipulationTech tech;
+    public TechSwitching techSwitching;
+    public bool viewpointControl = false;
 
     //public ReferenceFrame refFrame;
     //public bool velocityBased = false;
@@ -19,6 +24,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     // move to UI
     public ConnectionLine line;
     public Transform wand;
+
+    //public ManipulationType manipulationType = ManipulationType.Translation & ManipulationType.Rotation;
 
     bool selected = false;
     bool pointed = false;
@@ -38,13 +45,14 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     float ratio;
     Vector3 scaledHandPos;
     Vector3 offset;
+    [SerializeField]
     Vector3 HmdOffset = new Vector3(0f, -0.4f, 0f);
     float gizmosR = 0.03f;
 
     float minSpeed = 0f;
     float maxSpeed = 0.1f;
     float minScale = 0f;
-    float maxScale = 2f;
+    float maxScale = 1f;
     [Tooltip("m/sec")]
     public float speed;
 
@@ -55,9 +63,9 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     [Tooltip("degree/sec")]
     public float angSpeed;
 
-    //public float xSpeed;
-    //public float ySpeed;
-    //public float zSpeed;
+    public float xSpeed;
+    public float ySpeed;
+    public float zSpeed;
     //public float minAxisSpeed;
     //public bool X;
     //public bool Y;
@@ -65,6 +73,12 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public float translationScaleFactor = 1f;
     public float rotationScaleFactor = 1f;
+
+    public float techThreshold = 0.3f;
+    public float handTorsoDist;
+
+
+
 
     public ManipulationTech Tech
     {
@@ -78,9 +92,15 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public enum SelectionMode
     {
-        Magical,
+        Lazy,
         Normal,
     }
+
+    //public enum ManipulationMode
+    //{
+    //    Scaled_HOMER,
+    //    Hybrid_HOMER
+    //}
 
     public enum ManipulationTech
     {
@@ -88,11 +108,11 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         Prism,
     }
 
-    //public enum ReferenceFrame
-    //{
-    //    User,
-    //    World,
-    //}
+    public enum TechSwitching
+    {
+        Manual,
+        Auto
+    }
 
 
     [System.Flags]
@@ -113,7 +133,16 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void Update()
     {
-        if (selectionMode == SelectionMode.Magical)
+        if (!calibrated)
+        {
+            Calibrate();
+            return;
+        }
+
+
+        UpdateTechState();
+
+        if (selectionMode == SelectionMode.Lazy)
         {
             CheckSelection();
             Manipulation();
@@ -122,8 +151,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             NormalSelection();
         }
-
-        UpdateState();
     }
 
     void OnValidate()
@@ -133,22 +160,54 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void UpdateCursorState()
     {
-        Color c;
-
-        if (Tech == ManipulationTech.Homer)
-            c = Color.blue;
-        else
-            c = Color.green;
-
         if (UIManager.Instance != null)
-            UIManager.Instance.SetCursorColor(c);
+        {
+            UIManager.Instance.SetCursorColor(Tech == ManipulationTech.Homer ? Color.blue : Color.green);
+        }
+
     }
 
-    void UpdateState()
+    void UpdateTechState()
+    {
+        if (magicStarted)
+            return;
+
+        if (techSwitching == TechSwitching.Auto)
+        {
+            var hand = VivePose.GetPoseEx(HandRole.RightHand).pos;
+            var torso = VivePose.GetPoseEx(DeviceRole.Hmd).pos + HmdOffset;
+
+            handTorsoDist = Vector3.Distance(hand, torso);
+
+            if (handTorsoDist > techThreshold)
+                Tech = ManipulationTech.Homer;
+            else
+                Tech = ManipulationTech.Prism;
+        }
+        else
+        {
+            if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
+            {
+                Tech = 1 - Tech;
+            }
+        }
+    }
+
+    /// <summary>
+    /// put controller on the chest to calibrate
+    /// </summary>
+    void Calibrate()
     {
         if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
         {
-            Tech = 1 - Tech;
+            var hand = VivePose.GetPoseEx(HandRole.RightHand).pos;
+            var head = VivePose.GetPoseEx(DeviceRole.Hmd).pos;
+
+            var handHeadDist = Vector3.Distance(hand, head);
+
+            HmdOffset.y = -handHeadDist;
+
+            calibrated = true;
         }
     }
 
@@ -160,9 +219,9 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
         speed = deltaHandPos.magnitude / Time.deltaTime;
 
-        //xSpeed = Mathf.Abs(deltaHandPos.x) / Time.deltaTime;
-        //ySpeed = Mathf.Abs(deltaHandPos.y) / Time.deltaTime;
-        //zSpeed = Mathf.Abs(deltaHandPos.z) / Time.deltaTime;
+        xSpeed = Mathf.Abs(deltaHandPos.x) / Time.deltaTime;
+        ySpeed = Mathf.Abs(deltaHandPos.y) / Time.deltaTime;
+        zSpeed = Mathf.Abs(deltaHandPos.z) / Time.deltaTime;
 
         //X = xSpeed > minAxisSpeed;
         //Y = ySpeed > minAxisSpeed;
@@ -246,6 +305,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             line.Setup(t);
         }
 
+        DockingManager.Instance.TouchStart();
     }
 
     void OnDeselected()
@@ -260,6 +320,11 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             List<Transform> t = new List<Transform>();
             line.Setup(t);
         }
+
+        if (viewpointControl)
+            UIManager.Instance.CamZoom(false);
+
+        DockingManager.Instance.TouchEnd();
     }
 
     void Manipulation()
@@ -294,81 +359,82 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         pHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
         pRigidPose = new RigidPose(transform);
 
+        cHmdPose = VivePose.GetPoseEx(DeviceRole.Hmd);
+        origin = cHmdPose.pos + HmdOffset;
+
+        // get ratio
+        float oWandR = Vector3.Distance(origin, oHandRigidPose.pos);
+        float oObjR = Vector3.Distance(origin, oRigidPose.pos);
+        ratio = oObjR / oWandR;
+
+        scaledHandPos = oHandRigidPose.pos;
 
         if (Tech == ManipulationTech.Homer)
         {
-            cHmdPose = VivePose.GetPoseEx(DeviceRole.Hmd);
-            origin = cHmdPose.pos + HmdOffset;
-
-            // get ratio
-            float oWandR = Vector3.Distance(origin, oHandRigidPose.pos);
-            float oObjR = Vector3.Distance(origin, oRigidPose.pos);
-            ratio = oObjR / oWandR;
-
-            // get offset
-            scaledHandPos = oHandRigidPose.pos;
             offset = oRigidPose.pos - (origin + (oHandRigidPose.pos - origin).normalized * oObjR);
-
         }
         else
         {
-            scaledHandPos = oHandRigidPose.pos;
             offset = oRigidPose.pos - scaledHandPos;
         }
+
+
+
+        if (viewpointControl)
+            UIManager.Instance.CamZoom(Tech == ManipulationTech.Prism);
     }
 
     void OnMagicUpdate()
     {
         cHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
 
-        if (Tech == ManipulationTech.Prism)
-            CalculateVelocity();
-        else
+        if (Tech == ManipulationTech.Homer)
         {
             translationScaleFactor = 1f;
             rotationScaleFactor = 1f;
         }
-
-        if ((manipulationType & ManipulationType.Translation) == ManipulationType.Translation)
+        else
         {
-
-            Vector3 deltaPos = cHandRigidPose.pos - pHandRigidPose.pos;
-            Vector3 diffPos = deltaPos * translationScaleFactor;
-
-
-            if (Tech == ManipulationTech.Homer)
-            {
-                scaledHandPos += diffPos;
-
-                Vector3 dir = (scaledHandPos - origin).normalized;
-                float cWandR = Vector3.Distance(origin, scaledHandPos);
-                transform.position = origin + dir * cWandR * ratio + offset;
-            }
-            else
-            {
-                //diffPos.x = X ? diffPos.x : 0f;
-                //diffPos.y = Y ? diffPos.y : 0f;
-                //diffPos.z = Z ? diffPos.z : 0f;
-
-                scaledHandPos += diffPos;
-                transform.position = scaledHandPos + offset;
-            }
-
-
+            CalculateVelocity();
         }
 
-        if ((manipulationType & ManipulationType.Rotation) == ManipulationType.Rotation)
+
+        // translation
+        Vector3 deltaPos = cHandRigidPose.pos - pHandRigidPose.pos;
+        Vector3 diffPos = deltaPos * translationScaleFactor;
+
+        if (Tech == ManipulationTech.Homer)
         {
-            // rotation
-            Quaternion delta = DockingHelper.GetDeltaQuaternion(pHandRigidPose.rot, cHandRigidPose.rot);
-            Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
-            transform.rotation = diff * pRigidPose.rot;
+            scaledHandPos += diffPos;
+
+            Vector3 dir = (scaledHandPos - origin).normalized;
+            float cWandR = Vector3.Distance(origin, scaledHandPos);
+            transform.position = origin + dir * cWandR * ratio + offset;
         }
+        else
+        {
+            //diffPos.x = X ? diffPos.x : 0f;
+            //diffPos.y = Y ? diffPos.y : 0f;
+            //diffPos.z = Z ? diffPos.z : 0f;
+
+            scaledHandPos += diffPos;
+            transform.position = scaledHandPos + offset;
+        }
+
+
+
+        // rotation
+        Quaternion delta = DockingHelper.GetDeltaQuaternion(pHandRigidPose.rot, cHandRigidPose.rot);
+        Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
+        transform.rotation = diff * pRigidPose.rot;
+
+
 
         cRigidPose = new RigidPose(transform); // for debugging
-
         pHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
         pRigidPose = new RigidPose(transform);
+
+        DockingManager.Instance.TouchUpdate();
     }
 
     void OnMagicEnd()
@@ -377,9 +443,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
         //Debug.Log("# OnMagicEnd");
     }
-
-
-
 
     public void OnPointerEnter(PointerEventData eventData)
     {
