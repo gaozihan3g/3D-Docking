@@ -11,6 +11,9 @@ public class DockingManager : MonoBehaviour
     public Transform head;
     public Transform[] hands;
     public bool IsRightHand = true;
+
+    public float anchorDist = 5f;
+
     Transform hand;
 
     public float randomOffsetRadius = 1f;
@@ -133,6 +136,14 @@ public class DockingManager : MonoBehaviour
 
         translationEfficiency_0 = 0f;
         rotationEfficiency_0 = 0f;
+
+        // setup anchor based on head
+
+        var headDir = head.forward;
+        headDir.y = 0f;
+        headDir.Normalize();
+
+        anchor.position = head.position + headDir * anchorDist;
 
 
         // reset pos
@@ -298,7 +309,7 @@ public class DockingManager : MonoBehaviour
         preFromObjRot = fromObject.rotation;
     }
 
-    public void TouchStart()
+    public void ManipulationStart()
     {
         isTouching = true;
 
@@ -315,13 +326,15 @@ public class DockingManager : MonoBehaviour
         }
     }
 
-    public void TouchUpdate()
+    public void ManipulationUpdate()
     {
         // update sths
         EasyAccuracyCheck();
+
+        
     }
 
-    public void TouchEnd()
+    public void ManipulationEnd()
     {
         isTouching = false;
         // accuracy check
@@ -331,11 +344,9 @@ public class DockingManager : MonoBehaviour
     void EasyAccuracyCheck()
     {
         // check easy
-        if (distance > easyDistThreshold)
+        if (distance > easyDistThreshold && angle > easyAngleThreshold)
             return;
 
-        if (angle > easyAngleThreshold)
-            return;
 
         // change flag
         if (!easyThresholdMet)
@@ -373,6 +384,9 @@ public class DockingManager : MonoBehaviour
 
     void HardAccuracyCheck()
     {
+        if (!easyThresholdMet)
+            return;
+
         // check hard
         if (distance > distThreshold)
             return;

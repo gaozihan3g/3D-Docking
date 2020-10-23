@@ -28,6 +28,10 @@ public class UIManager : MonoBehaviour
     public Transform camRoot;
     public float camDist = 1f;
 
+    public GameObject pointer;
+    public ConnectionLine line;
+    public Transform wand;
+
 
     public void CamZoom(bool on)
     {
@@ -136,5 +140,24 @@ public class UIManager : MonoBehaviour
             return;
 
         cursorMat.SetColor(Shader.PropertyToID("g_vOutlineColor"), c);
+    }
+
+    public void SetupPointer(Transform objTransform, bool pointerActive)
+    {
+        if (pointer != null)
+            pointer.SetActive(pointerActive);
+
+        if (line != null)
+        {
+            List<Transform> t = new List<Transform>();
+
+            if (!pointerActive)
+            {
+                t.Add(wand);
+                t.Add(objTransform);
+            }
+
+            line.Setup(t);
+        }
     }
 }

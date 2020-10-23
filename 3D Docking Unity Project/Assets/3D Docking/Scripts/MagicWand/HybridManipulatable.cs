@@ -9,27 +9,16 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 {
     public bool calibrated = false;
     public SelectionMode selectionMode;
-
-    //public ManipulationMode manipulationMode;
+    public RotationMode rotationMode;
+    public bool viewpointControl = false;
+    public bool prismFineTuning = false;
 
     [SerializeField]
-    private ManipulationTech tech;
-    public TechSwitching techSwitching;
-    public bool viewpointControl = false;
-
-    //public ReferenceFrame refFrame;
-    //public bool velocityBased = false;
-
-    public GameObject pointer;
-    // move to UI
-    public ConnectionLine line;
-    public Transform wand;
-
-    //public ManipulationType manipulationType = ManipulationType.Translation & ManipulationType.Rotation;
+    private ManipulationTech tech = ManipulationTech.Homer;
 
     bool selected = false;
     bool pointed = false;
-    bool magicStarted = false;
+    bool manipulationStarted = false;
 
     RigidPose oHandRigidPose;
     RigidPose pHandRigidPose;
@@ -47,7 +36,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     Vector3 offset;
     [SerializeField]
     Vector3 HmdOffset = new Vector3(0f, -0.4f, 0f);
-    float gizmosR = 0.03f;
+    //float gizmosR = 0.03f;
 
     float minSpeed = 0f;
     float maxSpeed = 0.1f;
@@ -56,7 +45,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     [Tooltip("m/sec")]
     public float speed;
 
-    float minAngSpeed = 0f;
+    float minAngSpeed = 1f;
     float maxAngSpeed = 90f;
     float minAngScale = 0f;
     float maxAngScale = 3f;
@@ -78,8 +67,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     public float handTorsoDist;
 
 
-
-
     public ManipulationTech Tech
     {
         get => tech;
@@ -96,11 +83,11 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         Normal,
     }
 
-    //public enum ManipulationMode
-    //{
-    //    Scaled_HOMER,
-    //    Hybrid_HOMER
-    //}
+    public enum RotationMode
+    {
+        ISO,
+        NON_ISO,
+    }
 
     public enum ManipulationTech
     {
@@ -115,16 +102,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     }
 
 
-    [System.Flags]
-    public enum ManipulationType
-    {
-        Translation = 4,
-        Rotation = 2,
-        //Scale = 1,
-    }
-
-
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -139,13 +116,12 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             return;
         }
 
-
-        UpdateTechState();
+        UpdateState();
 
         if (selectionMode == SelectionMode.Lazy)
         {
             CheckSelection();
-            Manipulation();
+            UpdateManipulation();
         }
         else
         {
@@ -167,29 +143,24 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     }
 
-    void UpdateTechState()
+
+    void UpdateState()
     {
-        if (magicStarted)
+        if (manipulationStarted)
             return;
 
-        if (techSwitching == TechSwitching.Auto)
+
+        var r = ViveInput.GetPadTouchAxisEx(HandRole.RightHand);
+
+        if (prismFineTuning)
         {
-            var hand = VivePose.GetPoseEx(HandRole.RightHand).pos;
-            var torso = VivePose.GetPoseEx(DeviceRole.Hmd).pos + HmdOffset;
-
-            handTorsoDist = Vector3.Distance(hand, torso);
-
-            if (handTorsoDist > techThreshold)
-                Tech = ManipulationTech.Homer;
-            else
-                Tech = ManipulationTech.Prism;
+            Tech = (r != Vector2.zero) ? ManipulationTech.Prism : ManipulationTech.Homer;
         }
-        else
+
+
+        if (viewpointControl)
         {
-            if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
-            {
-                Tech = 1 - Tech;
-            }
+            UIManager.Instance.CamZoom(r != Vector2.zero);
         }
     }
 
@@ -211,7 +182,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         }
     }
 
-    void CalculateVelocity()
+    void CalculateScaleFactor()
     {
         // get speed
 
@@ -227,51 +198,44 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         //Y = ySpeed > minAxisSpeed;
         //Z = zSpeed > minAxisSpeed;
 
-
         translationScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale, maxScale, true);
 
-        // get scale factor based on rotation speed
-        angSpeed = Quaternion.Angle(pHandRigidPose.rot, cHandRigidPose.rot) / Time.deltaTime;
-        rotationScaleFactor = DockingHelper.Map(angSpeed, minAngSpeed, maxAngSpeed, minAngScale, maxAngScale, true);
 
-
+        if (rotationMode == RotationMode.ISO)
+        {
+            rotationScaleFactor = 1f;
+        }
+        else
+        {
+            // get scale factor based on rotation speed
+            angSpeed = Quaternion.Angle(pHandRigidPose.rot, cHandRigidPose.rot) / Time.deltaTime;
+            rotationScaleFactor = DockingHelper.Map(angSpeed, minAngSpeed, maxAngSpeed, minAngScale, maxAngScale, true);
+        }
     }
 
     void NormalSelection()
     {
         // define start and end
 
-        if (pointed && !magicStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
+        if (pointed && !manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
         {
-            if (pointer != null)
-                pointer.SetActive(false);
 
-            if (line != null)
-            {
-                List<Transform> t = new List<Transform>();
-                t.Add(wand);
-                t.Add(transform);
-                line.Setup(t);
-            }
+            //ui
+            UIManager.Instance.SetupPointer(transform, false);
+            //ui
 
-            OnMagicStart();
+            OnManipulationStart();
         }
 
-        if (magicStarted)
-            OnMagicUpdate();
+        if (manipulationStarted)
+            OnManipulationUpdate();
 
-        if (magicStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
+        if (manipulationStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
         {
-            if (pointer != null)
-                pointer.SetActive(true);
+            //ui
+            UIManager.Instance.SetupPointer(transform, true);
 
-            if (line != null)
-            {
-                List<Transform> t = new List<Transform>();
-                line.Setup(t);
-            }
-
-            OnMagicEnd();
+            OnManipulationEnd();
         }
     }
 
@@ -294,63 +258,46 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         selected = true;
 
-        if (pointer != null)
-            pointer.SetActive(false);
+        //ui
+        UIManager.Instance.SetupPointer(transform, false);
 
-        if (line != null)
-        {
-            List<Transform> t = new List<Transform>();
-            t.Add(wand);
-            t.Add(transform);
-            line.Setup(t);
-        }
-
-        DockingManager.Instance.TouchStart();
+        DockingManager.Instance.ManipulationStart();
     }
 
     void OnDeselected()
     {
         selected = false;
 
-        if (pointer != null)
-            pointer.SetActive(true);
+        //ui
+        UIManager.Instance.SetupPointer(transform, true);
 
-        if (line != null)
-        {
-            List<Transform> t = new List<Transform>();
-            line.Setup(t);
-        }
-
-        if (viewpointControl)
-            UIManager.Instance.CamZoom(false);
-
-        DockingManager.Instance.TouchEnd();
+        //DockingManager.Instance.TouchEnd();
     }
 
-    void Manipulation()
+    void UpdateManipulation()
     {
         if (!selected)
             return;
 
         // define start and end
 
-        if (!magicStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
+        if (!manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
         {
-            OnMagicStart();
+            OnManipulationStart();
         }
 
-        if (magicStarted)
-            OnMagicUpdate();
+        if (manipulationStarted)
+            OnManipulationUpdate();
 
-        if (magicStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
+        if (manipulationStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
         {
-            OnMagicEnd();
+            OnManipulationEnd();
         }
     }
 
-    void OnMagicStart()
+    void OnManipulationStart()
     {
-        magicStarted = true;
+        manipulationStarted = true;
 
         // record data
         oHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
@@ -378,25 +325,14 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             offset = oRigidPose.pos - scaledHandPos;
         }
 
-
-
-        if (viewpointControl)
-            UIManager.Instance.CamZoom(Tech == ManipulationTech.Prism);
+        DockingManager.Instance.ManipulationStart();
     }
 
-    void OnMagicUpdate()
+    void OnManipulationUpdate()
     {
         cHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
 
-        if (Tech == ManipulationTech.Homer)
-        {
-            translationScaleFactor = 1f;
-            rotationScaleFactor = 1f;
-        }
-        else
-        {
-            CalculateVelocity();
-        }
+        CalculateScaleFactor();
 
 
         // translation
@@ -421,78 +357,80 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             transform.position = scaledHandPos + offset;
         }
 
-
-
         // rotation
         Quaternion delta = DockingHelper.GetDeltaQuaternion(pHandRigidPose.rot, cHandRigidPose.rot);
         Quaternion diff = Quaternion.SlerpUnclamped(Quaternion.identity, delta, rotationScaleFactor);
         transform.rotation = diff * pRigidPose.rot;
 
-
-
         cRigidPose = new RigidPose(transform); // for debugging
         pHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
         pRigidPose = new RigidPose(transform);
 
-        DockingManager.Instance.TouchUpdate();
+        DockingManager.Instance.ManipulationUpdate();
     }
 
-    void OnMagicEnd()
+    void OnManipulationEnd()
     {
-        magicStarted = false;
+        manipulationStarted = false;
 
-        //Debug.Log("# OnMagicEnd");
+        DockingManager.Instance.ManipulationEnd();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         pointed = true;
-        //Debug.Log("OnPointerEnter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         pointed = false;
-        //Debug.Log("OnPointerExit");
     }
-
-
-    private void OnDrawGizmos()
-    {
-        // origin
-        Gizmos.color = Color.white;
-        Gizmos.DrawSphere(origin, gizmosR);
-
-
-
-        // p hand
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(pHandRigidPose.pos, gizmosR);
-        // hand to origin
-        Gizmos.DrawLine(origin, pHandRigidPose.pos);
-
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere(cHandRigidPose.pos, gizmosR);
-        // hand to origin
-        Gizmos.DrawLine(origin, cHandRigidPose.pos);
-
-        // v object
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(vPos, gizmosR);
-        //Gizmos.DrawLine(pRigidPose.pos, vPos);
-        //Gizmos.DrawLine(origin, vPos);
-
-        // p object
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(pRigidPose.pos, gizmosR);
-        // object to origin
-        Gizmos.DrawLine(origin, pRigidPose.pos);
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(cRigidPose.pos, gizmosR);
-        // object to origin
-        Gizmos.DrawLine(origin, cRigidPose.pos);
-
-    }
-
 }
+
+
+//public TechSwitching techSwitching;
+
+//if (techSwitching == TechSwitching.Auto)
+//{
+//    // distance based
+//    var hand = VivePose.GetPoseEx(HandRole.RightHand).pos;
+//    var torso = VivePose.GetPoseEx(DeviceRole.Hmd).pos + HmdOffset;
+
+//    handTorsoDist = Vector3.Distance(hand, torso);
+
+//    if (handTorsoDist > techThreshold)
+//        Tech = ManipulationTech.Homer;
+//    else
+//        Tech = ManipulationTech.Prism;
+//}
+//else
+//{
+
+
+//private void OnDrawGizmos()
+//{
+//    // origin
+//    Gizmos.color = Color.white;
+//    Gizmos.DrawSphere(origin, gizmosR);
+//    // p hand
+//    Gizmos.color = Color.red;
+//    Gizmos.DrawSphere(pHandRigidPose.pos, gizmosR);
+//    // hand to origin
+//    Gizmos.DrawLine(origin, pHandRigidPose.pos);
+
+//    Gizmos.color = Color.magenta;
+//    Gizmos.DrawSphere(cHandRigidPose.pos, gizmosR);
+//    // hand to origin
+//    Gizmos.DrawLine(origin, cHandRigidPose.pos);
+
+//    // p object
+//    Gizmos.color = Color.blue;
+//    Gizmos.DrawSphere(pRigidPose.pos, gizmosR);
+//    // object to origin
+//    Gizmos.DrawLine(origin, pRigidPose.pos);
+
+//    Gizmos.color = Color.cyan;
+//    Gizmos.DrawSphere(cRigidPose.pos, gizmosR);
+//    // object to origin
+//    Gizmos.DrawLine(origin, cRigidPose.pos);
+//}

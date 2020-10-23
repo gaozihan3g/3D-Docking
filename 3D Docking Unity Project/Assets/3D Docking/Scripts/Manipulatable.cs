@@ -51,7 +51,7 @@ public class Manipulatable : MonoBehaviour
         pCasterPose = GetEventPose(eventData);
         pObjPose = new RigidPose(transform);
 
-        DockingManager.Instance.TouchStart();
+        DockingManager.Instance.ManipulationStart();
 
     }
 
@@ -86,7 +86,7 @@ public class Manipulatable : MonoBehaviour
             transform.rotation = diff * pObjPose.rot;
         }
 
-        DockingManager.Instance.TouchUpdate();
+        DockingManager.Instance.ManipulationUpdate();
 
         pCasterPose = curCasterPose;
         pObjPose = new RigidPose(transform);
@@ -94,7 +94,7 @@ public class Manipulatable : MonoBehaviour
 
     public void OnColliderEventDragEnd(ColliderButtonEventData eventData)
     {
-        DockingManager.Instance.TouchEnd();
+        DockingManager.Instance.ManipulationEnd();
     }
 
     private RigidPose GetEventPose(ColliderButtonEventData eventData)

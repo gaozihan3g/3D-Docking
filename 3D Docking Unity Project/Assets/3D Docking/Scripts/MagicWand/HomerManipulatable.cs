@@ -170,7 +170,7 @@ public class HomerManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
             line.Setup(t);
         }
 
-        DockingManager.Instance.TouchStart();
+        DockingManager.Instance.ManipulationStart();
     }
 
     void OnDeselected()
@@ -186,7 +186,7 @@ public class HomerManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
             line.Setup(t);
         }
 
-        DockingManager.Instance.TouchEnd();
+        DockingManager.Instance.ManipulationEnd();
     }
 
     void Manipulation()
@@ -236,7 +236,7 @@ public class HomerManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         wandPos = oHandRigidPose.pos;
 
-        DockingManager.Instance.TouchStart();
+        DockingManager.Instance.ManipulationStart();
     }
 
     void OnMagicUpdate()
@@ -275,7 +275,7 @@ public class HomerManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
         pHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
         pRigidPose = new RigidPose(transform);
 
-        DockingManager.Instance.TouchUpdate();
+        DockingManager.Instance.ManipulationUpdate();
     }
 
     void OnMagicEnd()
@@ -283,7 +283,7 @@ public class HomerManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerE
         magicStarted = false;
 
         //Debug.Log("# OnMagicEnd");
-        DockingManager.Instance.TouchEnd();
+        DockingManager.Instance.ManipulationEnd();
     }
 
 

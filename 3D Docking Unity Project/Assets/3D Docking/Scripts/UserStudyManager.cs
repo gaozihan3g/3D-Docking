@@ -12,41 +12,36 @@ public class UserStudyManager : MonoBehaviour
     public static UserStudyManager Instance;
 
     const string kPath = "Assets/Output/";
-    const string kXmlFileName = "data.xml";
+    public string kXmlFileName = "data.xml";
     const string kFileNameFormat = "output_{0}_{1}.txt";
     const string kNeedInit = "Initialization needed. Enter condition # and metric #.";
     public bool practice = true;
     public bool auto = false;
     public int autoConditionCounter = 0;
 
-    [HideInInspector]
     public int numOfUsers = 36;
-    //[HideInInspector]
-    public List<UserSession> userSessions;
-    [HideInInspector]
-    public int currentUser = 0;
-
-    [HideInInspector]
     public int numOfConditions = 6;
-    [HideInInspector]
-    public int currentCondition = 0;
+    public int numOfTrials = 5;
 
-    [HideInInspector]
-    public int numOfTrials = 10;
-    [HideInInspector]
-    public int currentTrial = 0;
-
-    [HideInInspector]
-    public int numOfMetrics = 20;
-
+    public List<UserSession> userSessions;
     public List<string> metricNames = new List<string>();
 
+    [HideInInspector]
+    public int currentUser = 0;
+    [HideInInspector]
+    public int currentCondition = 0;
+    [HideInInspector]
+    public int currentTrial = 0;
     [HideInInspector]
     public string log;
     [HideInInspector]
     public bool initialized;
 
     private Dictionary<string, int> orderDictionary;
+    /// <summary>
+    /// min: 1 !!!
+    /// </summary>
+    /// <value>The order dictionary.</value>
     public Dictionary<string, int> OrderDictionary { get => orderDictionary; }
 
     public UserSession GetCurrentUser()
@@ -71,8 +66,6 @@ public class UserStudyManager : MonoBehaviour
 
     public void PracticeMode()
     {
-        if (DockingManager.Instance != null)
-            DockingManager.Instance.Init();
         practice = true;
     }
 
@@ -82,23 +75,26 @@ public class UserStudyManager : MonoBehaviour
         currentUser = 0;
         auto = false;
 
+        // get num of condition based on condition manager
+        GetNumOfCondition();
+
         InitOrderDict();
 
         // populate users
-
-        UserSession.Init();
         userSessions = new List<UserSession>();
 
         for (int i = 0; i < numOfUsers; ++i)
         {
-            userSessions.Add(new UserSession(numOfConditions, numOfTrials, numOfMetrics));
+            userSessions.Add(new UserSession(numOfConditions, numOfTrials, i));
         }
-
-        if (DockingManager.Instance != null)
-            DockingManager.Instance.Init();
 
         initialized = true;
         Log("Initialized.");
+    }
+
+    protected void GetNumOfCondition()
+    {
+        numOfConditions = ConditionManager.Instance.NumOfConditions;
     }
 
     public void InitOrderDict()
@@ -115,13 +111,16 @@ public class UserStudyManager : MonoBehaviour
         index.Add(0);
         index.Add(1);
 
-        int n = noc - 1;
-        int m = 2;
-
-        while (index.Count < noc)
+        if (noc != 2)
         {
-            index.Add(n--);
-            index.Add(m++);
+            int n = noc - 1;
+            int m = 2;
+
+            while (index.Count < noc)
+            {
+                index.Add(n--);
+                index.Add(m++);
+            }
         }
 
         for (int i = 0; i < noc; i++)
@@ -132,7 +131,6 @@ public class UserStudyManager : MonoBehaviour
             }
         }
     }
-
 
     public void AutoInit()
     {
@@ -158,10 +156,8 @@ public class UserStudyManager : MonoBehaviour
 
         if (currentTrial == numOfTrials)
         {
-            AudioManager.Instance.PlaySound(2);
-
-            // get avg based on currentCondition
-            GetCurrentUser().conditions[currentCondition].GetAvgData();
+            //if (AudioManager.Instance != null)
+            //    AudioManager.Instance.PlaySound(2, 1f);
 
             currentTrial = 0;
 
@@ -184,14 +180,12 @@ public class UserStudyManager : MonoBehaviour
         TaskSetup(currentCondition, currentTrial);
     }
 
-
     public void TaskSetup(int condition, int trial)
     {
         practice = false;
         currentCondition = condition;
         currentTrial = trial;
 
-        // TODO init for a new trial
         if (ConditionManager.Instance != null)
             ConditionManager.Instance.CurrentCondition = condition;
 
@@ -204,51 +198,32 @@ public class UserStudyManager : MonoBehaviour
             " Current Trial: " + (currentTrial + 1));
     }
 
-
     public void ExportData(int k)
     {
         StringBuilder sb = new StringBuilder();
 
         // metric names
-        sb.Append("u");
-        sb.Append("\t");
-
-        sb.Append("c");
-        sb.Append("\t");
-
-        for (int j = 0; j < numOfTrials; ++j)
+        for (int i = 0; i < numOfConditions; ++i)
         {
-            string s = "t" + j + "v" + k;
-            sb.Append(s);
-            sb.Append("\t");
+            for (int j = 0; j < numOfTrials; ++j)
+            {
+                string s = "c" + i + "t" + j + "v" + k;
+                sb.Append(s);
+                sb.Append("\t");
+            }
         }
 
         sb.Append("\n");
 
-
-
-        for (int i = 0; i < numOfUsers; ++i)
-        {
-            for (int ii = 0; ii < numOfConditions; ++ii)
-            {
-                sb.Append(i + 1);
-                sb.Append("\t");
-
-                sb.Append(ii + 1);
-                sb.Append("\t");
-
-                for (int iii = 0; iii < numOfTrials; ++iii)
-                {
-                    sb.Append(userSessions[i].conditions[ii].trials[iii].data[k].ToString("F3"));
-                    sb.Append("\t");
-                }
-
-                sb.Append("\n");
-            }
-        }
-
         // values
+        for (int i = 0; i < userSessions.Count; ++i)
+        {
+            var dataStr = userSessions[i].GetDataString(k);
 
+
+            sb.Append(dataStr);
+            sb.Append("\n");
+        }
 
         string fileNameStr = string.Format(kFileNameFormat, k, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
         File.WriteAllText(kPath + fileNameStr, sb.ToString());
@@ -259,32 +234,25 @@ public class UserStudyManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
-        // metric names
-        for (int i = 0; i < numOfConditions; ++i)
-        {
-            for (int j = 0; j < numOfTrials; ++j)
-            {
-                for (int k = 0; k < numOfMetrics; ++k)
-                {
-                    string s = "c" + i + "t" + j + "v" + k;
-                    sb.Append(s);
-                    sb.Append("\t");
-                }
-            }
-        }
-
+        sb.Append("u");
+        sb.Append("\t");
+        sb.Append("c");
+        sb.Append("\t");
+        sb.Append("t");
         sb.Append("\n");
+
 
         for (int ii = 0; ii < userSessions.Count; ++ii)
         {
-            string s = userSessions[ii].ToString();
+            string s;
+            s = userSessions[ii].ToString();
             sb.Append(s);
-            sb.Append("\n");
         }
 
-        string fileNameStr = string.Format(kFileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        string fileNameStr = string.Format(kFileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"), "all");
         File.WriteAllText(kPath + fileNameStr, sb.ToString());
         AssetDatabase.Refresh();
+        Debug.Log("Data Exported.");
     }
 
     public void SaveXML()
@@ -296,6 +264,7 @@ public class UserStudyManager : MonoBehaviour
         }
 
         AssetDatabase.Refresh();
+        Debug.Log("XML Saved.");
     }
 
     public void LoadXML()
@@ -309,27 +278,22 @@ public class UserStudyManager : MonoBehaviour
         // get users
         numOfUsers = userSessions.Count;
 
-        // get conditions
+        // get conditions TODO
         var c = userSessions[0].conditions;
         numOfConditions = c.Count;
 
-        // get trials
+        // get trials TODO
         var t = c[0].trials;
         numOfTrials = t.Count;
 
-        // get metrics
-        var m = t[0].data;
-        numOfMetrics = m.Count;
-
         auto = false;
         initialized = true;
+        Debug.Log("XML Loaded.");
     }
 
     public void Clear()
     {
         initialized = false;
-
-
 
         Log(kNeedInit);
         // to sth else to clear
@@ -346,6 +310,11 @@ public class UserStudyManager : MonoBehaviour
         if (practice)
             return;
 
+        // add meta info
+        t.u = currentUser;
+        t.c = currentCondition;
+        t.t = currentTrial;
+
         userSessions[currentUser].conditions[currentCondition].trials[currentTrial] = t;
         Debug.Log("[CurrentUser: " + (currentUser + 1) +
             "] [CurrentCondition: " + (currentCondition + 1) +
@@ -354,40 +323,32 @@ public class UserStudyManager : MonoBehaviour
 
         // save it ?
         SaveXML();
-    }
 
-    // user * condition * metric
-    // 24 * 12 * 10
+        AutoSetNextTask();
+    }
 
     [Serializable]
     public class UserSession
     {
-        static int userCount;
+        public int u;
 
-        public int id;
         public List<Condition> conditions;
-
-        static public void Init()
-        {
-            userCount = 0;
-        }
 
         public UserSession()
         { }
 
         // condition, trial, metrics
-        public UserSession(int noc, int not, int nom)
+        public UserSession(int noc, int not, int iu)
         {
-            id = userCount++;
-
             conditions = new List<Condition>();
 
             for (int i = 0; i < noc; ++i)
-                conditions.Add(new Condition(not, nom));
+                conditions.Add(new Condition(not, iu, i));
         }
 
         public Trial GetTask(int c, int t)
         {
+            //print("c: " + c + " t: " + t);
             return conditions[c].trials[t];
         }
 
@@ -420,36 +381,56 @@ public class UserStudyManager : MonoBehaviour
     [Serializable]
     public class Condition
     {
+        public int u;
+        public int c;
+
         public List<Trial> trials;
         public List<float> average;
+
         public Condition()
         { }
 
-        public Condition(int not, int nom)
+        public Condition(int not, int iu, int ic)
         {
+            u = iu;
+            c = ic;
+
             trials = new List<Trial>();
             average = new List<float>();
 
             for (int i = 0; i < not; ++i)
-                trials.Add(new Trial(nom));
+                trials.Add(new Trial(iu, ic, i));
 
-            for (int i = 0; i < nom; i++)
-                average.Add(0f);
         }
 
         public void GetAvgData()
         {
-            for (int i = 0; i < average.Count; i++)
+            average = new List<float>();
+
+            // get longest trial size
+            int maxSize = 0;
+            for (int j = 0; j < trials.Count; j++)
+            {
+                if (trials[j].data.Count > maxSize)
+                    maxSize = trials[j].data.Count;
+            }
+
+            for (int i = 0; i < maxSize; i++)
             {
                 float avg = 0f;
+                int count = 0;
 
                 for (int j = 0; j < trials.Count; j++)
                 {
-                    avg += trials[j].data[i];
+                    if (trials[j].data.Count > i)
+                    {
+                        avg += trials[j].data[i];
+                        count++;
+                    }
                 }
 
-                avg /= trials.Count;
-                average[i] = avg;
+                avg /= count;
+                average.Add(avg);
             }
         }
 
@@ -482,23 +463,27 @@ public class UserStudyManager : MonoBehaviour
     [Serializable]
     public class Trial
     {
-        public List<float> data;
+        public int u;
+        public int c;
+        public int t;
 
+        public List<float> data;
 
         public Trial()
         { }
 
+        public Trial(int iu, int ic, int it)
+        {
+            u = iu;
+            c = ic;
+            t = it;
+
+            data = new List<float>();
+        }
+
         public Trial(List<float> d)
         {
             data = d;
-        }
-
-        public Trial(int n)
-        {
-            data = new List<float>();
-
-            for (int i = 0; i < n; ++i)
-                data.Add(0f);
         }
 
         public string GetDataString(int k)
@@ -510,14 +495,22 @@ public class UserStudyManager : MonoBehaviour
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.Append(u + 1);
+            sb.Append("\t");
+            sb.Append(c + 1);
+            sb.Append("\t");
+            sb.Append(t + 1);
+            sb.Append("\t");
+
             for (int i = 0; i < data.Count; ++i)
             {
                 string s = data[i].ToString();
                 sb.Append(s);
                 sb.Append("\t");
             }
+
+            sb.Append("\n");
             return sb.ToString();
         }
     }
-
 }
