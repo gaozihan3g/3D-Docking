@@ -5,8 +5,8 @@ using System.IO;
 using System.Text;
 using UnityEditor;
 using System.Xml.Serialization;
+using System.Collections;
 
-[ExecuteInEditMode]
 public class UserStudyManager : MonoBehaviour
 {
     public static UserStudyManager Instance;
@@ -36,6 +36,8 @@ public class UserStudyManager : MonoBehaviour
     public string log;
     [HideInInspector]
     public bool initialized;
+
+    public float taskInterval = 1f;
 
     private Dictionary<string, int> orderDictionary;
     /// <summary>
@@ -156,8 +158,8 @@ public class UserStudyManager : MonoBehaviour
 
         if (currentTrial == numOfTrials)
         {
-            //if (AudioManager.Instance != null)
-            //    AudioManager.Instance.PlaySound(2, 1f);
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySound(2);
 
             currentTrial = 0;
 
@@ -177,7 +179,17 @@ public class UserStudyManager : MonoBehaviour
             currentCondition = c;
         }
 
-        TaskSetup(currentCondition, currentTrial);
+        StartCoroutine(WaitAndDo(taskInterval, () =>
+        {
+            TaskSetup(currentCondition, currentTrial);
+        }));
+
+    }
+
+    IEnumerator WaitAndDo(float waitTime, Action action)
+    {
+        yield return new WaitForSeconds(waitTime);
+        action();
     }
 
     public void TaskSetup(int condition, int trial)
@@ -190,7 +202,7 @@ public class UserStudyManager : MonoBehaviour
             ConditionManager.Instance.CurrentCondition = condition;
 
         if (DockingManager.Instance != null)
-            DockingManager.Instance.Init();
+            DockingManager.Instance.Init(trial);
 
 
         Log("Current User: " + (currentUser + 1) +

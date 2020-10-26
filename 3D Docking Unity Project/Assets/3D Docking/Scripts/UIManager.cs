@@ -33,9 +33,17 @@ public class UIManager : MonoBehaviour
     public Transform wand;
 
 
+    bool camZoom = false;
+
+
     public void CamZoom(bool on)
     {
-        if (!on)
+        if (on == camZoom)
+            return;
+
+        camZoom = on;
+
+        if (!camZoom)
         {
             camPosT = 1f;
         }
@@ -47,15 +55,6 @@ public class UIManager : MonoBehaviour
 
         camRoot.position = Vector3.Lerp(obj.position + (camRoot.position - cam.position), origin.position, camPosT);
     }
-
-    void UpdateCamPos()
-    {
-        if (updateCamPos)
-        {
-            camRoot.position = Vector3.Lerp(obj.position + (camRoot.position - cam.position), origin.position, camPosT);
-        }
-    }
-
 
 
     void Awake()

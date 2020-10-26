@@ -8,8 +8,9 @@ using HTC.UnityPlugin.Utility;
 public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool calibrated = false;
-    public SelectionMode selectionMode;
-    public RotationMode rotationMode;
+
+    public bool lazySelection = false;
+    public bool nonIsoRotation = false;
     public bool viewpointControl = false;
     public bool prismFineTuning = false;
 
@@ -38,8 +39,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     Vector3 HmdOffset = new Vector3(0f, -0.4f, 0f);
     //float gizmosR = 0.03f;
 
-    float minSpeed = 0f;
-    float maxSpeed = 0.1f;
+    float minSpeed = 0.01f;
+    float maxSpeed = 1f;
     float minScale = 0f;
     float maxScale = 1f;
     [Tooltip("m/sec")]
@@ -118,7 +119,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
         UpdateState();
 
-        if (selectionMode == SelectionMode.Lazy)
+        if (lazySelection)
         {
             CheckSelection();
             UpdateManipulation();
@@ -146,21 +147,19 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void UpdateState()
     {
-        if (manipulationStarted)
-            return;
-
-
         var r = ViveInput.GetPadTouchAxisEx(HandRole.RightHand);
-
-        if (prismFineTuning)
-        {
-            Tech = (r != Vector2.zero) ? ManipulationTech.Prism : ManipulationTech.Homer;
-        }
-
 
         if (viewpointControl)
         {
             UIManager.Instance.CamZoom(r != Vector2.zero);
+        }
+
+        if (prismFineTuning)
+        {
+            if (manipulationStarted)
+                return;
+
+            Tech = (r != Vector2.zero) ? ManipulationTech.Prism : ManipulationTech.Homer;
         }
     }
 
@@ -201,7 +200,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         translationScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale, maxScale, true);
 
 
-        if (rotationMode == RotationMode.ISO)
+        if (!nonIsoRotation)
         {
             rotationScaleFactor = 1f;
         }

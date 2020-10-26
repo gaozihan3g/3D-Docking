@@ -11,11 +11,12 @@ public class UserStudyWindow : EditorWindow
     int gridIndex = 0;
     Vector2 scrollPos;
     bool[] showCondition;
-    int exportIndex = 0;
     public string[] options;
 
     int userPerRow = 4;
     int dataWidth = 30;
+    const int kBtnWidth = 40;
+    const int kSmallBtnWidth = 20;
     int activeUserId = -1;
 
 
@@ -44,26 +45,20 @@ public class UserStudyWindow : EditorWindow
 
         for (int i = 0; i < showCondition.Length; ++i)
             showCondition[i] = true;
-
-        exportIndex = 0;
-
-        //List<string> s = new List<string>();
-        //for (int j = 0; j < usm.numOfMetrics; ++j)
-        //    s.Add(j.ToString());
-        ////options
-        //options = s.ToArray();
     }
 
     void OnGUI()
     {
         GUI.backgroundColor = Color.white;
 
-        usm = (UserStudyManager)EditorGUILayout.ObjectField("UserStudyManager", usm, typeof(UserStudyManager), true);
-        cm = (ConditionManager)EditorGUILayout.ObjectField("ConditionManager", cm, typeof(ConditionManager), true);
+        GUILayout.BeginHorizontal();
+        usm = (UserStudyManager)EditorGUILayout.ObjectField("USM", usm, typeof(UserStudyManager), true);
+        cm = (ConditionManager)EditorGUILayout.ObjectField("CM", cm, typeof(ConditionManager), true);
+        GUILayout.EndHorizontal();
 
         if (usm == null || cm == null)
         {
-            if (GUILayout.Button("GetManagers"))
+            if (GUILayout.Button("Get Managers"))
             {
                 if (UserStudyManager.Instance != null)
                 {
@@ -76,6 +71,16 @@ public class UserStudyWindow : EditorWindow
                     cm = ConditionManager.Instance;
             }
         }
+        else
+        {
+            if ((GUILayout.Button("Remove Managers")))
+            {
+                usm = null;
+                cm = null;
+            }
+        }
+
+
 
         if (usm == null || cm == null)
             return;
@@ -183,7 +188,7 @@ public class UserStudyWindow : EditorWindow
 
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Start Auto Test", GUILayout.Width(100)))
+            if (GUILayout.Button("Auto", GUILayout.Width(kBtnWidth)))
             {
                 activeUserId = usm.currentUser;
                 usm.AutoInit();
@@ -192,54 +197,57 @@ public class UserStudyWindow : EditorWindow
             usm.auto = EditorGUILayout.ToggleLeft("Auto", usm.auto);
 
 
-            if (GUILayout.Button("Show All", GUILayout.Width(100)))
+            if (GUILayout.Button("Show", GUILayout.Width(kBtnWidth)))
             {
                 for (int i = 0; i < showCondition.Length; ++i)
                     showCondition[i] = true;
             }
 
-            if (GUILayout.Button("Hide All", GUILayout.Width(100)))
+            if (GUILayout.Button("Hide", GUILayout.Width(kBtnWidth)))
             {
                 for (int i = 0; i < showCondition.Length; ++i)
                     showCondition[i] = false;
             }
-
             GUILayout.EndHorizontal();
 
+
+
+            GUILayout.BeginHorizontal();
+
+            GUILayout.Label("", GUILayout.Width(kBtnWidth));
+
+            GUILayout.Label("", GUILayout.Width(kSmallBtnWidth));
+
+            // metric names
+            for (int i = 0; i < usm.metricNames.Count; ++i)
+                GUILayout.Label(usm.metricNames[i], GUILayout.Width(dataWidth));
+
+            GUILayout.EndHorizontal();
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
             // each condition
             for (int j = 0; j < usm.numOfConditions; ++j)
             {
-                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], "Condition #" + (j + 1));
+                string s = gridIndex % usm.numOfConditions + "_" + j;
+
+                if (usm.OrderDictionary == null)
+                    usm.InitOrderDict();
+
+                int c = usm.OrderDictionary[s];
+
+                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], "#" + (j + 1) + " " + cm.GetConditionName(c) + " [" + (c + 1) + "]");
 
                 if (showCondition[j])
                 {
-
-                    string s = gridIndex % usm.numOfConditions + "_" + j;
-
-                    if (usm.OrderDictionary == null)
-                        usm.InitOrderDict();
-
-                    int c = usm.OrderDictionary[s];
-
                     GUILayout.BeginHorizontal();
 
-                    if (GUILayout.Button("Practice", GUILayout.Width(120)))
+                    if (GUILayout.Button("P", GUILayout.Width(kBtnWidth)))
                     {
-                        //TODO change condition
-                        //cm.CurrentCondition = (ConditionManager.Condition)c;
                         cm.CurrentCondition = c;
 
                         usm.PracticeMode();
                     }
-
-                    GUILayout.Label("", GUILayout.Width(20));
-
-                    // metric names
-                    for (int i = 0; i < usm.metricNames.Count; ++i)
-                        GUILayout.Label(usm.metricNames[i], GUILayout.Width(dataWidth));
 
                     GUILayout.EndHorizontal();
 
@@ -258,7 +266,7 @@ public class UserStudyWindow : EditorWindow
 
                     GUILayout.BeginHorizontal();
 
-                    if (GUILayout.Button("AVERAGE", GUILayout.Width(120)))
+                    if (GUILayout.Button("AVG", GUILayout.Width(kBtnWidth)))
                     {
                         // calculate mean based on:
                         //user:
@@ -266,7 +274,7 @@ public class UserStudyWindow : EditorWindow
                         usm.GetCurrentUser().conditions[c].GetAvgData();
                     }
 
-                    GUILayout.Label("", GUILayout.Width(20));
+                    GUILayout.Label("", GUILayout.Width(kSmallBtnWidth));
 
                     var avg = usm.GetCurrentUser().conditions[c].average;
 
@@ -284,9 +292,8 @@ public class UserStudyWindow : EditorWindow
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button("Clear Trails"))
+        if (GUILayout.Button(""))
         {
-            //usm.ClearVisData();
         }
 
         GUILayout.BeginHorizontal();
@@ -310,72 +317,18 @@ public class UserStudyWindow : EditorWindow
 
         GUILayout.BeginHorizontal();
 
-        if (ConditionManager.Instance == null)
-        {
-            Debug.LogError("ConditionManager not ready");
-            return;
-        }
-
-        if (GUILayout.Button(ConditionManager.Instance.GetConditionName(con) + " #" + (tri + 1), GUILayout.Width(120)))
+        if (GUILayout.Button("#" + (tri + 1), GUILayout.Width(kBtnWidth)))
         {
             usm.TaskSetup(con, tri);
             activeUserId = usm.currentUser;
             usm.autoConditionCounter = order;
         }
 
-
-        //bool hasVisData = trial.HasVisData();
-
-        //GUI.backgroundColor = hasVisData ? Color.HSVToRGB(0.25f, 0.5f, 1f) : Color.grey;
-
-        //string s = "-";
-
-        //if (hasVisData)
-        //{
-        //    s = usm.ShowVis(trial.visData) ? "Y" : "N";
-        //}
-
-        //if (GUILayout.Button(s, GUILayout.Width(20)))
-        //{
-        //    if (hasVisData)
-        //    {
-        //        usm.ToggleVis(trial.visData);
-        //    }
-        //}
-
-        //if (hasVisData)
-        //{
-        //    GUI.backgroundColor = Color.white;
-
-        //    if (GUILayout.Button("E", GUILayout.Width(20)))
-        //    {
-        //        usm.ExportVisData(trial);
-        //    }
-        //}
-
-
         GUI.backgroundColor = Color.HSVToRGB(0f, 0.5f, 1f);
 
-        if (GUILayout.Button("X", GUILayout.Width(20)))
+        if (GUILayout.Button("X", GUILayout.Width(kSmallBtnWidth)))
         {
-            // clear data
-            //for (int i = 0; i < usm.numOfMetrics; ++i)
-            //{
-            //    if (usm.GetCurrentUser() == null)
-            //        return;
-
-            //    usm.GetCurrentUser().GetTask(con, tri).data[i] = 0f;
-            //}
-
-            // clear data
             trial.data = new List<float>();
-
-            //// hide trail
-            //if (usm.ShowVis(trial.visData))
-            //    usm.ToggleVis(trial.visData);
-
-            //// clear trail
-            //trial.visData = new TrailData();
         }
 
         GUI.backgroundColor = Color.white;

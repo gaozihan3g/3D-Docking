@@ -79,6 +79,10 @@ public class DockingManager : MonoBehaviour
     public float translationEfficiency_0 = 0f;
     public float rotationEfficiency_0 = 0f;
 
+    public int randomSeed;
+
+    const int kRandomSeedBase = 10000;
+
     Vector3 preHeadPos;
     Quaternion preHeadRot;
 
@@ -96,7 +100,7 @@ public class DockingManager : MonoBehaviour
     //public List<Transform> froms;
     //public List<Transform> tos;
 
-    public void Init()
+    public void Init(int t = 0)
     {
         isFirstTouch = true;
         isTimeCounting = false;
@@ -139,12 +143,15 @@ public class DockingManager : MonoBehaviour
 
         // setup anchor based on head
 
-        var headDir = head.forward;
-        headDir.y = 0f;
-        headDir.Normalize();
+        //var headDir = head.forward;
+        //headDir.y = 0f;
+        //headDir.Normalize();
 
-        anchor.position = head.position + headDir * anchorDist;
+        anchor.position = head.position + Vector3.forward * anchorDist;
 
+        randomSeed = kRandomSeedBase + t;
+
+        Random.InitState(randomSeed);
 
         // reset pos
         RandomPosition();
@@ -177,8 +184,6 @@ public class DockingManager : MonoBehaviour
 
     public void RandomPosition()
     {
-        //TODO use seed
-
         toObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
 
         // r, polar theta, azimuth phi
@@ -407,14 +412,6 @@ public class DockingManager : MonoBehaviour
 
         // send data
         SendData();
-
-        // auto start next trial
-        AutoStartNextTrial();
-    }
-
-    void AutoStartNextTrial()
-    {
-        UserStudyManager.Instance.AutoSetNextTask();
     }
 
     public void SendData()
