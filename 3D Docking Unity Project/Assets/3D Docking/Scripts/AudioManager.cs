@@ -7,8 +7,13 @@ public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager Instance;
-    public float lowPitch = 0.5f;
-    public float highPitch = 1f;
+    //public float lowPitch = 0.6f;
+    //public float midPitch = 0.8f;
+    //public float highPitch = 1f;
+
+    /// <summary>
+    /// 0-2 task, 3 all done, 4 fail
+    /// </summary>
     public AudioClip[] sounds;
     AudioSource source;
 
@@ -29,12 +34,12 @@ public class AudioManager : MonoBehaviour
         if (i >= sounds.Length)
             return;
 
-        if (i == 0)
-            source.pitch = lowPitch;
-        else if (i == 1)
-            source.pitch = highPitch;
-        else
-            source.pitch = 1f;
+        //if (i == 0)
+        //    source.pitch = lowPitch;
+        //else if (i == 1)
+        //    source.pitch = midPitch;
+        //else
+        //    source.pitch = highPitch;
 
         source.PlayOneShot(sounds[i]);
         

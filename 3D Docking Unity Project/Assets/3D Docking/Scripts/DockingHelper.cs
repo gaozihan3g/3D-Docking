@@ -4,6 +4,15 @@ using UnityEngine;
 
 public static class DockingHelper
 {
+
+    [System.Flags]
+    public enum ManipulationType
+    {
+        Translation = 4,
+        Rotation = 2,
+        //Scale = 1,
+    }
+
     public static Quaternion GetDeltaQuaternion(Quaternion from, Quaternion to)
     {
         Quaternion d = to * Quaternion.Inverse(from);

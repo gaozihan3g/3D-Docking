@@ -20,6 +20,7 @@ public class UserStudyManager : MonoBehaviour
     public int autoConditionCounter = 0;
 
     public int numOfUsers = 36;
+    [HideInInspector]
     public int numOfConditions = 6;
     public int numOfTrials = 5;
 
@@ -159,7 +160,13 @@ public class UserStudyManager : MonoBehaviour
         if (currentTrial == numOfTrials)
         {
             if (AudioManager.Instance != null)
-                AudioManager.Instance.PlaySound(2);
+            {
+                StartCoroutine(WaitAndDo(taskInterval, () =>
+                {
+                    AudioManager.Instance.PlaySound(3);
+                }));
+            }
+                
 
             currentTrial = 0;
 

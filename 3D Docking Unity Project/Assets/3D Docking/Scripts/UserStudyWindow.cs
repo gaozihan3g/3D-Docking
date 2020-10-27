@@ -13,7 +13,7 @@ public class UserStudyWindow : EditorWindow
     bool[] showCondition;
     public string[] options;
 
-    int userPerRow = 4;
+    int userPerRow = 8;
     int dataWidth = 30;
     const int kBtnWidth = 40;
     const int kSmallBtnWidth = 20;
@@ -87,14 +87,16 @@ public class UserStudyWindow : EditorWindow
 
         ConsoleGUI();
 
-        if (!usm.initialized)
+        if (Application.isPlaying)
         {
-            SetupGUI();
+            if (usm.initialized)
+                ExperimentGUI();
         }
         else
         {
-            ExperimentGUI();
+            SetupGUI();
         }
+
 
         EditorGUILayout.HelpBox(usm.log, MessageType.Info);
     }
@@ -236,7 +238,7 @@ public class UserStudyWindow : EditorWindow
 
                 int c = usm.OrderDictionary[s];
 
-                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], "#" + (j + 1) + " " + cm.GetConditionName(c) + " [" + (c + 1) + "]");
+                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("#{0,2} - {1} [{2}]", j + 1, cm.GetConditionName(c), c + 1));
 
                 if (showCondition[j])
                 {
@@ -263,28 +265,26 @@ public class UserStudyWindow : EditorWindow
 
                         EditorGUILayout.EndVertical();
                     }
-
-                    GUILayout.BeginHorizontal();
-
-                    if (GUILayout.Button("AVG", GUILayout.Width(kBtnWidth)))
-                    {
-                        // calculate mean based on:
-                        //user:
-                        //condition: c
-                        usm.GetCurrentUser().conditions[c].GetAvgData();
-                    }
-
-                    GUILayout.Label("", GUILayout.Width(kSmallBtnWidth));
-
-                    var avg = usm.GetCurrentUser().conditions[c].average;
-
-                    for (int i = 0; i < avg.Count; ++i)
-                        GUILayout.Label(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
-
-                    GUILayout.EndHorizontal();
-
-
                 }
+
+                GUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("AVG", GUILayout.Width(kBtnWidth)))
+                {
+                    // calculate mean based on:
+                    //user:
+                    //condition: c
+                    usm.GetCurrentUser().conditions[c].GetAvgData();
+                }
+
+                GUILayout.Label("", GUILayout.Width(kSmallBtnWidth));
+
+                var avg = usm.GetCurrentUser().conditions[c].average;
+
+                for (int i = 0; i < avg.Count; ++i)
+                    GUILayout.Label(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
+
+                GUILayout.EndHorizontal();
             }
 
             EditorGUILayout.EndScrollView();
@@ -292,8 +292,10 @@ public class UserStudyWindow : EditorWindow
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button(""))
+        if (GUILayout.Button("Get Average"))
         {
+            for (int j = 0; j < usm.numOfConditions; ++j)
+                usm.GetCurrentUser().conditions[j].GetAvgData();
         }
 
         GUILayout.BeginHorizontal();
