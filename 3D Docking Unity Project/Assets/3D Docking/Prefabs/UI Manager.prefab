@@ -74,8 +74,19 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190335
   mat: {fileID: 2100000, guid: c48a13b19834cd4438f9b062f4626c68, type: 2}
+  connectionMat: {fileID: 2100000, guid: cc0057ea5b42b23409507854c8553397, type: 2}
   cursorMat: {fileID: 2100000, guid: 62a35cd959a10284aa8d3307189b11e3, type: 2}
   t: 0
+  updateCamPos: 0
+  camPosT: 0
+  origin: {fileID: 0}
+  obj: {fileID: 0}
+  cam: {fileID: 0}
+  camRoot: {fileID: 0}
+  camDist: 1
+  pointer: {fileID: 0}
+  line: {fileID: 0}
+  wand: {fileID: 0}
 --- !u!1001 &7475127681315349473
 PrefabInstance:
   m_ObjectHideFlags: 0

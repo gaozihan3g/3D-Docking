@@ -101,6 +101,14 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         }
     }
 
+    public void Init()
+    {
+        selected = false;
+        pointed = false;
+        manipulationStarted = false;
+    }
+
+
     void Update()
     {
         if (!calibrated)
@@ -108,8 +116,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             Calibrate();
             return;
         }
-
-        UpdateState();
 
         if (lazySelection)
         {
@@ -120,6 +126,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             NormalSelection();
         }
+
+        InputCheck();
     }
 
     void OnValidate()
@@ -145,17 +153,27 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     }
 
 
-    void UpdateState()
+    void InputCheck()
     {
-        if (ViveInput.GetPressUp(HandRole.RightHand, ControllerButton.Grip))
+        if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
         {
-            DockingManager.Instance.Finish();
+            if (selected)
+            {
+                ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+                AudioManager.Instance.PlaySound(4);
+            }
+            else
+            {
+                DockingManager.Instance.Finish();
+            }
+
+            
         }
 
-        if (ViveInput.GetPressUp(HandRole.LeftHand, ControllerButton.Grip))
-        {
-            DockingManager.Instance.Init();
-        }
+        //if (ViveInput.GetPressUpEx(HandRole.LeftHand, ControllerButton.Grip))
+        //{
+        //    DockingManager.Instance.Init();
+        //}
 
 
         var r = ViveInput.GetPadTouchAxisEx(HandRole.RightHand);
@@ -253,7 +271,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void CheckSelection()
     {
-        if (pointed && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
+        if (pointed && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
         {
             OnSelected();
         }
@@ -268,6 +286,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         selected = true;
 
+        ViveInput.TriggerHapticVibration(HandRole.RightHand);
+
         //ui
         UIManager.Instance.SetupPointer(transform, false);
 
@@ -277,6 +297,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     void OnDeselected()
     {
         selected = false;
+
+        ViveInput.TriggerHapticVibration(HandRole.RightHand);
 
         //ui
         UIManager.Instance.SetupPointer(transform, true);
@@ -396,11 +418,13 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         pointed = true;
+        ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         pointed = false;
+        ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
     }
 
     void Start()

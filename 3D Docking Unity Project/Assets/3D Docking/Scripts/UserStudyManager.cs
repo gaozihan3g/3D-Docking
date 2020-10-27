@@ -161,7 +161,7 @@ public class UserStudyManager : MonoBehaviour
         {
             if (AudioManager.Instance != null)
             {
-                StartCoroutine(WaitAndDo(taskInterval, () =>
+                StartCoroutine(DockingHelper.WaitAndDo(taskInterval, () =>
                 {
                     AudioManager.Instance.PlaySound(3);
                 }));
@@ -186,18 +186,14 @@ public class UserStudyManager : MonoBehaviour
             currentCondition = c;
         }
 
-        StartCoroutine(WaitAndDo(taskInterval, () =>
+        StartCoroutine(DockingHelper.WaitAndDo(taskInterval, () =>
         {
             TaskSetup(currentCondition, currentTrial);
         }));
 
     }
 
-    IEnumerator WaitAndDo(float waitTime, Action action)
-    {
-        yield return new WaitForSeconds(waitTime);
-        action();
-    }
+
 
     public void TaskSetup(int condition, int trial)
     {
@@ -520,6 +516,14 @@ public class UserStudyManager : MonoBehaviour
             sb.Append("\t");
             sb.Append(t + 1);
             sb.Append("\t");
+
+            // add condition info
+
+            for (int i = 3; i >= 0; i--)
+            {
+                sb.Append(((c & 1 << i) == 1 << i) ? 1 : 0);
+                sb.Append("\t");
+            }
 
             for (int i = 0; i < data.Count; ++i)
             {

@@ -13,8 +13,9 @@ public class UIManager : MonoBehaviour
     public Color32 colorA;
     public Color32 colorB;
     public Color32 colorC;
-    public Color32 outColor;
+    
     public Material mat;
+    public Material connectionMat;
     public Material cursorMat;
     [Range(0f, 1f)]
     public float t;
@@ -32,7 +33,7 @@ public class UIManager : MonoBehaviour
     public ConnectionLine line;
     public Transform wand;
 
-
+    Color32 outColor;
     bool camZoom = false;
 
 
@@ -49,8 +50,9 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            float d = Vector3.Distance(origin.position, obj.position);
-            camPosT = Mathf.Clamp01(camDist / d);
+            camPosT = 0.3333f;
+            //float d = Vector3.Distance(origin.position, obj.position);
+            //camPosT = Mathf.Clamp01(camDist / d);
         }
 
         camRoot.position = Vector3.Lerp(obj.position + (camRoot.position - cam.position), origin.position, camPosT);
@@ -92,12 +94,18 @@ public class UIManager : MonoBehaviour
         if (DockingManager.Instance == null)
             return;
 
-        text.text = string.Format("Condition: {0}\nProgress: {1} / {2}\nTrial: {3} / {4}\n\nCompletion Time: {5:F2}s",
-            ConditionManager.Instance.CurrentCondition.ToString(),
-            UserStudyManager.Instance.autoConditionCounter + 1,
-            UserStudyManager.Instance.numOfConditions,
-            UserStudyManager.Instance.currentTrial + 1,
-            UserStudyManager.Instance.numOfTrials,
+        var cc = UserStudyManager.Instance.autoConditionCounter + 1;
+        var nc = UserStudyManager.Instance.numOfConditions;
+        var ct = UserStudyManager.Instance.currentTrial + 1;
+        var nt = UserStudyManager.Instance.numOfTrials;
+
+        text.text = string.Format("Condition:\t{0} [{1}]\nTrial:\t{2} / {3}\nProgress:\t{4} / {5}\n\nCompletion Time:\t{6:F2}s",
+            ConditionManager.Instance.GetCurrentConditionName(),
+            cc,
+            ct,
+            nt,
+            (cc-1) * nt + ct,
+            nc * nt,
             DockingManager.Instance.timer
             );
     }
@@ -139,6 +147,14 @@ public class UIManager : MonoBehaviour
             return;
 
         cursorMat.SetColor(Shader.PropertyToID("g_vOutlineColor"), c);
+    }
+
+    public void SetLineColor(Color c)
+    {
+        if (connectionMat == null)
+            return;
+
+        connectionMat.SetColor(Shader.PropertyToID("_Color"), c);
     }
 
     public void SetupPointer(Transform objTransform, bool pointerActive)

@@ -165,8 +165,8 @@ public class DockingManager : MonoBehaviour
         toObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
 
         // r, polar theta, azimuth phi
-        var theta = Random.Range(0f, 0.5f * Mathf.PI);
-        var phi = Random.Range(0f, 2f * Mathf.PI);
+        var theta = Random.Range(0.25f * Mathf.PI, 0.5f * Mathf.PI);
+        var phi = Random.Range(0f, 0.25f * Mathf.PI);
         Vector3 d = new Vector3(
             Mathf.Sin(theta) * Mathf.Cos(phi),
             Mathf.Cos(theta),
@@ -214,7 +214,12 @@ public class DockingManager : MonoBehaviour
 
     void UpdateAccuracy()
     {
-        float angleAccuracy = DockingHelper.Map(angle, initAngle, 0f, 0f, 1f, true);
+        float angleAccuracy = 0f;
+
+        if (angle > easyAngleThreshold)
+            angleAccuracy = DockingHelper.Map(angle, initAngle, easyAngleThreshold, 0f, 0.5f, true);
+        else
+            angleAccuracy = DockingHelper.Map(angle, easyAngleThreshold, angleThreshold, 0.5f, 1f, true);
 
         if (UIManager.Instance != null)
             UIManager.Instance.SetColor(angleAccuracy);
@@ -335,7 +340,7 @@ public class DockingManager : MonoBehaviour
         var tNotMet = distance > easyDistThreshold;
         var rNotMet = angle > easyAngleThreshold;
 
-        
+
         if (checkT && checkR) // 6DOF
         {
             if (tNotMet && rNotMet)
@@ -477,7 +482,6 @@ public class DockingManager : MonoBehaviour
         List<float> data = new List<float>();
 
         // fill data
-
         data.Add(timer_0);
         data.Add(timer - timer_0);
         data.Add(timer);

@@ -46,6 +46,11 @@ public class ConditionManager : MonoBehaviour
         return conditionNames[c];
     }
 
+    public string GetCurrentConditionName()
+    {
+        return conditionNames[CurrentCondition];
+    }
+
     protected virtual void UpdateCondition()
     { }
 

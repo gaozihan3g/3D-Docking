@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public static class DockingHelper
         Translation = 4,
         Rotation = 2,
         //Scale = 1,
+    }
+
+    public static IEnumerator WaitAndDo(float waitTime, Action action)
+    {
+        yield return new WaitForSeconds(waitTime);
+        action();
     }
 
     public static Quaternion GetDeltaQuaternion(Quaternion from, Quaternion to)
