@@ -106,6 +106,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         selected = false;
         pointed = false;
         manipulationStarted = false;
+        UIManager.Instance.SetLineColor(0);
     }
 
 
@@ -157,17 +158,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
         {
-            if (selected)
-            {
-                ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
-                AudioManager.Instance.PlaySound(4);
-            }
-            else
-            {
-                DockingManager.Instance.Finish();
-            }
-
-            
+            DockingManager.Instance.Finish(selected);
         }
 
         //if (ViveInput.GetPressUpEx(HandRole.LeftHand, ControllerButton.Grip))
@@ -358,6 +349,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         }
 
         DockingManager.Instance.ManipulationStart();
+        UIManager.Instance.SetLineColor(1);
     }
 
     void OnManipulationUpdate()
@@ -413,6 +405,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         manipulationStarted = false;
 
         DockingManager.Instance.ManipulationEnd();
+        UIManager.Instance.SetLineColor(0);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -429,7 +422,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void Start()
     {
-
+        Init();
     }
 }
 

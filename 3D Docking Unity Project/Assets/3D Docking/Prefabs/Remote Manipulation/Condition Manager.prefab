@@ -51,9 +51,9 @@ MonoBehaviour:
   currentCondition: 0
   manipulatable: {fileID: 0}
   dm: {fileID: 0}
-  targetDistS: 10
-  targetDistL: 30
+  targetDistS: 5
+  targetDistL: 15
   moveDistS: 5
-  moveDistL: 10
+  moveDistL: 15
   angleS: 0
   angleL: 135

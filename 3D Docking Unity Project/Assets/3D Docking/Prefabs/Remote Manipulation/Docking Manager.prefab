@@ -244,7 +244,7 @@ MonoBehaviour:
   initDist: 5
   initAngle: 135
   randomSeed: 10000
-  easyDistThreshold: 0.25
+  easyDistThreshold: 1
   easyAngleThreshold: 30
   distThreshold: 0.05
   angleThreshold: 10

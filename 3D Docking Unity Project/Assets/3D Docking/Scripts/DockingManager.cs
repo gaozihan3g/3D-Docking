@@ -72,6 +72,7 @@ public class DockingManager : MonoBehaviour
     float totalObjAngle_0 = 0f;
     float translationEfficiency_0 = 0f;
     float rotationEfficiency_0 = 0f;
+    int numOfAttempts = 0;
 
     const int kRandomSeedBase = 10000;
     const float kMinStatDist = 0.0001f;
@@ -122,6 +123,8 @@ public class DockingManager : MonoBehaviour
         totalObjAngle_0 = 0f;
         translationEfficiency_0 = 0f;
         rotationEfficiency_0 = 0f;
+
+        numOfAttempts = 0;
 
         //totalHeadDistance = 0f;
         //totalHeadAngle = 0f;
@@ -424,8 +427,29 @@ public class DockingManager : MonoBehaviour
         hardThresholdMet = true;
     }
 
-    public void Finish()
+    public void Attempt()
     {
+        numOfAttempts++;
+    }
+
+    public void Finish(bool selected)
+    {
+        if (!isTimeCounting)
+        {
+            ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+            AudioManager.Instance.PlaySound(4);
+            return;
+        }
+
+        numOfAttempts++;
+
+        if (selected)
+        {
+            ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+            AudioManager.Instance.PlaySound(4);
+            return;
+        }
+            
 
         var checkT = (manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
         var checkR = (manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
@@ -436,6 +460,7 @@ public class DockingManager : MonoBehaviour
         if (checkT)
             if (tNotMet)
             {
+                ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
                 AudioManager.Instance.PlaySound(4);
                 return;
             }
@@ -443,18 +468,10 @@ public class DockingManager : MonoBehaviour
         if (checkR)
             if (rNotMet)
             {
+                ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
                 AudioManager.Instance.PlaySound(4);
                 return;
             }
-
-
-
-        //if (distance > distThreshold || angle > angleThreshold)
-        //{
-        //    // audio feedback - fail
-        //    AudioManager.Instance.PlaySound(4);
-        //    return;
-        //}
 
         // stop timer
         isTimeCounting = false;
@@ -507,6 +524,8 @@ public class DockingManager : MonoBehaviour
 
         data.Add(rotationEfficiency_0);
         data.Add(rotationEfficiency);
+
+        data.Add(numOfAttempts);
 
         // set completion time
         //UIManager.Instance.SetText(string.Format(timeFormatStr, timer));

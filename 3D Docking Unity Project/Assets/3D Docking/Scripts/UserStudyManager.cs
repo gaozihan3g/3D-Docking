@@ -6,6 +6,7 @@ using System.Text;
 using UnityEditor;
 using System.Xml.Serialization;
 using System.Collections;
+using UnityEngine.AI;
 
 public class UserStudyManager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class UserStudyManager : MonoBehaviour
     [HideInInspector]
     public bool initialized;
 
+    public int numOfIV = 4;
     public float taskInterval = 1f;
 
     private Dictionary<string, int> orderDictionary;
@@ -166,7 +168,7 @@ public class UserStudyManager : MonoBehaviour
                     AudioManager.Instance.PlaySound(3);
                 }));
             }
-                
+
 
             currentTrial = 0;
 
@@ -254,6 +256,21 @@ public class UserStudyManager : MonoBehaviour
         sb.Append("c");
         sb.Append("\t");
         sb.Append("t");
+        sb.Append("\t");
+
+        for (int i = 0; i < numOfIV; i++)
+        {
+            sb.Append("IV" + (i+1));
+            sb.Append("\t");
+        }
+
+
+        for (int i = 0; i < metricNames.Count; i++)
+        {
+            sb.Append(metricNames[i]);
+            sb.Append("\t");
+        }
+
         sb.Append("\n");
 
 

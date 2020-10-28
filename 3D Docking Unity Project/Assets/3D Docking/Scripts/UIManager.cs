@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public Color32 colorA;
     public Color32 colorB;
     public Color32 colorC;
+
+    public List<Color32> lineColors;
     
     public Material mat;
     public Material connectionMat;
@@ -149,12 +151,15 @@ public class UIManager : MonoBehaviour
         cursorMat.SetColor(Shader.PropertyToID("g_vOutlineColor"), c);
     }
 
-    public void SetLineColor(Color c)
+    public void SetLineColor(int i)
     {
+        if (lineColors == null || i >= lineColors.Count)
+            return;
+
         if (connectionMat == null)
             return;
 
-        connectionMat.SetColor(Shader.PropertyToID("_Color"), c);
+        connectionMat.SetColor(Shader.PropertyToID("_Color"), lineColors[i]);
     }
 
     public void SetupPointer(Transform objTransform, bool pointerActive)

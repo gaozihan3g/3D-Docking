@@ -70,9 +70,11 @@ MonoBehaviour:
   - TE1
   - RE0
   - RE1
+  - NOA
   currentUser: 0
   currentCondition: 0
   currentTrial: 0
   log: 'Initialization needed. Enter condition # and metric #.'
   initialized: 1
-  taskInterval: 1
+  numOfIV: 4
+  taskInterval: 2
