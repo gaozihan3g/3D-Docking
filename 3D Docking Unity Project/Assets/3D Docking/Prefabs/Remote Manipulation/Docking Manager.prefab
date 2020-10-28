@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dab58d0b591484d8aeb32e032997bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manipulatable: {fileID: 7249284980253832426}
   anchor: {fileID: 652822767580101148}
   fromObject: {fileID: 1688068716398801292}
   toObject: {fileID: 9184771641017470681}
@@ -238,16 +239,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   IsRightHand: 1
-  manipulationType: 0
   targetDist: 5
   randomOffsetRadius: 0.02
   initDist: 5
   initAngle: 135
-  randomSeed: 10000
   easyDistThreshold: 1
   easyAngleThreshold: 30
   distThreshold: 0.05
   angleThreshold: 10
+  randomSeedBase: 10000
+  randomSeed: 10000
   timer: 0
   clutch: -1
   distance: 0.3

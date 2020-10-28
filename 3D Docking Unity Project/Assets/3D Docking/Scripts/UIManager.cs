@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     public Color32 colorC;
 
     public List<Color32> lineColors;
-    
+
     public Material mat;
     public Material connectionMat;
     public Material cursorMat;
@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour
     public Transform obj;
     public Transform cam;
     public Transform camRoot;
-    public float camDist = 1f;
 
     public GameObject pointer;
     public ConnectionLine line;
@@ -37,7 +36,8 @@ public class UIManager : MonoBehaviour
 
     Color32 outColor;
     bool camZoom = false;
-
+    //public float zoomFactor = 0.2f;
+    public float camDist = 1f;
 
     public void CamZoom(bool on)
     {
@@ -52,9 +52,25 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            camPosT = 0.3333f;
-            //float d = Vector3.Distance(origin.position, obj.position);
-            //camPosT = Mathf.Clamp01(camDist / d);
+            //camPosT = zoomFactor;
+
+            // Bit shift the index of the layer (8) to get a bit mask
+            int layerMask = 1 << 8;
+
+            // This would cast rays only against colliders in layer 8.
+            // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+            layerMask = ~layerMask;
+
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+
+            var dir = obj.position - cam.position;
+
+            if (Physics.Raycast(cam.position, dir, out hit, Mathf.Infinity, layerMask))
+            {
+                float d = Vector3.Distance(cam.position, obj.position);
+                camPosT = Mathf.Clamp01((d - hit.distance + camDist) / d);
+            }
         }
 
         camRoot.position = Vector3.Lerp(obj.position + (camRoot.position - cam.position), origin.position, camPosT);
@@ -106,7 +122,7 @@ public class UIManager : MonoBehaviour
             cc,
             ct,
             nt,
-            (cc-1) * nt + ct,
+            (cc - 1) * nt + ct,
             nc * nt,
             DockingManager.Instance.timer
             );

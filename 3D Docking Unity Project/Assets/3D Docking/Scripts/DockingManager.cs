@@ -7,6 +7,7 @@ using UnityEngine;
 public class DockingManager : MonoBehaviour
 {
     public static DockingManager Instance;
+    public HybridManipulatable manipulatable;
     public Transform anchor;
     public Transform fromObject;
     public Transform toObject;
@@ -14,13 +15,10 @@ public class DockingManager : MonoBehaviour
     public Transform[] hands;
     public bool IsRightHand = true;
 
-    public DockingHelper.ManipulationType manipulationType;
-
     public float targetDist = 5f;
     public float randomOffsetRadius = 1f;
     public float initDist = 1f;
     public float initAngle;
-    public int randomSeed;
 
     //[Range(0f, 0.1f)]
     public float easyDistThreshold = 0.03f;
@@ -30,6 +28,9 @@ public class DockingManager : MonoBehaviour
     public float distThreshold = 0.01f;
     //[Range(0f, 30f)]
     public float angleThreshold = 5f;
+
+    public int randomSeedBase = 10000;
+    public int randomSeed;
 
     bool isFirstTouch = true;
     bool isTouching = false;
@@ -74,7 +75,6 @@ public class DockingManager : MonoBehaviour
     float rotationEfficiency_0 = 0f;
     int numOfAttempts = 0;
 
-    const int kRandomSeedBase = 10000;
     const float kMinStatDist = 0.0001f;
     const float kMinStatAngle = 0.001f;
 
@@ -88,7 +88,7 @@ public class DockingManager : MonoBehaviour
 
     public void Init(int t)
     {
-        randomSeed = kRandomSeedBase + t;
+        randomSeed = randomSeedBase + (t + 1) * randomSeedBase / 100;
 
         Init();
     }
@@ -130,6 +130,8 @@ public class DockingManager : MonoBehaviour
         //totalHeadAngle = 0f;
         //totalHeadDistance_0 = 0f;
         //totalHeadAngle_0 = 0f;
+
+        manipulatable.Init();
 
         anchor.position = head.position + Vector3.forward * targetDist;
 
@@ -180,12 +182,16 @@ public class DockingManager : MonoBehaviour
 
     public void RandomRotation()
     {
-        var a = Random.rotation;
-        var x = Random.onUnitSphere;
-        var b = Quaternion.AngleAxis(initAngle, x);
+        var axis0 = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        var s = Random.Range(1, 3);
+        var a = Quaternion.AngleAxis(22.5f * (2 * s + 1), axis0);
 
-        fromObject.rotation = a;
-        toObject.rotation = b * a;
+        //var a = Random.rotationUniform;
+        var axis1 = Random.onUnitSphere;
+        var b = Quaternion.AngleAxis(initAngle, axis1);
+        //Debug.Log("#" + axis0 + " " + axis1);
+        toObject.rotation = a;
+        fromObject.rotation = b * a;
     }
 
     void Awake()
@@ -337,8 +343,8 @@ public class DockingManager : MonoBehaviour
 
         // check easy
 
-        var checkT = (manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
-        var checkR = (manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
+        var checkT = (manipulatable.manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
+        var checkR = (manipulatable.manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
 
         var tNotMet = distance > easyDistThreshold;
         var rNotMet = angle > easyAngleThreshold;
@@ -404,8 +410,8 @@ public class DockingManager : MonoBehaviour
         //    return;
 
 
-        var checkT = (manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
-        var checkR = (manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
+        var checkT = (manipulatable.manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
+        var checkR = (manipulatable.manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
 
         var tNotMet = distance > distThreshold;
         var rNotMet = angle > angleThreshold;
@@ -451,8 +457,8 @@ public class DockingManager : MonoBehaviour
         }
             
 
-        var checkT = (manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
-        var checkR = (manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
+        var checkT = (manipulatable.manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
+        var checkR = (manipulatable.manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
 
         var tNotMet = distance > distThreshold;
         var rNotMet = angle > angleThreshold;

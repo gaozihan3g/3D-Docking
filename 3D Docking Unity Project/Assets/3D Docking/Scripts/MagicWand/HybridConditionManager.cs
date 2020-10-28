@@ -23,7 +23,7 @@ public class HybridConditionManager : ConditionManager
 
     void DofSetup(bool is6Dof)
     {
-        dm.manipulationType = manipulatable.manipulationType = is6Dof ? DockingHelper.ManipulationType.Translation | DockingHelper.ManipulationType.Rotation : DockingHelper.ManipulationType.Translation;
+        manipulatable.manipulationType = is6Dof ? DockingHelper.ManipulationType.Translation | DockingHelper.ManipulationType.Rotation : DockingHelper.ManipulationType.Translation;
         dm.initAngle = is6Dof ? angleL : angleS;
     }
 

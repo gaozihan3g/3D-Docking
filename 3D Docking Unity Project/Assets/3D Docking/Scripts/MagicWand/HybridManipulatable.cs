@@ -12,18 +12,13 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         HOMER,
         NOVEL
     }
-
-
-
     public enum TranslationTechType
     {
         Homer,
         Prism,
     }
 
-
     public bool calibrated = false;
-
     [SerializeField]
     TechType tech;
     public DockingHelper.ManipulationType manipulationType;
@@ -51,12 +46,17 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     Vector3 offset;
     [SerializeField]
     Vector3 HmdOffset = new Vector3(0f, -0.4f, 0f);
-    //float gizmosR = 0.03f;
 
     float minSpeed = 0.01f;
     float maxSpeed = 1f;
-    float minScale = 0f;
-    float maxScale = 1f;
+    //homer
+    float minScale0 = 0f;
+    float maxScale0 = 1.2f;
+
+    //prism
+    float minScale1 = 0f;
+    float maxScale1 = 2f;
+
     [Tooltip("m/sec")]
     public float speed;
 
@@ -67,15 +67,16 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     [Tooltip("degree/sec")]
     public float angSpeed;
 
-    public float xSpeed;
-    public float ySpeed;
-    public float zSpeed;
+    //public float xSpeed;
+    //public float ySpeed;
+    //public float zSpeed;
     //public float minAxisSpeed;
     //public bool X;
     //public bool Y;
     //public bool Z;
 
-    public float translationScaleFactor = 1f;
+    public float prismScaleFactor = 1f;
+    public float homerScaleFactor = 1f;
     public float rotationScaleFactor = 1f;
 
     public float techThreshold = 0.3f;
@@ -107,6 +108,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         pointed = false;
         manipulationStarted = false;
         UIManager.Instance.SetLineColor(0);
+        UIManager.Instance.CamZoom(false);
     }
 
 
@@ -209,16 +211,16 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
         speed = deltaHandPos.magnitude / Time.deltaTime;
 
-        xSpeed = Mathf.Abs(deltaHandPos.x) / Time.deltaTime;
-        ySpeed = Mathf.Abs(deltaHandPos.y) / Time.deltaTime;
-        zSpeed = Mathf.Abs(deltaHandPos.z) / Time.deltaTime;
+        //xSpeed = Mathf.Abs(deltaHandPos.x) / Time.deltaTime;
+        //ySpeed = Mathf.Abs(deltaHandPos.y) / Time.deltaTime;
+        //zSpeed = Mathf.Abs(deltaHandPos.z) / Time.deltaTime;
 
         //X = xSpeed > minAxisSpeed;
         //Y = ySpeed > minAxisSpeed;
         //Z = zSpeed > minAxisSpeed;
 
-        translationScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale, maxScale, true);
-
+        homerScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale0, maxScale0, true);
+        prismScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale1, maxScale1, true);
 
         if (!nonIsoRotation)
         {
@@ -229,6 +231,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             // get scale factor based on rotation speed
             angSpeed = Quaternion.Angle(pHandRigidPose.rot, cHandRigidPose.rot) / Time.deltaTime;
             rotationScaleFactor = DockingHelper.Map(angSpeed, minAngSpeed, maxAngSpeed, minAngScale, maxAngScale, true);
+
+            rotationScaleFactor = speed > maxSpeed ? 0f : rotationScaleFactor;
         }
     }
 
@@ -365,7 +369,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
             if (TranslationTech == TranslationTechType.Homer)
             {
-                Vector3 diffPos = deltaPos * translationScaleFactor;
+                Vector3 diffPos = deltaPos * homerScaleFactor;
                 scaledHandPos += diffPos;
 
                 Vector3 dir = (scaledHandPos - origin).normalized;
@@ -378,7 +382,9 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
                 //diffPos.y = Y ? diffPos.y : 0f;
                 //diffPos.z = Z ? diffPos.z : 0f;
 
-                scaledHandPos += deltaPos;
+                Vector3 diffPos = deltaPos * prismScaleFactor;
+                scaledHandPos += diffPos;
+
                 transform.position = scaledHandPos + offset;
             }
         }
