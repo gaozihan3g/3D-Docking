@@ -22,7 +22,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField]
     TechType tech;
     public DockingHelper.ManipulationType manipulationType;
-    
+
     public bool nonIsoRotation = false;
     public bool prismFineTuning = false;
     public bool viewpointControl = false;
@@ -52,11 +52,11 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     float maxSpeed = 1f;
     //homer
     float minScale0 = 0f;
-    float maxScale0 = 1.2f;
+    float maxScale0 = 1f;
 
     //prism
     float minScale1 = 0f;
-    float maxScale1 = 2f;
+    float maxScale1 = 0.5f;
 
     [Tooltip("m/sec")]
     public float speed;
@@ -67,14 +67,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     float maxAngScale = 3f;
     [Tooltip("degree/sec")]
     public float angSpeed;
-
-    //public float xSpeed;
-    //public float ySpeed;
-    //public float zSpeed;
-    //public float minAxisSpeed;
-    //public bool X;
-    //public bool Y;
-    //public bool Z;
 
     public float prismScaleFactor = 1f;
     public float homerScaleFactor = 1f;
@@ -110,29 +102,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         manipulationStarted = false;
         UIManager.Instance.SetLineColor(0);
         UIManager.Instance.CamZoom(false);
-        UIManager.Instance.SetupPointer(transform, true);
-    }
-
-
-    void Update()
-    {
-        if (!calibrated)
-        {
-            Calibrate();
-            return;
-        }
-
-        if (lazyRelease)
-        {
-            CheckSelection();
-            UpdateManipulation();
-        }
-        else
-        {
-            NormalSelection();
-        }
-
-        InputCheck();
+        UIManager.Instance.ShowPointer(transform, true);
     }
 
     void OnValidate()
@@ -147,7 +117,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             UIManager.Instance.SetCursorColor(TranslationTech == TranslationTechType.Homer ? Color.blue : Color.green);
         }
-
     }
     void UpdateTechState()
     {
@@ -156,20 +125,12 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         viewpointControl = tech == TechType.NOVEL;
         prismFineTuning = tech == TechType.NOVEL;
     }
-
-
     void InputCheck()
     {
         if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
         {
             DockingManager.Instance.Finish(false);
         }
-
-        //if (ViveInput.GetPressUpEx(HandRole.LeftHand, ControllerButton.Grip))
-        //{
-        //    DockingManager.Instance.Init();
-        //}
-
 
         var r = ViveInput.GetPadTouchAxisEx(HandRole.RightHand);
 
@@ -208,18 +169,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     void CalculateScaleFactor()
     {
         // get speed
-
         Vector3 deltaHandPos = cHandRigidPose.pos - pHandRigidPose.pos;
-
         speed = deltaHandPos.magnitude / Time.deltaTime;
-
-        //xSpeed = Mathf.Abs(deltaHandPos.x) / Time.deltaTime;
-        //ySpeed = Mathf.Abs(deltaHandPos.y) / Time.deltaTime;
-        //zSpeed = Mathf.Abs(deltaHandPos.z) / Time.deltaTime;
-
-        //X = xSpeed > minAxisSpeed;
-        //Y = ySpeed > minAxisSpeed;
-        //Z = zSpeed > minAxisSpeed;
 
         homerScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale0, maxScale0, true);
         prismScaleFactor = DockingHelper.Map(speed, minSpeed, maxSpeed, minScale1, maxScale1, true);
@@ -238,94 +189,45 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         }
     }
 
-    void NormalSelection()
-    {
-        // define start and end
 
-        if (pointed && !manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
+    void Update()
+    {
+        if (!calibrated)
         {
-
-            //ui
-            UIManager.Instance.SetupPointer(transform, false);
-            //ui
-
-            OnManipulationStart();
-        }
-
-        if (manipulationStarted)
-            OnManipulationUpdate();
-
-        if (manipulationStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
-        {
-            //ui
-            UIManager.Instance.SetupPointer(transform, true);
-
-            OnManipulationEnd();
-        }
-    }
-
-
-
-    void CheckSelection()
-    {
-        if (pointed && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
-        {
-            OnSelected();
-        }
-
-        if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Menu))
-        {
-            OnDeselected();
-        }
-    }
-
-    void OnSelected()
-    {
-        selected = true;
-
-        ViveInput.TriggerHapticVibration(HandRole.RightHand);
-
-        //ui
-        UIManager.Instance.SetupPointer(transform, false);
-
-        DockingManager.Instance.ManipulationStart();
-    }
-
-    void OnDeselected()
-    {
-        selected = false;
-
-        ViveInput.TriggerHapticVibration(HandRole.RightHand);
-
-        //ui
-        UIManager.Instance.SetupPointer(transform, true);
-
-        //DockingManager.Instance.TouchEnd();
-    }
-
-    void UpdateManipulation()
-    {
-        if (!selected)
+            Calibrate();
             return;
-
-        // define start and end
-
-        if (!manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
-        {
-            OnManipulationStart();
         }
+
+        ManipulationCheck();
+
+        InputCheck();
+    }
+
+    void ManipulationCheck()
+    {
+        bool bStart;
+
+        if (lazyRelease)
+            bStart = pointed || selected;
+        else
+            bStart = pointed;
+
+        if (bStart && !manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
+            OnManipulationStart();
 
         if (manipulationStarted)
             OnManipulationUpdate();
 
         if (manipulationStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
-        {
             OnManipulationEnd();
-        }
+
+        if (lazyRelease && selected && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Menu))
+            OnRelease();
     }
 
     void OnManipulationStart()
     {
+        selected = true;
         manipulationStarted = true;
 
         // record data
@@ -355,7 +257,8 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         }
 
         DockingManager.Instance.ManipulationStart();
-        UIManager.Instance.SetLineColor(1);
+        UIManager.Instance.ShowPointer(transform, false);
+        UIManager.Instance.SetLineColor(2);
     }
 
     void OnManipulationUpdate()
@@ -380,10 +283,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             }
             else
             {
-                //diffPos.x = X ? diffPos.x : 0f;
-                //diffPos.y = Y ? diffPos.y : 0f;
-                //diffPos.z = Z ? diffPos.z : 0f;
-
                 Vector3 diffPos = deltaPos * prismScaleFactor;
                 scaledHandPos += diffPos;
 
@@ -399,8 +298,6 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             transform.rotation = diff * pRigidPose.rot;
         }
 
-
-
         cRigidPose = new RigidPose(transform); // for debugging
         pHandRigidPose = VivePose.GetPoseEx(HandRole.RightHand);
         pRigidPose = new RigidPose(transform);
@@ -413,18 +310,29 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         manipulationStarted = false;
 
         DockingManager.Instance.ManipulationEnd();
+        UIManager.Instance.ShowPointer(transform, !lazyRelease);
+        UIManager.Instance.SetLineColor(lazyRelease ? 1 : 0);
+    }
+    void OnRelease()
+    {
+        selected = false;
+
+        ViveInput.TriggerHapticVibration(HandRole.RightHand);
+        UIManager.Instance.ShowPointer(transform, true);
         UIManager.Instance.SetLineColor(0);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         pointed = true;
+        UIManager.Instance.SetLineColor(1);
         ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         pointed = false;
+        UIManager.Instance.SetLineColor(0);
         ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
     }
 
@@ -433,6 +341,28 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         Init();
     }
 }
+
+
+
+//public float xSpeed;
+//public float ySpeed;
+//public float zSpeed;
+//public float minAxisSpeed;
+//public bool X;
+//public bool Y;
+//public bool Z;
+
+//xSpeed = Mathf.Abs(deltaHandPos.x) / Time.deltaTime;
+//ySpeed = Mathf.Abs(deltaHandPos.y) / Time.deltaTime;
+//zSpeed = Mathf.Abs(deltaHandPos.z) / Time.deltaTime;
+
+//X = xSpeed > minAxisSpeed;
+//Y = ySpeed > minAxisSpeed;
+//Z = zSpeed > minAxisSpeed;
+
+//diffPos.x = X ? diffPos.x : 0f;
+//diffPos.y = Y ? diffPos.y : 0f;
+//diffPos.z = Z ? diffPos.z : 0f;
 
 
 //public TechSwitching techSwitching;
@@ -480,4 +410,51 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 //    Gizmos.DrawSphere(cRigidPose.pos, gizmosR);
 //    // object to origin
 //    Gizmos.DrawLine(origin, cRigidPose.pos);
+//}
+
+//void CheckSelection()
+//{
+//    if (pointed && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
+//    {
+//        selected = true;
+
+//        ViveInput.TriggerHapticVibration(HandRole.RightHand);
+
+//        //ui
+//        UIManager.Instance.SetupPointer(transform, false);
+
+//        DockingManager.Instance.ManipulationStart();
+//    }
+
+//    if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Menu))
+//    {
+//        selected = false;
+
+//        ViveInput.TriggerHapticVibration(HandRole.RightHand);
+
+//        //ui
+//        UIManager.Instance.SetupPointer(transform, true);
+//    }
+//}
+
+
+//void UpdateManipulation()
+//{
+//    if (!selected)
+//        return;
+
+//    // define start and end
+
+//    if (!manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
+//    {
+//        OnManipulationStart();
+//    }
+
+//    if (manipulationStarted)
+//        OnManipulationUpdate();
+
+//    if (manipulationStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
+//    {
+//        OnManipulationEnd();
+//    }
 //}
