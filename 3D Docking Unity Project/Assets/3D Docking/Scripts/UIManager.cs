@@ -178,7 +178,7 @@ public class UIManager : MonoBehaviour
         connectionMat.SetColor(Shader.PropertyToID("_Color"), lineColors[i]);
     }
 
-    public void SetupPointer(Transform objTransform, bool pointerActive)
+    public void ShowPointer(Transform objTransform, bool pointerActive)
     {
         if (pointer != null)
             pointer.SetActive(pointerActive);

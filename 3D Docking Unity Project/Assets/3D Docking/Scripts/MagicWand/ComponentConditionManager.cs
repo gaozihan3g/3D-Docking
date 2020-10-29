@@ -22,14 +22,13 @@ public class ComponentConditionManager : ConditionManager
 
         for (int i = 0; i < conditionNames.Count; i++)
         {
-            conditionNames[i] = ((i & 1 << 3) == 1 << 3 ? "N" : "I")
-                + ((i & 1 << 2) == 1 << 2 ? "P" : "H")
-                + ((i & 1 << 1) == 1 << 1 ? "V" : "N")
-                + ((i & 1 << 0) == 1 << 0 ? "L" : "N");
+            conditionNames[i] = ((i & 1 << 2) == 1 << 2 ? "Non_" : "Iso_")
+                + ((i & 1 << 1) == 1 << 1 ? "VC_" : "NN_")
+                + ((i & 1 << 0) == 1 << 0 ? "Lazy" : "Norm");
         }
 
-        manipulatable.nonIsoRotation = (CurrentCondition & 1 << 3) == 1 << 3;
-        manipulatable.prismFineTuning = (CurrentCondition & 1 << 2) == 1 << 2;
+        manipulatable.nonIsoRotation = (CurrentCondition & 1 << 2) == 1 << 2;
+        //manipulatable.prismFineTuning = (CurrentCondition & 1 << 2) == 1 << 2;
         manipulatable.viewpointControl = (CurrentCondition & 1 << 1) == 1 << 1;
         manipulatable.lazyRelease = (CurrentCondition & 1 << 0) == 1 << 0;
 

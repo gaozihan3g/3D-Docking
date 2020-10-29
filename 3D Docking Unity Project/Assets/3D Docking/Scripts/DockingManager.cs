@@ -78,6 +78,8 @@ public class DockingManager : MonoBehaviour
     const float kMinStatDist = 0.0001f;
     const float kMinStatAngle = 0.001f;
 
+    public bool accFeedback = false;
+
     //Vector3 preHeadPos;
     //Quaternion preHeadRot;
     //public float totalHeadDistance = 0f;
@@ -387,9 +389,12 @@ public class DockingManager : MonoBehaviour
         orgFromObjRot = fromObject.rotation;
 
         // audio feedback
-        AudioManager.Instance.PlaySound(0);
+        if (accFeedback)
+        {
+            AudioManager.Instance.PlaySound(0);
+            ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+        }
 
-        ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
 
         easyThresholdMet = true;
 
@@ -427,8 +432,11 @@ public class DockingManager : MonoBehaviour
 
 
         // audio feedback
-        AudioManager.Instance.PlaySound(1);
-        ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+        if (accFeedback)
+        {
+            AudioManager.Instance.PlaySound(1);
+            ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+        }
 
         hardThresholdMet = true;
     }

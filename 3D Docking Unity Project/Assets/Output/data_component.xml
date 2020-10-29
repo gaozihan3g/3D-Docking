@@ -12,1266 +12,128 @@
             <c>0</c>
             <t>0</t>
             <data>
-              <float>6.516117</float>
-              <float>17.5</float>
-              <float>24.0161171</float>
-              <float>0.9973114</float>
-              <float>0.0435186923</float>
-              <float>84.848465</float>
-              <float>9.594035</float>
-              <float>1</float>
-              <float>2</float>
-              <float>3</float>
-              <float>1.01569724</float>
-              <float>0.981257558</float>
-              <float>90.8931961</float>
-              <float>421.88855</float>
-              <float>0.5328662</float>
-              <float>0.170635536</float>
-              <float>0.5676848</float>
-              <float>0.202636659</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>0</c>
-            <t>1</t>
-            <data>
-              <float>7.3194046</float>
-              <float>12.4888916</float>
-              <float>19.8082962</float>
-              <float>0.9933898</float>
-              <float>0.02858728</float>
-              <float>79.75558</float>
-              <float>7.30014133</float>
-              <float>1</float>
-              <float>1</float>
-              <float>2</float>
-              <float>0.910197</float>
-              <float>0.6130917</float>
-              <float>149.322647</float>
-              <float>204.822922</float>
-              <float>0.622499347</float>
-              <float>0.295801073</float>
-              <float>0.5888097</float>
-              <float>0.40235883</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>0</c>
-            <t>2</t>
-            <data>
-              <float>5.19705963</float>
-              <float>22.3222275</float>
-              <float>27.5192871</float>
-              <float>0.977302253</float>
-              <float>0.03376741</float>
-              <float>115.025826</float>
-              <float>9.353179</float>
-              <float>1</float>
-              <float>4</float>
-              <float>5</float>
-              <float>0.6450986</float>
-              <float>1.063906</float>
-              <float>265.95108</float>
-              <float>370.3519</float>
-              <float>0.7482071</float>
-              <float>0.142219648</float>
-              <float>0.606304169</float>
-              <float>0.287120879</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>1</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>1</c>
-            <t>0</t>
-            <data>
-              <float>2.176796</float>
-              <float>12.077774</float>
-              <float>14.25457</float>
-              <float>0.721886456</float>
-              <float>0.04410304</float>
-              <float>76.88999</float>
-              <float>4.45372438</float>
-              <float>2</float>
-              <float>2</float>
-              <float>4</float>
-              <float>0.433843583</float>
-              <float>0.9884069</float>
-              <float>65.53557</float>
-              <float>410.914246</float>
-              <float>0.8862319</float>
-              <float>0.0505086</float>
-              <float>0.9153743</float>
-              <float>0.190684676</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>1</c>
-            <t>1</t>
-            <data>
-              <float>1.67285156</float>
-              <float>31.4444427</float>
-              <float>33.1172943</float>
-              <float>0.9575522</float>
-              <float>0.0163770933</float>
-              <float>131.7307</float>
-              <float>2.65236878</float>
-              <float>2</float>
-              <float>6</float>
-              <float>8</float>
-              <float>0.5177342</float>
-              <float>1.24235487</float>
-              <float>64.77478</float>
-              <float>317.623444</float>
-              <float>0.7217296</float>
-              <float>0.08579863</float>
-              <float>0.473784059</float>
-              <float>0.4246712</float>
-              <float>5</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>1</c>
-            <t>2</t>
-            <data>
-              <float>2.6739502</float>
-              <float>31.4333344</float>
-              <float>34.1072845</float>
-              <float>0.990454257</float>
-              <float>0.01418011</float>
-              <float>118.477158</float>
-              <float>7.81751871</float>
-              <float>2</float>
-              <float>6</float>
-              <float>8</float>
-              <float>0.641947865</float>
-              <float>1.62099612</float>
-              <float>97.9651947</float>
-              <float>517.7813</float>
-              <float>0.7378419</float>
-              <float>0.08203487</float>
-              <float>0.6686932</float>
-              <float>0.235778257</float>
-              <float>2</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>2</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>2</c>
-            <t>0</t>
-            <data>
-              <float>5.93936157</float>
-              <float>39.7444458</float>
-              <float>45.6838074</float>
-              <float>0.986503541</float>
-              <float>0.004956863</float>
-              <float>70.6265</float>
-              <float>1.063845</float>
-              <float>2</float>
-              <float>5</float>
-              <float>7</float>
-              <float>0.7068461</float>
-              <float>0.7528062</float>
-              <float>107.669685</float>
-              <float>258.1897</float>
-              <float>0.8117972</float>
-              <float>0.249425411</float>
-              <float>0.615193367</float>
-              <float>0.2721578</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>2</c>
-            <t>1</t>
-            <data>
-              <float>7.58136</float>
-              <float>21.9888916</float>
-              <float>29.5702515</float>
-              <float>0.9820737</float>
-              <float>0.00193091983</float>
-              <float>75.60122</float>
-              <float>0.279764622</float>
-              <float>2</float>
-              <float>2</float>
-              <float>4</float>
-              <float>1.18760669</float>
-              <float>0.6963161</float>
-              <float>226.298584</float>
-              <float>280.6179</float>
-              <float>0.344190449</float>
-              <float>0.2859593</float>
-              <float>0.362737179</float>
-              <float>0.270771623</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>2</c>
-            <t>2</t>
-            <data>
-              <float>6.82580566</float>
-              <float>32.0333252</float>
-              <float>38.85913</float>
-              <float>0.983730137</float>
-              <float>0.005062192</float>
-              <float>115.746834</float>
-              <float>0.440573931</float>
-              <float>2</float>
-              <float>4</float>
-              <float>6</float>
-              <float>0.6005601</float>
-              <float>1.41348314</float>
-              <float>102.809563</float>
-              <float>642.2542</float>
-              <float>0.8058761</float>
-              <float>0.07417047</float>
-              <float>0.6772047</float>
-              <float>0.180361748</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>3</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>3</c>
-            <t>0</t>
-            <data>
-              <float>3.178955</float>
-              <float>16.4222412</float>
-              <float>19.6011963</float>
-              <float>0.9728187</float>
-              <float>0.009263594</float>
-              <float>97.09307</float>
-              <float>0.9650892</float>
-              <float>2</float>
-              <float>4</float>
-              <float>6</float>
-              <float>0.679138362</float>
-              <float>0.7500997</float>
-              <float>77.5776</float>
-              <float>275.368347</float>
-              <float>0.749976039</float>
-              <float>0.112852074</float>
-              <float>0.529666662</float>
-              <float>0.354245871</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>3</c>
-            <t>1</t>
-            <data>
-              <float>3.057312</float>
-              <float>20.2666626</float>
-              <float>23.3239746</float>
-              <float>0.9352898</float>
-              <float>0.0156558417</float>
-              <float>115.259445</float>
-              <float>1.13296473</float>
-              <float>3</float>
-              <float>6</float>
-              <float>9</float>
-              <float>0.549598</float>
-              <float>1.08971834</float>
-              <float>66.85692</float>
-              <float>356.8144</float>
-              <float>0.844034433</float>
-              <float>0.07829539</float>
-              <float>0.6071044</float>
-              <float>0.321847826</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>3</c>
-            <t>2</t>
-            <data>
-              <float>1.83233643</float>
-              <float>22.3000488</float>
-              <float>24.1323853</float>
-              <float>0.943922043</float>
-              <float>0.0113569917</float>
-              <float>117.6277</float>
-              <float>0.4387938</float>
-              <float>2</float>
-              <float>8</float>
-              <float>10</float>
-              <float>0.427781284</float>
-              <float>1.31937933</float>
-              <float>60.1991768</float>
-              <float>341.9227</float>
-              <float>0.966679</float>
-              <float>0.0297328942</float>
-              <float>0.9247448</float>
-              <float>0.34301883</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>4</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>4</c>
-            <t>0</t>
-            <data>
-              <float>3.30474854</float>
-              <float>13.6444092</float>
-              <float>16.9491577</float>
-              <float>0.9827959</float>
-              <float>0.0352327377</float>
-              <float>93.3654861</float>
-              <float>1.8667022</float>
-              <float>1</float>
-              <float>1</float>
-              <float>2</float>
-              <float>0.370173663</float>
-              <float>0.9808289</float>
-              <float>48.02981</float>
-              <float>440.356842</float>
-              <float>0.9682964</float>
-              <float>0.09314673</float>
-              <float>0.9099863</float>
-              <float>0.207868755</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>4</c>
-            <t>1</t>
-            <data>
-              <float>5.711853</float>
-              <float>7.87780762</float>
-              <float>13.5896606</float>
-              <float>1.36210048</float>
-              <float>0.04093439</float>
-              <float>29.7362423</float>
-              <float>3.04168463</float>
+              <float>9.527453</float>
+              <float>6.44444466</float>
+              <float>15.9718981</float>
+              <float>0.939694941</float>
+              <float>0.025943473</float>
+              <float>41.5193024</float>
+              <float>1.49459231</float>
               <float>1</float>
               <float>0</float>
               <float>1</float>
-              <float>0.729253232</float>
-              <float>0.533513</float>
-              <float>200.830582</float>
-              <float>95.21239</float>
-              <float>0.764098465</float>
-              <float>0.432159275</float>
-              <float>0.557244658</float>
-              <float>0.28920415</float>
+              <float>1.56790793</float>
+              <float>0.5286349</float>
+              <float>482.895</float>
+              <float>123.409271</float>
+              <float>0.6240076</float>
+              <float>0.208277017</float>
+              <float>0.269151032</float>
+              <float>0.3273944</float>
               <float>1</float>
             </data>
           </Trial>
           <Trial>
             <u>0</u>
-            <c>4</c>
-            <t>2</t>
-            <data>
-              <float>12.2849731</float>
-              <float>18.3110962</float>
-              <float>30.59607</float>
-              <float>2.353925</float>
-              <float>0.0405125357</float>
-              <float>29.9936962</float>
-              <float>1.16430962</float>
-              <float>2</float>
-              <float>2</float>
-              <float>4</float>
-              <float>1.28462088</float>
-              <float>0.8345698</float>
-              <float>632.9516</float>
-              <float>210.0871</float>
-              <float>0.6001868</float>
-              <float>0.5420249</float>
-              <float>0.253888518</float>
-              <float>0.140580222</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>5</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>5</c>
-            <t>0</t>
-            <data>
-              <float>2.28417969</float>
-              <float>9.5</float>
-              <float>11.78418</float>
-              <float>0.9847362</float>
-              <float>0.026392037</float>
-              <float>81.69646</float>
-              <float>3.139949</float>
-              <float>2</float>
-              <float>3</float>
-              <float>5</float>
-              <float>0.4918322</float>
-              <float>0.553142846</float>
-              <float>76.26438</float>
-              <float>313.6752</float>
-              <float>0.858258665</float>
-              <float>0.24342005</float>
-              <float>0.7017822</float>
-              <float>0.265315026</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>5</c>
+            <c>0</c>
             <t>1</t>
             <data>
-              <float>7.224304</float>
-              <float>27.35559</float>
-              <float>34.579895</float>
-              <float>4.32184267</float>
-              <float>0.0217940789</float>
-              <float>29.9438229</float>
-              <float>1.77338076</float>
-              <float>5</float>
-              <float>6</float>
-              <float>11</float>
-              <float>1.043256</float>
-              <float>1.31041551</float>
-              <float>481.512817</float>
-              <float>264.208984</float>
-              <float>0.73965013</float>
-              <float>0.414186984</float>
-              <float>0.322418541</float>
-              <float>0.113498487</float>
-              <float>2</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>5</c>
-            <t>2</t>
-            <data>
-              <float>1.72998047</float>
-              <float>38.7333374</float>
-              <float>40.4633179</float>
-              <float>0.9618933</float>
-              <float>0.0342255123</float>
-              <float>119.257195</float>
-              <float>3.40245771</float>
-              <float>2</float>
-              <float>7</float>
-              <float>9</float>
-              <float>0.329096526</float>
-              <float>2.43792486</float>
-              <float>70.43879</float>
-              <float>743.1509</float>
-              <float>0.9269575</float>
-              <float>0.0315696932</float>
-              <float>0.7509159</float>
-              <float>0.160575777</float>
-              <float>3</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>6</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>6</c>
-            <t>0</t>
-            <data>
-              <float>6.578125</float>
-              <float>29.9888916</float>
-              <float>36.5670166</float>
-              <float>0.993892</float>
-              <float>0.00564000336</float>
-              <float>81.05384</float>
-              <float>0.8494917</float>
-              <float>2</float>
-              <float>4</float>
-              <float>6</float>
-              <float>0.5099427</float>
-              <float>1.606133</float>
-              <float>77.30777</float>
-              <float>320.45874</float>
-              <float>0.860519</float>
-              <float>0.278138578</float>
-              <float>0.717599034</float>
-              <float>0.256504238</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>6</c>
-            <t>1</t>
-            <data>
-              <float>1.67773438</float>
-              <float>19.9777832</float>
-              <float>21.6555176</float>
-              <float>0.9632236</float>
-              <float>0.0174898319</float>
-              <float>106.486244</float>
-              <float>1.24173212</float>
+              <float>1.87562943</float>
+              <float>18.88889</float>
+              <float>20.7645187</float>
+              <float>0.957372546</float>
+              <float>0.01905279</float>
+              <float>106.658173</float>
+              <float>7.8101</float>
               <float>0</float>
-              <float>3</float>
-              <float>3</float>
-              <float>0.572391748</float>
-              <float>0.7612293</float>
-              <float>81.13039</float>
-              <float>228.874008</float>
-              <float>0.608699143</float>
-              <float>0.8439987</float>
-              <float>0.443792135</float>
-              <float>0.461207241</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.644955337</float>
+              <float>1.15927792</float>
+              <float>86.8282852</float>
+              <float>251.139252</float>
+              <float>0.885347247</float>
+              <float>0.148196712</float>
+              <float>0.7560858</float>
+              <float>0.4148963</float>
               <float>1</float>
             </data>
           </Trial>
           <Trial>
             <u>0</u>
-            <c>6</c>
+            <c>0</c>
             <t>2</t>
             <data>
-              <float>1.1706543</float>
-              <float>38.5333252</float>
-              <float>39.70398</float>
-              <float>0.9897667</float>
-              <float>0.005409815</float>
-              <float>114.286171</float>
-              <float>1.23794436</float>
-              <float>0</float>
-              <float>6</float>
-              <float>6</float>
-              <float>0.4011901</float>
-              <float>2.066436</float>
-              <float>65.31804</float>
-              <float>366.150818</float>
-              <float>0.9052946</float>
-              <float>0.212986559</float>
-              <float>0.6171165</float>
-              <float>0.317857742</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>7</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>7</c>
-            <t>0</t>
-            <data>
-              <float>2.9588623</float>
-              <float>11.6777344</float>
-              <float>14.6365967</float>
-              <float>0.9637843</float>
-              <float>0.003819446</float>
-              <float>75.45858</float>
-              <float>0.237388134</float>
-              <float>2</float>
-              <float>4</float>
-              <float>6</float>
-              <float>0.711726069</float>
-              <float>0.8061799</float>
-              <float>147.742889</float>
-              <float>279.097443</float>
-              <float>0.5034817</float>
-              <float>0.598259</float>
-              <float>0.536040664</float>
-              <float>0.270891726</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>7</c>
-            <t>1</t>
-            <data>
-              <float>2.558838</float>
-              <float>22.43335</float>
-              <float>24.9921875</float>
-              <float>0.961149931</float>
-              <float>0.006444294</float>
-              <float>114.321</float>
-              <float>1.9715209</float>
-              <float>2</float>
-              <float>5</float>
-              <float>7</float>
-              <float>0.6168347</float>
-              <float>1.94369531</float>
-              <float>80.35109</float>
-              <float>394.622559</float>
-              <float>0.8164971</float>
-              <float>0.53399545</float>
-              <float>0.6540314</float>
-              <float>0.295209527</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>7</c>
-            <t>2</t>
-            <data>
-              <float>2.58239746</float>
-              <float>16.72229</float>
-              <float>19.3046875</float>
-              <float>0.996807337</float>
-              <float>0.014078713</float>
-              <float>127.125778</float>
-              <float>0.6702692</float>
-              <float>2</float>
-              <float>4</float>
-              <float>6</float>
-              <float>0.6061295</float>
-              <float>1.00177145</float>
-              <float>82.28172</float>
-              <float>305.7685</float>
-              <float>0.8294401</float>
-              <float>0.114610404</float>
-              <float>0.618401051</float>
-              <float>0.417250633</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>8</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>8</c>
-            <t>0</t>
-            <data>
-              <float>1.46862793</float>
-              <float>39.4666748</float>
-              <float>40.9353027</float>
-              <float>8.236708</float>
-              <float>0.0285987575</float>
-              <float>29.24605</float>
-              <float>0.5961027</float>
-              <float>1</float>
-              <float>4</float>
-              <float>5</float>
-              <float>0.187040359</float>
-              <float>1.94890714</float>
-              <float>46.6632538</float>
-              <float>309.551758</float>
-              <float>1.02923381</float>
-              <float>0.296781629</float>
-              <float>0.9112454</float>
-              <float>0.05623363</float>
-              <float>2</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>8</c>
-            <t>1</t>
-            <data>
-              <float>1.81494141</float>
-              <float>23.7443848</float>
-              <float>25.5593262</float>
-              <float>0.9581352</float>
-              <float>0.0120897759</float>
-              <float>85.94072</float>
-              <float>3.33436656</float>
+              <float>0.7284279</float>
+              <float>14.9777794</float>
+              <float>15.7062073</float>
+              <float>0.9171296</float>
+              <float>0.0398922265</float>
+              <float>118.679893</float>
+              <float>6.50755072</float>
               <float>0</float>
               <float>2</float>
               <float>2</float>
-              <float>0.617150843</float>
-              <float>1.38424611</float>
-              <float>77.03686</float>
-              <float>350.449463</float>
-              <float>0.8486197</float>
-              <float>0.10156709</float>
-              <float>0.892865956</float>
-              <float>0.139115736</float>
+              <float>0.388545454</float>
+              <float>1.01317787</float>
+              <float>52.1293221</float>
+              <float>474.981323</float>
+              <float>0.994956732</float>
+              <float>0.115527995</float>
+              <float>0.966737</float>
+              <float>0.260623246</float>
               <float>1</float>
             </data>
           </Trial>
           <Trial>
             <u>0</u>
-            <c>8</c>
-            <t>2</t>
+            <c>0</c>
+            <t>3</t>
             <data>
-              <float>2.565796</float>
-              <float>29.055542</float>
-              <float>31.6213379</float>
-              <float>0.9425436</float>
-              <float>0.00552826934</float>
-              <float>132.309433</float>
-              <float>4.09415865</float>
-              <float>1</float>
-              <float>5</float>
-              <float>6</float>
-              <float>0.413984269</float>
-              <float>2.23652077</float>
-              <float>117.295456</float>
-              <float>716.1826</float>
-              <float>0.857175946</float>
-              <float>0.04313063</float>
-              <float>0.5592519</float>
-              <float>0.09321339</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>9</c>
-            <t>0</t>
-            <data>
-              <float>2.790039</float>
-              <float>20.06665</float>
-              <float>22.85669</float>
-              <float>0.955074</float>
-              <float>0.004781276</float>
-              <float>53.145237</float>
-              <float>4.655185</float>
-              <float>2</float>
-              <float>3</float>
-              <float>5</float>
-              <float>0.624759734</float>
-              <float>0.8812507</float>
-              <float>78.4870758</float>
-              <float>385.044739</float>
-              <float>0.763679445</float>
-              <float>0.131651849</float>
-              <float>0.5932311</float>
-              <float>0.0774343237</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>9</c>
-            <t>1</t>
-            <data>
-              <float>2.1875</float>
-              <float>9.466675</float>
-              <float>11.6541748</float>
-              <float>0.9550619</float>
-              <float>0.0457901</float>
-              <float>93.04841</float>
-              <float>5.78003645</float>
-              <float>2</float>
-              <float>1</float>
-              <float>3</float>
-              <float>0.452195048</float>
-              <float>0.542843342</float>
-              <float>59.5785141</float>
-              <float>151.915741</float>
-              <float>0.930381358</float>
-              <float>0.276390761</float>
-              <float>0.9165712</float>
-              <float>0.326472133</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>9</c>
-            <t>2</t>
-            <data>
-              <float>4.11706543</float>
-              <float>8.688843</float>
-              <float>12.8059082</float>
-              <float>1.92362094</float>
-              <float>0.0307037123</float>
-              <float>28.5635376</float>
-              <float>2.74917078</float>
-              <float>3</float>
-              <float>1</float>
-              <float>4</float>
-              <float>0.6747511</float>
-              <float>0.6252925</float>
-              <float>158.45224</float>
-              <float>102.873352</float>
-              <float>0.886309266</float>
-              <float>0.3005698</float>
-              <float>0.3944098</float>
-              <float>0.185202569</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>10</c>
-            <t>0</t>
-            <data>
-              <float>10.098877</float>
-              <float>22.7554932</float>
-              <float>32.85437</float>
-              <float>0.968705058</float>
-              <float>0.00421576574</float>
-              <float>94.483</float>
-              <float>0.474776536</float>
-              <float>2</float>
-              <float>3</float>
-              <float>5</float>
-              <float>1.36666334</float>
-              <float>0.616830945</float>
-              <float>197.351578</float>
-              <float>160.601089</float>
-              <float>0.2642711</float>
-              <float>0.228800118</float>
-              <float>0.362703651</float>
-              <float>0.421920329</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>10</c>
-            <t>1</t>
-            <data>
-              <float>5.597168</float>
-              <float>23.41101</float>
-              <float>29.0081787</float>
-              <float>0.9795573</float>
-              <float>0.009224713</float>
-              <float>79.49639</float>
-              <float>1.54961455</float>
-              <float>1</float>
-              <float>1</float>
-              <float>2</float>
-              <float>0.582105458</float>
-              <float>0.8078181</float>
-              <float>83.4290161</float>
-              <float>158.898621</float>
-              <float>0.8244006</float>
-              <float>0.103935346</float>
-              <float>0.665291131</float>
-              <float>0.4264221</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>10</c>
-            <t>2</t>
-            <data>
-              <float>8.547363</float>
-              <float>27.6555176</float>
-              <float>36.20288</float>
-              <float>0.9800917</float>
-              <float>0.006235346</float>
-              <float>133.1947</float>
-              <float>0.508217931</float>
-              <float>2</float>
-              <float>3</float>
-              <float>5</float>
-              <float>1.00190246</float>
-              <float>1.07421434</float>
-              <float>238.640671</float>
-              <float>312.401855</float>
-              <float>0.6626646</float>
-              <float>0.131583691</float>
-              <float>0.325319976</float>
-              <float>0.264450818</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>11</c>
-            <t>0</t>
-            <data>
-              <float>1.78271484</float>
-              <float>19.8222046</float>
-              <float>21.60492</float>
-              <float>2.48848438</float>
-              <float>0.04927924</float>
-              <float>29.7147789</float>
-              <float>3.09095383</float>
-              <float>2</float>
-              <float>2</float>
-              <float>4</float>
-              <float>0.358484954</float>
-              <float>1.20050561</float>
-              <float>46.9317245</float>
-              <float>354.093445</float>
-              <float>0.9946019</float>
-              <float>0.282101154</float>
-              <float>0.9425651</float>
-              <float>0.0573809221</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>11</c>
-            <t>1</t>
-            <data>
-              <float>2.24401855</float>
-              <float>20.85559</float>
-              <float>23.09961</float>
-              <float>0.9425806</float>
-              <float>0.007026991</float>
-              <float>87.57456</float>
-              <float>6.11778975</float>
-              <float>2</float>
-              <float>3</float>
-              <float>5</float>
-              <float>0.492968649</float>
-              <float>1.0966326</float>
-              <float>60.90636</float>
-              <float>298.967041</float>
-              <float>0.9103139</float>
-              <float>0.0969426</float>
-              <float>0.8750795</float>
-              <float>0.181471333</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>11</c>
-            <t>2</t>
-            <data>
-              <float>2.00195313</float>
-              <float>20.222168</float>
-              <float>22.2241211</float>
-              <float>0.984883666</float>
-              <float>0.00847369</float>
-              <float>118.703896</float>
-              <float>1.76231194</float>
-              <float>2</float>
-              <float>6</float>
-              <float>8</float>
-              <float>0.454346359</float>
-              <float>0.7802879</float>
-              <float>70.76756</float>
-              <float>277.5926</float>
-              <float>0.9678771</float>
-              <float>0.181588948</float>
-              <float>0.849024236</float>
-              <float>0.2401721</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>12</c>
-            <t>0</t>
-            <data>
-              <float>6.34289551</float>
-              <float>18.833313</float>
-              <float>25.1762085</float>
-              <float>0.986608148</float>
-              <float>0.02233967</float>
-              <float>133.85762</float>
-              <float>1.69899511</float>
-              <float>2</float>
-              <float>2</float>
-              <float>4</float>
-              <float>0.80099684</float>
-              <float>1.06197166</float>
-              <float>159.36409</float>
-              <float>509.629333</float>
-              <float>0.420529455</float>
-              <float>0.135041684</float>
-              <float>0.225625023</float>
-              <float>0.133263469</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>12</c>
-            <t>1</t>
-            <data>
-              <float>5.22406</float>
-              <float>17.4111328</float>
-              <float>22.6351929</float>
-              <float>0.9963206</float>
-              <float>0.0213077012</float>
-              <float>62.8444824</float>
-              <float>3.64826655</float>
-              <float>1</float>
-              <float>1</float>
-              <float>2</float>
-              <float>0.6095897</float>
-              <float>1.14134586</float>
-              <float>116.219208</float>
-              <float>291.247559</float>
-              <float>0.831264138</float>
-              <float>0.143846259</float>
-              <float>0.6085916</float>
-              <float>0.136435971</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>12</c>
-            <t>2</t>
-            <data>
-              <float>1.02142334</float>
-              <float>41.63336</float>
-              <float>42.6547852</float>
-              <float>0.965626836</float>
-              <float>0.03043897</float>
-              <float>166.492828</float>
-              <float>3.29302645</float>
-              <float>0</float>
-              <float>6</float>
-              <float>6</float>
-              <float>0.360372156</float>
-              <float>2.16194534</float>
-              <float>83.95122</float>
-              <float>650.282349</float>
-              <float>0.9589627</float>
-              <float>0.040767733</float>
-              <float>0.60547334</float>
-              <float>0.135941058</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>13</c>
-            <t>0</t>
-            <data>
-              <float>1.68634033</float>
-              <float>16.93335</float>
-              <float>18.61969</float>
-              <float>3.34675121</float>
-              <float>0.0235596467</float>
-              <float>29.3761425</float>
-              <float>4.21977043</float>
-              <float>2</float>
-              <float>4</float>
-              <float>6</float>
-              <float>0.3707055</float>
-              <float>1.04350257</float>
-              <float>53.15928</float>
-              <float>340.40744</float>
-              <float>0.9552022</float>
-              <float>0.3769666</float>
-              <float>0.8941653</float>
-              <float>0.0463920273</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>13</c>
-            <t>1</t>
-            <data>
-              <float>2.56097412</float>
-              <float>19.7999878</float>
-              <float>22.3609619</float>
-              <float>0.9365677</float>
-              <float>0.0449279621</float>
-              <float>101.338554</float>
-              <float>4.91165829</float>
-              <float>3</float>
-              <float>4</float>
-              <float>7</float>
-              <float>0.419378251</float>
-              <float>1.52951562</float>
-              <float>53.3243332</float>
-              <float>381.523468</float>
-              <float>0.9809</float>
-              <float>0.03799909</float>
-              <float>0.937364042</float>
-              <float>0.140194535</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>13</c>
-            <t>2</t>
-            <data>
-              <float>1.81005859</float>
-              <float>11.9222412</float>
-              <float>13.7323</float>
-              <float>0.994726956</float>
-              <float>0.0237192474</float>
-              <float>120.956543</float>
-              <float>8.544287</float>
-              <float>2</float>
-              <float>3</float>
-              <float>5</float>
-              <float>0.453784049</float>
-              <float>0.726931751</float>
-              <float>61.7971878</float>
-              <float>262.025879</float>
-              <float>0.9196744</float>
-              <float>0.123095632</float>
-              <float>0.7094136</float>
-              <float>0.2252656</float>
-              <float>1</float>
-            </data>
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>0</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>0</u>
-            <c>14</c>
-            <t>0</t>
-            <data>
-              <float>4.745819</float>
-              <float>33.01111</float>
-              <float>37.7569275</float>
-              <float>0.9568495</float>
-              <float>0.003890555</float>
-              <float>80.14127</float>
-              <float>1.21690106</float>
-              <float>1</float>
-              <float>5</float>
-              <float>6</float>
-              <float>0.7079016</float>
-              <float>1.589763</float>
-              <float>104.867249</float>
-              <float>296.809082</float>
-              <float>0.8016358</float>
-              <float>0.5722292</float>
-              <float>0.660665333</float>
-              <float>0.227022111</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>14</c>
-            <t>1</t>
-            <data>
-              <float>1.060791</float>
-              <float>28.3999939</float>
-              <float>29.4607849</float>
-              <float>20.1627922</float>
-              <float>0.006157478</float>
-              <float>27.7198544</float>
-              <float>0.482948869</float>
+              <float>1.30256653</float>
+              <float>16.2444458</float>
+              <float>17.5470123</float>
+              <float>0.978143752</float>
+              <float>0.03284936</float>
+              <float>159.589142</float>
+              <float>5.432554</float>
               <float>0</float>
               <float>3</float>
               <float>3</float>
-              <float>0.323863655</float>
-              <float>2.00066876</float>
-              <float>63.7177048</float>
-              <float>340.833252</float>
-              <float>0.520965457</float>
-              <float>0.749066949</float>
-              <float>0.7081057</float>
-              <float>0.03949038</float>
+              <float>0.5095568</float>
+              <float>1.54142785</float>
+              <float>61.73243</float>
+              <float>528.6143</float>
+              <float>0.94896996</float>
+              <float>0.0668628961</float>
+              <float>0.862283647</float>
+              <float>0.303313345</float>
               <float>1</float>
             </data>
           </Trial>
           <Trial>
             <u>0</u>
-            <c>14</c>
-            <t>2</t>
+            <c>0</c>
+            <t>4</t>
             <data>
-              <float>1.34912109</float>
-              <float>31.8999634</float>
-              <float>33.2490845</float>
-              <float>0.980798542</float>
-              <float>0.008330984</float>
-              <float>133.478348</float>
-              <float>0.619286</float>
+              <float>2.13388824</float>
+              <float>32.16667</float>
+              <float>34.30056</float>
+              <float>0.9583397</float>
+              <float>0.0209146272</float>
+              <float>116.748886</float>
+              <float>3.867821</float>
               <float>0</float>
               <float>4</float>
               <float>4</float>
-              <float>0.344494969</float>
-              <float>1.36742342</float>
-              <float>82.34262</float>
-              <float>394.611053</float>
-              <float>0.8943873</float>
-              <float>0.133647472</float>
-              <float>0.8845056</float>
-              <float>0.193633288</float>
+              <float>0.6337047</float>
+              <float>2.179249</float>
+              <float>111.326454</float>
+              <float>832.01</float>
+              <float>0.8863507</float>
+              <float>0.05985929</float>
+              <float>0.64730835</float>
+              <float>0.144500151</float>
               <float>1</float>
             </data>
           </Trial>
@@ -1280,83 +142,957 @@
       </Condition>
       <Condition>
         <u>0</u>
-        <c>15</c>
+        <c>1</c>
         <trials>
           <Trial>
             <u>0</u>
-            <c>15</c>
+            <c>1</c>
             <t>0</t>
             <data>
-              <float>3.74996948</float>
-              <float>23.8888855</float>
-              <float>27.638855</float>
-              <float>0.979523361</float>
-              <float>0.00963248</float>
-              <float>95.63547</float>
-              <float>1.45854664</float>
+              <float>1.58586121</float>
+              <float>12.4222107</float>
+              <float>14.0080719</float>
+              <float>0.9256395</float>
+              <float>0.03251892</float>
+              <float>78.4243546</float>
+              <float>1.72913337</float>
+              <float>0</float>
               <float>3</float>
-              <float>9</float>
-              <float>12</float>
-              <float>0.5620363</float>
-              <float>1.74974656</float>
-              <float>144.241684</float>
-              <float>298.494873</float>
-              <float>0.85713166</float>
-              <float>0.07590512</float>
-              <float>0.38282147</float>
-              <float>0.2518762</float>
+              <float>3</float>
+              <float>0.590082765</float>
+              <float>1.06759775</float>
+              <float>85.1727753</float>
+              <float>607.221436</float>
+              <float>0.8854073</float>
+              <float>0.08458808</float>
+              <float>0.715476</float>
+              <float>0.127553552</float>
               <float>1</float>
             </data>
           </Trial>
           <Trial>
             <u>0</u>
-            <c>15</c>
+            <c>1</c>
             <t>1</t>
             <data>
-              <float>2.52041626</float>
-              <float>15.7111206</float>
-              <float>18.2315369</float>
-              <float>0.967452168</float>
-              <float>0.009870896</float>
-              <float>87.2356</float>
-              <float>0.344917029</float>
-              <float>3</float>
-              <float>3</float>
-              <float>6</float>
-              <float>0.5609228</float>
-              <float>1.02135348</float>
-              <float>74.93779</float>
-              <float>230.542221</float>
-              <float>0.835492134</float>
-              <float>0.317967951</float>
-              <float>0.817298234</float>
-              <float>0.261356831</float>
-              <float>1</float>
-            </data>
-          </Trial>
-          <Trial>
-            <u>0</u>
-            <c>15</c>
-            <t>2</t>
-            <data>
-              <float>1.77554321</float>
-              <float>17.71112</float>
-              <float>19.4866638</float>
-              <float>0.977858663</float>
-              <float>0.00538810762</float>
-              <float>126.9736</float>
-              <float>0.498892069</float>
-              <float>2</float>
-              <float>2</float>
+              <float>1.05055237</float>
+              <float>16.2555542</float>
+              <float>17.3061066</float>
+              <float>0.972357869</float>
+              <float>0.0756544</float>
+              <float>105.775887</float>
+              <float>5.382455</float>
+              <float>0</float>
               <float>4</float>
-              <float>0.442443043</float>
-              <float>1.30173266</float>
-              <float>62.64963</float>
-              <float>265.600525</float>
-              <float>0.9675555</float>
-              <float>0.224814549</float>
-              <float>0.878990054</float>
-              <float>0.2951894</float>
+              <float>4</float>
+              <float>0.503792167</float>
+              <float>1.78182733</float>
+              <float>62.6041565</float>
+              <float>806.8933</float>
+              <float>0.9462538</float>
+              <float>0.0556891263</float>
+              <float>0.9038627</float>
+              <float>0.129655883</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>1</c>
+            <t>2</t>
+            <data>
+              <float>0.802154541</float>
+              <float>12.17778</float>
+              <float>12.9799347</float>
+              <float>0.940731</float>
+              <float>0.08623433</float>
+              <float>117.672577</float>
+              <float>3.94775128</float>
+              <float>0</float>
+              <float>2</float>
+              <float>2</float>
+              <float>0.384248525</float>
+              <float>1.00980735</float>
+              <float>53.3662338</float>
+              <float>450.5255</float>
+              <float>1.00052857</float>
+              <float>0.111075841</float>
+              <float>0.9398875</float>
+              <float>0.260759026</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>1</c>
+            <t>3</t>
+            <data>
+              <float>2.08145142</float>
+              <float>12.0444489</float>
+              <float>14.1259</float>
+              <float>0.9972403</float>
+              <float>0.0138204172</float>
+              <float>146.300369</float>
+              <float>3.37311244</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.7199255</float>
+              <float>1.0310601</float>
+              <float>101.109207</float>
+              <float>703.977844</float>
+              <float>0.9104304</float>
+              <float>0.1343248</float>
+              <float>0.81466645</float>
+              <float>0.203813434</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>1</c>
+            <t>4</t>
+            <data>
+              <float>1.538559</float>
+              <float>10.0000153</float>
+              <float>11.5385742</float>
+              <float>0.9792524</float>
+              <float>0.01994058</float>
+              <float>123.443581</float>
+              <float>3.31340647</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.612401545</float>
+              <float>0.741240561</float>
+              <float>102.618889</float>
+              <float>395.058563</float>
+              <float>0.763935566</float>
+              <float>0.149538547</float>
+              <float>0.476227343</float>
+              <float>0.316682</float>
+              <float>1</float>
+            </data>
+          </Trial>
+        </trials>
+        <average />
+      </Condition>
+      <Condition>
+        <u>0</u>
+        <c>2</c>
+        <trials>
+          <Trial>
+            <u>0</u>
+            <c>2</c>
+            <t>0</t>
+            <data>
+              <float>1.61630249</float>
+              <float>23.28888</float>
+              <float>24.9051819</float>
+              <float>0.9825815</float>
+              <float>0.0595630966</float>
+              <float>79.39337</float>
+              <float>2.88531566</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.6136137</float>
+              <float>0.7722454</float>
+              <float>88.57733</float>
+              <float>318.827728</float>
+              <float>0.8658229</float>
+              <float>0.212122247</float>
+              <float>0.6816946</float>
+              <float>0.243613556</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>2</c>
+            <t>1</t>
+            <data>
+              <float>4.93927</float>
+              <float>13.3444519</float>
+              <float>18.2837219</float>
+              <float>0.995479</float>
+              <float>0.0199135132</float>
+              <float>99.4310455</float>
+              <float>1.121159</float>
+              <float>1</float>
+              <float>1</float>
+              <float>2</float>
+              <float>0.7315023</float>
+              <float>0.560199738</float>
+              <float>117.229179</float>
+              <float>187.6225</float>
+              <float>0.652275</float>
+              <float>0.3902524</float>
+              <float>0.447139084</float>
+              <float>0.538154662</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>2</c>
+            <t>2</t>
+            <data>
+              <float>12.7415771</float>
+              <float>15.8222351</float>
+              <float>28.5638123</float>
+              <float>0.9168459</float>
+              <float>0.0122981071</float>
+              <float>162.215225</float>
+              <float>0.7548474</float>
+              <float>2</float>
+              <float>1</float>
+              <float>3</float>
+              <float>2.01769</float>
+              <float>0.832814932</float>
+              <float>453.475464</float>
+              <float>365.877625</float>
+              <float>0.09737069</float>
+              <float>0.132552341</float>
+              <float>0.144878209</float>
+              <float>0.439188451</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>2</c>
+            <t>3</t>
+            <data>
+              <float>3.12850952</float>
+              <float>27.2000122</float>
+              <float>30.3285217</float>
+              <float>0.7976832</float>
+              <float>0.0120382914</float>
+              <float>148.63945</float>
+              <float>2.04288316</float>
+              <float>1</float>
+              <float>3</float>
+              <float>4</float>
+              <float>0.5325518</float>
+              <float>1.77251244</float>
+              <float>80.45902</float>
+              <float>649.3171</float>
+              <float>0.8935772</float>
+              <float>0.040417403</float>
+              <float>0.7550219</float>
+              <float>0.228877023</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>2</c>
+            <t>4</t>
+            <data>
+              <float>6.35498047</float>
+              <float>25.2000122</float>
+              <float>31.5549927</float>
+              <float>0.936728358</float>
+              <float>0.0130163655</float>
+              <float>103.488205</float>
+              <float>4.16637373</float>
+              <float>1</float>
+              <float>3</float>
+              <float>4</float>
+              <float>1.13098526</float>
+              <float>1.208637</float>
+              <float>162.305435</float>
+              <float>322.264832</float>
+              <float>0.6058126</float>
+              <float>0.06934735</float>
+              <float>0.335606456</float>
+              <float>0.3307592</float>
+              <float>1</float>
+            </data>
+          </Trial>
+        </trials>
+        <average />
+      </Condition>
+      <Condition>
+        <u>0</u>
+        <c>3</c>
+        <trials>
+          <Trial>
+            <u>0</u>
+            <c>3</c>
+            <t>0</t>
+            <data>
+              <float>3.35516357</float>
+              <float>12.222229</float>
+              <float>15.5773926</float>
+              <float>0.9525394</float>
+              <float>0.0475373119</float>
+              <float>67.81345</float>
+              <float>3.016878</float>
+              <float>1</float>
+              <float>1</float>
+              <float>2</float>
+              <float>0.7575347</float>
+              <float>0.6500432</float>
+              <float>170.480591</float>
+              <float>190.1763</float>
+              <float>0.775340438</float>
+              <float>0.196623817</float>
+              <float>0.63446635</float>
+              <float>0.361287683</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>3</c>
+            <t>1</t>
+            <data>
+              <float>1.30450439</float>
+              <float>13.2999878</float>
+              <float>14.6044922</float>
+              <float>0.9098716</float>
+              <float>0.008195924</float>
+              <float>110.146118</float>
+              <float>0.9346004</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.5501689</float>
+              <float>0.661295533</float>
+              <float>67.0882645</float>
+              <float>218.11377</float>
+              <float>0.8360898</float>
+              <float>0.167537585</float>
+              <float>0.7293221</float>
+              <float>0.5055666</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>3</c>
+            <t>2</t>
+            <data>
+              <float>0.8045654</float>
+              <float>18.8778076</float>
+              <float>19.682373</float>
+              <float>0.890446</float>
+              <float>0.008169248</float>
+              <float>127.239922</float>
+              <float>1.41053283</float>
+              <float>0</float>
+              <float>4</float>
+              <float>4</float>
+              <float>0.434565425</float>
+              <float>1.15423942</float>
+              <float>71.17711</float>
+              <float>461.677368</float>
+              <float>0.988792</float>
+              <float>0.0825101659</float>
+              <float>0.881746352</float>
+              <float>0.272233754</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>3</c>
+            <t>3</t>
+            <data>
+              <float>0.7333374</float>
+              <float>13.944458</float>
+              <float>14.6777954</float>
+              <float>0.92387414</float>
+              <float>0.005839812</float>
+              <float>156.318329</float>
+              <float>1.0187459</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.416190833</float>
+              <float>1.25019765</float>
+              <float>60.00194</float>
+              <float>374.4006</float>
+              <float>1.00970674</float>
+              <float>0.0498241074</float>
+              <float>0.956751466</float>
+              <float>0.421716422</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>3</c>
+            <t>4</t>
+            <data>
+              <float>1.76776123</float>
+              <float>18.3222046</float>
+              <float>20.0899658</float>
+              <float>0.8743026</float>
+              <float>0.0277727544</float>
+              <float>97.13075</float>
+              <float>6.15797663</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.6460398</float>
+              <float>0.9756631</float>
+              <float>84.0361938</float>
+              <float>344.93634</float>
+              <float>0.815358341</float>
+              <float>0.0906389952</float>
+              <float>0.712859452</float>
+              <float>0.290683359</float>
+              <float>1</float>
+            </data>
+          </Trial>
+        </trials>
+        <average />
+      </Condition>
+      <Condition>
+        <u>0</u>
+        <c>4</c>
+        <trials>
+          <Trial>
+            <u>0</u>
+            <c>4</c>
+            <t>0</t>
+            <data>
+              <float>1.78192139</float>
+              <float>32.34442</float>
+              <float>34.1263428</float>
+              <float>0.955991745</float>
+              <float>0.0713130757</float>
+              <float>72.0888</float>
+              <float>8.283685</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.596339762</float>
+              <float>1.73629785</float>
+              <float>80.36326</float>
+              <float>823.9146</float>
+              <float>0.866694331</float>
+              <float>0.0965352654</float>
+              <float>0.701099932</float>
+              <float>0.0414627455</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>4</c>
+            <t>1</t>
+            <data>
+              <float>7.20574951</float>
+              <float>16.9332886</float>
+              <float>24.1390381</float>
+              <float>0.952171862</float>
+              <float>0.0313949957</float>
+              <float>100.745857</float>
+              <float>1.11415589</float>
+              <float>1</float>
+              <float>1</float>
+              <float>2</float>
+              <float>0.601610959</float>
+              <float>1.4417057</float>
+              <float>100.338524</float>
+              <float>531.775635</float>
+              <float>0.688979566</float>
+              <float>0.08173023</float>
+              <float>0.5140048</float>
+              <float>0.09391123</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>4</c>
+            <t>2</t>
+            <data>
+              <float>1.515686</float>
+              <float>11.333313</float>
+              <float>12.848999</float>
+              <float>0.98936224</float>
+              <float>0.0384424366</float>
+              <float>159.076981</float>
+              <float>5.393354</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.5282077</float>
+              <float>0.9082355</float>
+              <float>90.6722946</float>
+              <float>345.141</float>
+              <float>0.8064636</float>
+              <float>0.110412508</float>
+              <float>0.5126426</float>
+              <float>0.227805391</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>4</c>
+            <t>3</t>
+            <data>
+              <float>4.392273</float>
+              <float>22.4666138</float>
+              <float>26.8588867</float>
+              <float>0.9946128</float>
+              <float>0.0338428877</float>
+              <float>144.796722</float>
+              <float>4.55006552</float>
+              <float>1</float>
+              <float>1</float>
+              <float>2</float>
+              <float>0.7140625</float>
+              <float>1.34269</float>
+              <float>196.880051</float>
+              <float>373.609619</float>
+              <float>0.78563267</float>
+              <float>0.100296088</float>
+              <float>0.291851282</float>
+              <float>0.224359646</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>4</c>
+            <t>4</t>
+            <data>
+              <float>6.30975342</float>
+              <float>19.9000244</float>
+              <float>26.2097778</float>
+              <float>0.9990565</float>
+              <float>0.02818566</float>
+              <float>107.671547</float>
+              <float>1.39659154</float>
+              <float>1</float>
+              <float>1</float>
+              <float>2</float>
+              <float>0.873500645</float>
+              <float>1.32572365</float>
+              <float>216.59407</float>
+              <float>365.728455</float>
+              <float>0.689026654</float>
+              <float>0.117409192</float>
+              <float>0.250927478</float>
+              <float>0.1990732</float>
+              <float>1</float>
+            </data>
+          </Trial>
+        </trials>
+        <average />
+      </Condition>
+      <Condition>
+        <u>0</u>
+        <c>5</c>
+        <trials>
+          <Trial>
+            <u>0</u>
+            <c>5</c>
+            <t>0</t>
+            <data>
+              <float>1.16540527</float>
+              <float>10.3444214</float>
+              <float>11.5098267</float>
+              <float>5.36666536</float>
+              <float>0.0363335349</float>
+              <float>29.9611378</float>
+              <float>6.06934357</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.4307303</float>
+              <float>1.13740659</float>
+              <float>56.8266373</float>
+              <float>321.7722</float>
+              <float>0.9769187</float>
+              <float>0.49809134</float>
+              <float>0.946923554</float>
+              <float>0.05387798</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>5</c>
+            <t>1</t>
+            <data>
+              <float>4.66021729</float>
+              <float>15.8778076</float>
+              <float>20.5380249</float>
+              <float>0.928742468</float>
+              <float>0.0476830751</float>
+              <float>37.7114334</float>
+              <float>2.620004</float>
+              <float>1</float>
+              <float>1</float>
+              <float>2</float>
+              <float>0.98335</float>
+              <float>0.8031282</float>
+              <float>294.719727</float>
+              <float>261.210022</float>
+              <float>0.6557298</float>
+              <float>0.1446618</float>
+              <float>0.180810437</float>
+              <float>0.103445955</float>
+              <float>2</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>5</c>
+            <t>2</t>
+            <data>
+              <float>4.282959</float>
+              <float>15.5888672</float>
+              <float>19.8718262</float>
+              <float>2.64526844</float>
+              <float>0.021674281</float>
+              <float>29.81379</float>
+              <float>3.11542225</float>
+              <float>1</float>
+              <float>3</float>
+              <float>4</float>
+              <float>0.8227542</float>
+              <float>1.11867309</float>
+              <float>292.389</float>
+              <float>304.9247</float>
+              <float>0.8602198</float>
+              <float>0.274003655</float>
+              <float>0.232846439</float>
+              <float>0.0662281</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>5</c>
+            <t>3</t>
+            <data>
+              <float>1.15759277</float>
+              <float>13.1333008</float>
+              <float>14.2908936</float>
+              <float>0.9973109</float>
+              <float>0.017809866</float>
+              <float>173.054718</float>
+              <float>4.42745543</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.5151514</float>
+              <float>1.0868119</float>
+              <float>72.5292358</float>
+              <float>402.8198</float>
+              <float>0.9546266</float>
+              <float>0.129902348</float>
+              <float>0.8799038</float>
+              <float>0.223341659</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>5</c>
+            <t>4</t>
+            <data>
+              <float>2.89642334</float>
+              <float>14.8444214</float>
+              <float>17.7408447</float>
+              <float>0.999658465</float>
+              <float>0.0310819186</float>
+              <float>112.313354</float>
+              <float>5.23795938</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.7174402</float>
+              <float>1.08463383</float>
+              <float>197.78006</float>
+              <float>368.521881</float>
+              <float>0.8494399</float>
+              <float>0.173116252</float>
+              <float>0.224986613</float>
+              <float>0.174515828</float>
+              <float>1</float>
+            </data>
+          </Trial>
+        </trials>
+        <average />
+      </Condition>
+      <Condition>
+        <u>0</u>
+        <c>6</c>
+        <trials>
+          <Trial>
+            <u>0</u>
+            <c>6</c>
+            <t>0</t>
+            <data>
+              <float>1.75408936</float>
+              <float>18.57782</float>
+              <float>20.33191</float>
+              <float>2.54403925</float>
+              <float>0.006018934</float>
+              <float>29.6859188</float>
+              <float>0.4545639</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.608419061</float>
+              <float>0.745879054</float>
+              <float>72.39991</float>
+              <float>165.371857</float>
+              <float>0.784735</float>
+              <float>0.503456235</float>
+              <float>0.7861124</float>
+              <float>0.154084831</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>6</c>
+            <t>1</t>
+            <data>
+              <float>1.54766846</float>
+              <float>15.5444336</float>
+              <float>17.0921021</float>
+              <float>0.908237338</float>
+              <float>0.00541792857</float>
+              <float>81.7021</float>
+              <float>1.0682503</float>
+              <float>0</float>
+              <float>2</float>
+              <float>2</float>
+              <float>0.6130076</float>
+              <float>0.544152439</float>
+              <float>88.82201</float>
+              <float>188.2036</float>
+              <float>0.889209867</float>
+              <float>0.282814533</float>
+              <float>0.8595367</float>
+              <float>0.272237271</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>6</c>
+            <t>2</t>
+            <data>
+              <float>4.668396</float>
+              <float>17.7666626</float>
+              <float>22.4350586</float>
+              <float>0.9482378</float>
+              <float>0.0121009024</float>
+              <float>132.57933</float>
+              <float>1.21109867</float>
+              <float>1</float>
+              <float>2</float>
+              <float>3</float>
+              <float>0.6120644</float>
+              <float>0.7039611</float>
+              <float>63.03564</float>
+              <float>214.2692</float>
+              <float>0.12865153</float>
+              <float>0.159269631</float>
+              <float>0.301900357</float>
+              <float>0.437577367</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>6</c>
+            <t>3</t>
+            <data>
+              <float>1.28399658</float>
+              <float>29.8444214</float>
+              <float>31.128418</float>
+              <float>0.9629606</float>
+              <float>0.005526429</float>
+              <float>155.257248</float>
+              <float>2.051295</float>
+              <float>0</float>
+              <float>4</float>
+              <float>4</float>
+              <float>0.478361666</float>
+              <float>1.01242828</float>
+              <float>103.7283</float>
+              <float>412.440521</float>
+              <float>0.912227333</float>
+              <float>0.229827851</float>
+              <float>0.7001534</float>
+              <float>0.2375994</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>6</c>
+            <t>4</t>
+            <data>
+              <float>5.36358643</float>
+              <float>16.3666382</float>
+              <float>21.7302246</float>
+              <float>0.997370541</float>
+              <float>0.0246740077</float>
+              <float>84.36083</float>
+              <float>4.18605661</float>
+              <float>1</float>
+              <float>2</float>
+              <float>3</float>
+              <float>0.7689214</float>
+              <float>0.7245364</float>
+              <float>142.084961</float>
+              <float>158.433685</float>
+              <float>0.7458925</float>
+              <float>0.169418111</float>
+              <float>0.5647657</float>
+              <float>0.36677736</float>
+              <float>1</float>
+            </data>
+          </Trial>
+        </trials>
+        <average />
+      </Condition>
+      <Condition>
+        <u>0</u>
+        <c>7</c>
+        <trials>
+          <Trial>
+            <u>0</u>
+            <c>7</c>
+            <t>0</t>
+            <data>
+              <float>1.4296875</float>
+              <float>11.6666565</float>
+              <float>13.096344</float>
+              <float>0.9099859</float>
+              <float>0.008513375</float>
+              <float>38.4866447</float>
+              <float>1.09144449</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.540210843</float>
+              <float>0.480885744</float>
+              <float>70.6917953</float>
+              <float>133.6915</float>
+              <float>0.889589965</float>
+              <float>0.2635405</float>
+              <float>0.714999557</float>
+              <float>0.22072722</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>7</c>
+            <t>1</t>
+            <data>
+              <float>1.33816528</float>
+              <float>12.1889038</float>
+              <float>13.5270691</float>
+              <float>0.9885555</float>
+              <float>0.01843071</float>
+              <float>84.8546448</float>
+              <float>1.17435</float>
+              <float>0</float>
+              <float>1</float>
+              <float>1</float>
+              <float>0.5693903</float>
+              <float>0.5836984</float>
+              <float>71.50014</float>
+              <float>163.508957</float>
+              <float>0.8891383</float>
+              <float>0.223665044</float>
+              <float>0.8735889</float>
+              <float>0.3516657</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>7</c>
+            <t>2</t>
+            <data>
+              <float>0.9694824</float>
+              <float>13.4222412</float>
+              <float>14.3917236</float>
+              <float>0.97042954</float>
+              <float>0.0165777337</float>
+              <float>146.3647</float>
+              <float>0.478062242</float>
+              <float>0</float>
+              <float>2</float>
+              <float>2</float>
+              <float>0.510836065</float>
+              <float>0.7792794</float>
+              <float>80.960144</float>
+              <float>242.347534</float>
+              <float>0.9729846</float>
+              <float>0.149241254</float>
+              <float>0.86693114</float>
+              <float>0.3516925</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>7</c>
+            <t>3</t>
+            <data>
+              <float>1.5411377</float>
+              <float>13.9777527</float>
+              <float>15.51889</float>
+              <float>0.928390145</float>
+              <float>0.0101599423</float>
+              <float>135.701843</float>
+              <float>1.990093</float>
+              <float>0</float>
+              <float>3</float>
+              <float>3</float>
+              <float>0.625773966</float>
+              <float>0.6285253</float>
+              <float>101.023659</float>
+              <float>215.259979</float>
+              <float>0.830757439</float>
+              <float>0.2159187</float>
+              <float>0.6836568</float>
+              <float>0.33759287</float>
+              <float>1</float>
+            </data>
+          </Trial>
+          <Trial>
+            <u>0</u>
+            <c>7</c>
+            <t>4</t>
+            <data>
+              <float>2.31283569</float>
+              <float>18.1111145</float>
+              <float>20.42395</float>
+              <float>0.998424053</float>
+              <float>0.01752903</float>
+              <float>136.6183</float>
+              <float>3.61528826</float>
+              <float>1</float>
+              <float>4</float>
+              <float>5</float>
+              <float>0.6853345</float>
+              <float>1.20658851</float>
+              <float>116.097481</float>
+              <float>305.90976</float>
+              <float>0.7563748</float>
+              <float>0.0677594</float>
+              <float>0.212675765</float>
+              <float>0.246230662</float>
               <float>1</float>
             </data>
           </Trial>
@@ -1390,6 +1126,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>1</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1413,6 +1161,18 @@
             <u>1</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1440,6 +1200,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>1</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1463,6 +1235,18 @@
             <u>1</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1490,6 +1274,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>1</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1513,6 +1309,18 @@
             <u>1</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1540,6 +1348,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>1</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>1</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1565,204 +1385,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>1</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>1</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>1</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>1</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>1</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1795,6 +1427,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>2</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1818,6 +1462,18 @@
             <u>2</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1845,6 +1501,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>2</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1868,6 +1536,18 @@
             <u>2</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1895,6 +1575,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>2</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1918,6 +1610,18 @@
             <u>2</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -1945,6 +1649,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>2</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>2</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -1970,204 +1686,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>2</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>2</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>2</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>2</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>2</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2200,6 +1728,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>3</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2223,6 +1763,18 @@
             <u>3</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2250,6 +1802,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>3</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2273,6 +1837,18 @@
             <u>3</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2300,6 +1876,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>3</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2323,6 +1911,18 @@
             <u>3</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2350,6 +1950,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>3</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>3</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2375,204 +1987,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>3</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>3</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>3</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>3</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>3</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2605,6 +2029,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>4</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2628,6 +2064,18 @@
             <u>4</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2655,6 +2103,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>4</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2678,6 +2138,18 @@
             <u>4</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2705,6 +2177,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>4</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2728,6 +2212,18 @@
             <u>4</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -2755,6 +2251,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>4</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>4</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -2780,204 +2288,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>4</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>4</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>4</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>4</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>4</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3010,6 +2330,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>5</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3033,6 +2365,18 @@
             <u>5</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3060,6 +2404,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>5</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3083,6 +2439,18 @@
             <u>5</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3110,6 +2478,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>5</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3133,6 +2513,18 @@
             <u>5</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3160,6 +2552,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>5</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>5</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3185,204 +2589,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>5</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>5</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>5</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>5</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>5</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3415,6 +2631,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>6</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3438,6 +2666,18 @@
             <u>6</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3465,6 +2705,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>6</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3488,6 +2740,18 @@
             <u>6</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3515,6 +2779,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>6</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3538,6 +2814,18 @@
             <u>6</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3565,6 +2853,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>6</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>6</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3590,204 +2890,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>6</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>6</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>6</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>6</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>6</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3820,6 +2932,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>7</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3843,6 +2967,18 @@
             <u>7</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3870,6 +3006,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>7</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3893,6 +3041,18 @@
             <u>7</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3920,6 +3080,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>7</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3943,6 +3115,18 @@
             <u>7</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -3970,6 +3154,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>7</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>7</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -3995,204 +3191,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>7</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>7</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>7</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>7</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>7</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4225,6 +3233,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>8</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4248,6 +3268,18 @@
             <u>8</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4275,6 +3307,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>8</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4298,6 +3342,18 @@
             <u>8</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4325,6 +3381,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>8</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4348,6 +3416,18 @@
             <u>8</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4375,6 +3455,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>8</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>8</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4400,204 +3492,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>8</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>8</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>8</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>8</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>8</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4630,6 +3534,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>9</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4653,6 +3569,18 @@
             <u>9</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4680,6 +3608,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>9</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4703,6 +3643,18 @@
             <u>9</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4730,6 +3682,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>9</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4753,6 +3717,18 @@
             <u>9</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -4780,6 +3756,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>9</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>9</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -4805,204 +3793,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>9</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>9</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>9</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>9</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>9</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5035,6 +3835,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>10</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5058,6 +3870,18 @@
             <u>10</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5085,6 +3909,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>10</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5108,6 +3944,18 @@
             <u>10</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5135,6 +3983,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>10</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5158,6 +4018,18 @@
             <u>10</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5185,6 +4057,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>10</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>10</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5210,204 +4094,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>10</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>10</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>10</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>10</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>10</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5440,6 +4136,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>11</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5463,6 +4171,18 @@
             <u>11</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5490,6 +4210,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>11</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5513,6 +4245,18 @@
             <u>11</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5540,6 +4284,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>11</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5563,6 +4319,18 @@
             <u>11</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5590,6 +4358,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>11</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>11</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5615,204 +4395,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>11</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>11</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>11</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>11</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>11</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5845,6 +4437,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>12</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5868,6 +4472,18 @@
             <u>12</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5895,6 +4511,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>12</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5918,6 +4546,18 @@
             <u>12</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5945,6 +4585,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>12</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -5968,6 +4620,18 @@
             <u>12</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -5995,6 +4659,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>12</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>12</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6020,204 +4696,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>12</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>12</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>12</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>12</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>12</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6250,6 +4738,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>13</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6273,6 +4773,18 @@
             <u>13</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6300,6 +4812,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>13</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6323,6 +4847,18 @@
             <u>13</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6350,6 +4886,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>13</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6373,6 +4921,18 @@
             <u>13</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6400,6 +4960,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>13</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>13</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6425,204 +4997,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>13</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>13</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>13</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>13</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>13</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6655,6 +5039,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>14</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6678,6 +5074,18 @@
             <u>14</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6705,6 +5113,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>14</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6728,6 +5148,18 @@
             <u>14</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6755,6 +5187,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>14</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6778,6 +5222,18 @@
             <u>14</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -6805,6 +5261,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>14</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>14</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -6830,204 +5298,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>14</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>14</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>14</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>14</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>14</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -7060,6 +5340,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>15</u>
+            <c>0</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>0</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -7083,6 +5375,18 @@
             <u>15</u>
             <c>1</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>1</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>1</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -7110,6 +5414,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>15</u>
+            <c>2</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>2</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -7133,6 +5449,18 @@
             <u>15</u>
             <c>3</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>3</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>3</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -7160,6 +5488,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>15</u>
+            <c>4</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>4</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -7183,6 +5523,18 @@
             <u>15</u>
             <c>5</c>
             <t>2</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>5</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>5</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
@@ -7210,6 +5562,18 @@
             <t>2</t>
             <data />
           </Trial>
+          <Trial>
+            <u>15</u>
+            <c>6</c>
+            <t>3</t>
+            <data />
+          </Trial>
+          <Trial>
+            <u>15</u>
+            <c>6</c>
+            <t>4</t>
+            <data />
+          </Trial>
         </trials>
         <average />
       </Condition>
@@ -7235,204 +5599,16 @@
             <t>2</t>
             <data />
           </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>8</c>
-        <trials>
           <Trial>
             <u>15</u>
-            <c>8</c>
-            <t>0</t>
+            <c>7</c>
+            <t>3</t>
             <data />
           </Trial>
           <Trial>
             <u>15</u>
-            <c>8</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>8</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>9</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>9</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>9</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>9</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>10</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>10</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>10</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>10</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>11</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>11</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>11</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>11</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>12</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>12</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>12</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>12</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>13</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>13</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>13</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>13</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>14</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>14</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>14</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>14</c>
-            <t>2</t>
-            <data />
-          </Trial>
-        </trials>
-        <average />
-      </Condition>
-      <Condition>
-        <u>15</u>
-        <c>15</c>
-        <trials>
-          <Trial>
-            <u>15</u>
-            <c>15</c>
-            <t>0</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>15</c>
-            <t>1</t>
-            <data />
-          </Trial>
-          <Trial>
-            <u>15</u>
-            <c>15</c>
-            <t>2</t>
+            <c>7</c>
+            <t>4</t>
             <data />
           </Trial>
         </trials>
