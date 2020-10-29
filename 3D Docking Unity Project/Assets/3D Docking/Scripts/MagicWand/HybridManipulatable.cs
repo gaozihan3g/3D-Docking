@@ -22,10 +22,11 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField]
     TechType tech;
     public DockingHelper.ManipulationType manipulationType;
-    bool lazySelection = false;
-    bool nonIsoRotation = false;
-    bool viewpointControl = false;
-    bool prismFineTuning = false;
+    
+    public bool nonIsoRotation = false;
+    public bool prismFineTuning = false;
+    public bool viewpointControl = false;
+    public bool lazyRelease = false;
 
     TranslationTechType transTech = TranslationTechType.Homer;
     bool selected = false;
@@ -109,6 +110,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         manipulationStarted = false;
         UIManager.Instance.SetLineColor(0);
         UIManager.Instance.CamZoom(false);
+        UIManager.Instance.SetupPointer(transform, true);
     }
 
 
@@ -120,7 +122,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
             return;
         }
 
-        if (lazySelection)
+        if (lazyRelease)
         {
             CheckSelection();
             UpdateManipulation();
@@ -149,7 +151,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     void UpdateTechState()
     {
-        lazySelection = tech == TechType.NOVEL;
+        lazyRelease = tech == TechType.NOVEL;
         nonIsoRotation = tech == TechType.NOVEL;
         viewpointControl = tech == TechType.NOVEL;
         prismFineTuning = tech == TechType.NOVEL;
@@ -160,7 +162,7 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
         {
-            DockingManager.Instance.Finish(selected);
+            DockingManager.Instance.Finish(false);
         }
 
         //if (ViveInput.GetPressUpEx(HandRole.LeftHand, ControllerButton.Grip))

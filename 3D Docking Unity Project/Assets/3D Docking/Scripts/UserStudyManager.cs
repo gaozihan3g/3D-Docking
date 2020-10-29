@@ -26,7 +26,8 @@ public class UserStudyManager : MonoBehaviour
     public int numOfTrials = 5;
 
     public List<UserSession> userSessions;
-    public List<string> metricNames = new List<string>();
+    public List<string> IvNames = new List<string>();
+    public List<string> DvNames = new List<string>();
 
     [HideInInspector]
     public int currentUser = 0;
@@ -39,7 +40,6 @@ public class UserStudyManager : MonoBehaviour
     [HideInInspector]
     public bool initialized;
 
-    public int numOfIV = 4;
     public float taskInterval = 1f;
 
     private Dictionary<string, int> orderDictionary;
@@ -251,23 +251,23 @@ public class UserStudyManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
-        sb.Append("u");
+        sb.Append("user");
         sb.Append("\t");
-        sb.Append("c");
+        sb.Append("condition");
         sb.Append("\t");
-        sb.Append("t");
+        sb.Append("trial");
         sb.Append("\t");
 
-        for (int i = 0; i < numOfIV; i++)
+        for (int i = 0; i < IvNames.Count; i++)
         {
-            sb.Append("IV" + (i+1));
+            sb.Append(IvNames[i]);
             sb.Append("\t");
         }
 
 
-        for (int i = 0; i < metricNames.Count; i++)
+        for (int i = 0; i < DvNames.Count; i++)
         {
-            sb.Append(metricNames[i]);
+            sb.Append(DvNames[i]);
             sb.Append("\t");
         }
 

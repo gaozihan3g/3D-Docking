@@ -221,8 +221,8 @@ public class UserStudyWindow : EditorWindow
             GUILayout.Label("", GUILayout.Width(kSmallBtnWidth));
 
             // metric names
-            for (int i = 0; i < usm.metricNames.Count; ++i)
-                GUILayout.Label(usm.metricNames[i], GUILayout.Width(dataWidth));
+            for (int i = 0; i < usm.DvNames.Count; ++i)
+                GUILayout.Label(usm.DvNames[i], GUILayout.Width(dataWidth));
 
             GUILayout.EndHorizontal();
 
