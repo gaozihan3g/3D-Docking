@@ -252,16 +252,16 @@ public class UserStudyWindow : EditorWindow
 
                 if (showCondition[j])
                 {
-                    //GUILayout.BeginHorizontal();
+                    GUILayout.BeginHorizontal();
 
-                    //if (GUILayout.Button("P", GUILayout.Width(kBtnWidth)))
-                    //{
-                    //    cm.CurrentCondition = c;
+                    if (GUILayout.Button("P", GUILayout.Width(kBtnWidth)))
+                    {
+                        cm.CurrentCondition = c;
 
-                    //    usm.PracticeMode();
-                    //}
+                        usm.PracticeMode();
+                    }
 
-                    //GUILayout.EndHorizontal();
+                    GUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginVertical();
 
