@@ -26,8 +26,11 @@ public class UserStudyManager : MonoBehaviour
     public int numOfTrials = 5;
 
     public List<UserSession> userSessions;
+
+    public List<int> IvNums = new List<int>();
     public List<string> IvNames = new List<string>();
     public List<string> DvNames = new List<string>();
+
 
     [HideInInspector]
     public int currentUser = 0;
@@ -287,6 +290,38 @@ public class UserStudyManager : MonoBehaviour
         Debug.Log("Data Exported.");
     }
 
+    public void ExportLogData()
+    {
+        foreach (var c in userSessions[currentUser].conditions)
+        {
+            foreach (var t in c.trials)
+            {
+                if (!t.HasLogData())
+                    continue;
+
+                ExportLogData(t);
+            }
+        }
+    }
+
+    public void ExportLogData(Trial t)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        string s = "u" + t.u + "c" + t.c + "t" + t.t;
+        sb.Append(s);
+
+        sb.Append("\n");
+
+        sb.Append(t.logData.ToString());
+
+        string fileNameStr = string.Format(kFileNameFormat, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"), s);
+        File.WriteAllText(kPath + fileNameStr, sb.ToString());
+        AssetDatabase.Refresh();
+        Debug.Log("Data Exported.");
+    }
+
+
     public void SaveXML()
     {
         var serializer = new XmlSerializer(typeof(List<UserSession>));
@@ -500,6 +535,7 @@ public class UserStudyManager : MonoBehaviour
         public int t;
 
         public List<float> data;
+        public LogData logData;
 
         public Trial()
         { }
@@ -511,11 +547,21 @@ public class UserStudyManager : MonoBehaviour
             t = it;
 
             data = new List<float>();
+            logData = new LogData();
         }
 
-        public Trial(List<float> d)
+        public Trial(List<float> d, LogData l)
         {
             data = d;
+            logData = l;
+        }
+
+        public bool HasLogData()
+        {
+            if (logData == null)
+                return false;
+
+            return logData.HasData();
         }
 
         public string GetDataString(int k)
@@ -536,11 +582,34 @@ public class UserStudyManager : MonoBehaviour
 
             // add condition info
 
-            for (int i = 3; i >= 0; i--)
+            //for (int i = 3; i >= 0; i--)
+            //{
+            //    sb.Append(((c & 1 << i) == 1 << i) ? 1 : 0);
+            //    sb.Append("\t");
+            //}
+
+            //TODO
+
+            List<int> ivNums = UserStudyManager.Instance.IvNums;
+            int p = 1;
+            List<int> rs = new List<int>();
+
+            for (int i = ivNums.Count - 1; i >= 0; i--)
             {
-                sb.Append(((c & 1 << i) == 1 << i) ? 1 : 0);
+                int r = (c / p) % ivNums[i];
+
+                rs.Add(r);
+
+                p *= ivNums[i];
+            }
+
+            for (int i = rs.Count - 1; i >= 0; i--)
+            {
+                sb.Append(rs[i]);
                 sb.Append("\t");
             }
+
+
 
             for (int i = 0; i < data.Count; ++i)
             {

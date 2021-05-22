@@ -7,7 +7,7 @@ using UnityEngine;
 public class DockingManager : MonoBehaviour
 {
     public static DockingManager Instance;
-    public HybridManipulatable manipulatable;
+    public ClutchManipulatable manipulatable;
     public Transform anchor;
     public Transform fromObject;
     public Transform toObject;
@@ -15,6 +15,7 @@ public class DockingManager : MonoBehaviour
     public Transform[] hands;
     public bool IsRightHand = true;
 
+    public float targetSize = 1f;
     public float targetDist = 5f;
     public float randomOffsetRadius = 1f;
     public float initDist = 1f;
@@ -34,10 +35,13 @@ public class DockingManager : MonoBehaviour
 
     bool isFirstTouch = true;
     bool isTouching = false;
+    [SerializeField]
     bool isTimeCounting = false;
     bool easyThresholdMet = false;
     bool hardThresholdMet = false;
     float startTime;
+    float maniStartTime;
+    float lastReleaseTime;
     Transform hand;
 
     Vector3 preHandPos;
@@ -47,7 +51,11 @@ public class DockingManager : MonoBehaviour
     Vector3 orgFromObjPos;
     Quaternion orgFromObjRot;
 
-    public float timer = 0f;
+    public float selectionTimer = 0f;
+    public float manipulationTimer = 0f;
+    public float clutchingTimer = 0f;
+    //public float reactionTimer = 0f;
+
     [SerializeField]
     int clutch = -1;
     [SerializeField]
@@ -79,6 +87,12 @@ public class DockingManager : MonoBehaviour
     const float kMinStatAngle = 0.001f;
 
     public bool accFeedback = false;
+    public bool easyRotation = false;
+
+    public float tSpeed;
+    public float rSpeed;
+
+    public LogData logData;
 
     //Vector3 preHeadPos;
     //Quaternion preHeadRot;
@@ -104,8 +118,13 @@ public class DockingManager : MonoBehaviour
 
         UpdateHand();
 
-        startTime = 0f;
-        timer = 0f;
+        // start timer
+        startTime = Time.time;
+
+        manipulationTimer = 0f;
+        selectionTimer = 0f;
+        clutchingTimer = 0f;
+
         // clutch = 0 means no clutch
         clutch = -1;
 
@@ -135,6 +154,9 @@ public class DockingManager : MonoBehaviour
 
         manipulatable.Init();
 
+        fromObject.localScale = Vector3.one * targetSize;
+        toObject.localScale = Vector3.one * targetSize;
+
         anchor.position = head.position + Vector3.forward * targetDist;
 
         Random.InitState(randomSeed);
@@ -148,6 +170,7 @@ public class DockingManager : MonoBehaviour
         orgFromObjPos = fromObject.position;
         orgFromObjRot = fromObject.rotation;
 
+        logData = new LogData();
 
         // reset UI
         //if (UIManager.Instance != null)
@@ -167,29 +190,41 @@ public class DockingManager : MonoBehaviour
             hand = hands[1];
     }
 
+
+    float[] rValues = { .25f, .75f };
+
     public void RandomPosition()
     {
         toObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
 
         // r, polar theta, azimuth phi
-        var theta = Random.Range(0.25f * Mathf.PI, 0.5f * Mathf.PI);
-        var phi = Random.Range(0f, 0.25f * Mathf.PI);
+        //var theta = Random.Range(0.25f * Mathf.PI, 0.5f * Mathf.PI);
+        var theta = 0.5f * Mathf.PI;
+        //var phi = Random.Range(0f, 0.25f * Mathf.PI);
+        var phi = 0.75f * Mathf.PI;
+        //var phi = rValues[Random.Range(0, rValues.Length)] * Mathf.PI;
+
         Vector3 d = new Vector3(
             Mathf.Sin(theta) * Mathf.Cos(phi),
             Mathf.Cos(theta),
             Mathf.Sin(theta) * Mathf.Sin(phi)
             );
+
         fromObject.position = toObject.position + d * initDist;
+        //fromObject.position = head.position + d * initDist;
+
+
     }
 
     public void RandomRotation()
     {
-        var axis0 = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-        var s = Random.Range(1, 3);
-        var a = Quaternion.AngleAxis(22.5f * (2 * s + 1), axis0);
+
+        Vector3 axis0 = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        int s = Random.Range(1, 3);
+        Quaternion a = Quaternion.AngleAxis(22.5f * (2 * s + 1), axis0);
 
         //var a = Random.rotationUniform;
-        var axis1 = Random.onUnitSphere;
+        var axis1 = easyRotation ? Vector3.up : Random.onUnitSphere;
         var b = Quaternion.AngleAxis(initAngle, axis1);
         //Debug.Log("#" + axis0 + " " + axis1);
         toObject.rotation = a;
@@ -226,14 +261,28 @@ public class DockingManager : MonoBehaviour
     void UpdateAccuracy()
     {
         float angleAccuracy = 0f;
+        angleAccuracy = DockingHelper.Map(angle, initAngle, angleThreshold, 0f, 1f, true);
 
-        if (angle > easyAngleThreshold)
-            angleAccuracy = DockingHelper.Map(angle, initAngle, easyAngleThreshold, 0f, 0.5f, true);
-        else
-            angleAccuracy = DockingHelper.Map(angle, easyAngleThreshold, angleThreshold, 0.5f, 1f, true);
+        float distAccuracy = 0f;
+        distAccuracy = DockingHelper.Map(distance, initDist, distThreshold, 0f, 1f, true);
+
+        float acc = 0f;
+
+        switch (manipulatable.manipulationType)
+        {
+            case DockingHelper.ManipulationType.Translation:
+                acc = distAccuracy;
+                break;
+            case DockingHelper.ManipulationType.Rotation:
+                acc = angleAccuracy;
+                break;
+            case DockingHelper.ManipulationType.Translation | DockingHelper.ManipulationType.Rotation:
+                acc = Mathf.Min(angleAccuracy, distAccuracy);
+                break;
+        }
 
         if (UIManager.Instance != null)
-            UIManager.Instance.SetColor(angleAccuracy);
+            UIManager.Instance.UpdateColor(acc);
     }
 
     void UpdateDiffs()
@@ -250,7 +299,10 @@ public class DockingManager : MonoBehaviour
     {
         if (isTimeCounting)
         {
-            timer = Time.time - startTime;
+            manipulationTimer += Time.fixedDeltaTime;
+
+            if (!isTouching)
+                clutchingTimer += Time.fixedDeltaTime;
         }
     }
 
@@ -296,7 +348,12 @@ public class DockingManager : MonoBehaviour
             if (deltaOA >= kMinStatAngle)
                 totalObjAngle += deltaOA;
 
+            tSpeed = Vector3.Distance(fromObject.position, preFromObjPos) / Time.fixedDeltaTime;
+            rSpeed = Quaternion.Angle(fromObject.rotation, preFromObjRot) / Time.fixedDeltaTime;
+
+            logData.Add(manipulationTimer, tSpeed, rSpeed, distance, angle);
         }
+
         //preHeadPos = head.position;
         //preHeadRot = head.rotation;
         preHandPos = hand.position;
@@ -315,11 +372,13 @@ public class DockingManager : MonoBehaviour
         // touch check
         if (isFirstTouch)
         {
-            // start timer
-            startTime = Time.time;
+            maniStartTime = Time.time;
+            selectionTimer = maniStartTime - startTime;
             isTimeCounting = true;
             isFirstTouch = false;
         }
+
+        logData.AddManiStart(Time.time - maniStartTime);
     }
 
     public void ManipulationUpdate()
@@ -332,6 +391,10 @@ public class DockingManager : MonoBehaviour
     public void ManipulationEnd()
     {
         isTouching = false;
+        lastReleaseTime = Time.time;
+
+        logData.AddManiEnd(Time.time - maniStartTime);
+
         // accuracy check
     }
 
@@ -371,7 +434,7 @@ public class DockingManager : MonoBehaviour
 
 
         // if met, record stats
-        timer_0 = timer;
+        timer_0 = manipulationTimer;
         clutch_0 = clutch;
         distance_0 = distance;
         angle_0 = angle;
@@ -446,7 +509,7 @@ public class DockingManager : MonoBehaviour
         numOfAttempts++;
     }
 
-    public void Finish(bool selected)
+    public void Finish(bool selected = false)
     {
         if (!isTimeCounting)
         {
@@ -463,7 +526,7 @@ public class DockingManager : MonoBehaviour
             AudioManager.Instance.PlaySound(4);
             return;
         }
-            
+
 
         var checkT = (manipulatable.manipulationType & DockingHelper.ManipulationType.Translation) == DockingHelper.ManipulationType.Translation;
         var checkR = (manipulatable.manipulationType & DockingHelper.ManipulationType.Rotation) == DockingHelper.ManipulationType.Rotation;
@@ -490,6 +553,8 @@ public class DockingManager : MonoBehaviour
         // stop timer
         isTimeCounting = false;
 
+        //reactionTimer = Time.time - lastReleaseTime;
+
         // calculate efficiency
         translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / (totalObjDistance - totalObjDistance_0);
         rotationEfficiency = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / (totalObjAngle - totalObjAngle_0);
@@ -513,39 +578,54 @@ public class DockingManager : MonoBehaviour
         List<float> data = new List<float>();
 
         // fill data
-        data.Add(timer_0);
-        data.Add(timer - timer_0);
-        data.Add(timer);
 
-        data.Add(distance_0);
+        //data.Add(selectionTimer);
+
+        //data.Add(timer_0);
+        //data.Add(manipulationTimer - timer_0);
+        data.Add(manipulationTimer);
+
+        data.Add(clutchingTimer);
+        //data.Add(reactionTimer);
+
+        //data.Add(distance_0);
         data.Add(distance);
 
-        data.Add(angle_0);
+        //data.Add(angle_0);
         data.Add(angle);
 
-        data.Add(clutch_0);
-        data.Add(clutch - clutch_0);
+        //data.Add(clutch_0);
+        //data.Add(clutch - clutch_0);
         data.Add(clutch);
 
-        data.Add(totalHandDistance_0);
-        data.Add(totalHandDistance - totalHandDistance_0);
 
-        data.Add(totalHandAngle_0);
-        data.Add(totalHandAngle - totalHandAngle_0);
 
-        data.Add(translationEfficiency_0);
-        data.Add(translationEfficiency);
+        //data.Add(totalHandDistance_0);
+        //data.Add(totalHandDistance - totalHandDistance_0);
 
-        data.Add(rotationEfficiency_0);
-        data.Add(rotationEfficiency);
+        //data.Add(totalHandAngle_0);
+        //data.Add(totalHandAngle - totalHandAngle_0);
 
-        data.Add(numOfAttempts);
+        //data.Add(translationEfficiency_0);
+        //data.Add(translationEfficiency);
+
+        //data.Add(rotationEfficiency_0);
+        //data.Add(rotationEfficiency);
+
+        //data.Add(numOfAttempts);
+
+        // data for on and off
+
+        // user input log e.g. speed
+
+
+
 
         // set completion time
         //UIManager.Instance.SetText(string.Format(timeFormatStr, timer));
 
         // send to user study manager
-        UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Trial(data));
+        UserStudyManager.Instance.SetTaskResult(new UserStudyManager.Trial(data, logData));
 
     }
 }

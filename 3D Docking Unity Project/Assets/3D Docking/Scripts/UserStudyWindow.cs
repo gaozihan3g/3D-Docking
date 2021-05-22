@@ -138,16 +138,16 @@ public class UserStudyWindow : EditorWindow
         //    usm.ExportData(exportIndex);
         //}
 
-        if (GUILayout.Button("Export All Data"))
+        if (GUILayout.Button("Export Data"))
         {
             usm.ExportData();
             //for (int i = 0; i < usm.numOfMetrics; ++i)
             //usm.ExportData(i);
         }
 
-        if (GUILayout.Button("Export Vis Data"))
+        if (GUILayout.Button("Export Log Data"))
         {
-            //usm.ExportVisData();
+            usm.ExportLogData();
             //for (int i = 0; i < usm.numOfMetrics; ++i)
             //usm.ExportData(i);
         }
@@ -210,6 +210,13 @@ public class UserStudyWindow : EditorWindow
                 for (int i = 0; i < showCondition.Length; ++i)
                     showCondition[i] = false;
             }
+
+            if (GUILayout.Button("Mean", GUILayout.Width(kBtnWidth)))
+            {
+                for (int j = 0; j < usm.numOfConditions; ++j)
+                    usm.GetCurrentUser().conditions[j].GetAvgData();
+            }
+
             GUILayout.EndHorizontal();
 
 
@@ -220,7 +227,7 @@ public class UserStudyWindow : EditorWindow
 
             // metric names
             for (int i = 0; i < usm.DvNames.Count; ++i)
-                GUILayout.Label(usm.DvNames[i], GUILayout.Width(dataWidth));
+                GUILayout.TextField(usm.DvNames[i], GUILayout.Width(dataWidth));
 
             GUILayout.EndHorizontal();
 
@@ -241,12 +248,12 @@ public class UserStudyWindow : EditorWindow
 
                 GUILayout.BeginHorizontal();
 
-                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("[{0}] {1}", j + 1, cm.GetConditionName(c)));
+                showCondition[j] = EditorGUILayout.Foldout(showCondition[j], string.Format("{0:D2} - [{1:D2}] {2}", j + 1, c, cm.GetConditionName(c)));
 
                 var avg = usm.GetCurrentUser().conditions[c].average;
 
                 for (int i = 0; i < avg.Count; ++i)
-                    GUILayout.Label(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
+                    EditorGUILayout.TextField(avg[i].ToString("F2"), GUILayout.Width(dataWidth));
 
                 GUILayout.EndHorizontal();
 
@@ -280,12 +287,6 @@ public class UserStudyWindow : EditorWindow
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button("Get Average"))
-        {
-            for (int j = 0; j < usm.numOfConditions; ++j)
-                usm.GetCurrentUser().conditions[j].GetAvgData();
-        }
-
         GUILayout.BeginHorizontal();
         GUILayout.Label("User");
         EditorGUILayout.TextField(string.Format("{0}/{1}", usm.currentUser + 1, usm.userSessions.Count));
@@ -315,6 +316,18 @@ public class UserStudyWindow : EditorWindow
         }
 
         GUI.backgroundColor = Color.HSVToRGB(0f, 0.5f, 1f);
+
+        bool hasLogData = trial.HasLogData();
+
+        if (hasLogData)
+        {
+            GUI.backgroundColor = Color.white;
+
+            if (GUILayout.Button("E", GUILayout.Width(20)))
+            {
+                usm.ExportLogData(trial);
+            }
+        }
 
         if (GUILayout.Button("X", GUILayout.Width(kSmallBtnWidth)))
         {

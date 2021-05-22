@@ -98,14 +98,14 @@ public class HybridManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         if (ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Grip))
         {
-            DockingManager.Instance.Finish(false);
+            DockingManager.Instance.Finish();
         }
 
         var r = ViveInput.GetPadTouchAxisEx(HandRole.RightHand);
 
         if (viewpointControl)
         {
-            UIManager.Instance.CamZoom(r != Vector2.zero);
+            UIManager.Instance.CamZoom(r != Vector2.zero, transform);
         }
     }
 
