@@ -253,9 +253,7 @@ MonoBehaviour:
   hintText: {fileID: 0}
   hintStr:
   - Drag&Drop
-  - Point&Click
-  - Lazy Drag&Drop
-  - Lazy Point&Click
+  - Drag&Keep
 --- !u!1001 &7391610408363201724
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10341,12 +10341,12 @@ MonoBehaviour:
           maniStartTimes: []
           maniEndTimes: []
       average: []
-  IvNums: 04000000030000000200000002000000
+  IvNums: 02000000030000000200000002000000
   IvNames:
   - CM
   - Dof
-  - TD
   - ID
+  - TD
   DvNames:
   - MT
   - CT

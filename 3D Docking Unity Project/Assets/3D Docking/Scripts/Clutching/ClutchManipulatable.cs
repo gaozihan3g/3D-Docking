@@ -81,6 +81,8 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         highlight.SetActive(true);
         UIManager.Instance.SetLineColor(1);
         ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+        // 0 -> 1
+        DockingManager.Instance.LogStateChange(0, 1);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -89,6 +91,8 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         highlight.SetActive(false);
         UIManager.Instance.SetLineColor(0);
         ViveInput.TriggerHapticVibrationEx(HandRole.RightHand);
+        // 1 -> 0
+        DockingManager.Instance.LogStateChange(1, 0);
     }
 
     public void Init()
@@ -175,6 +179,8 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             OnSelect();
             OnManipulationStart();
+            // 1 -> 2
+            DockingManager.Instance.LogStateChange(1, 2);
         }
 
         // manipulate
@@ -186,6 +192,8 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         {
             OnManipulationEnd();
             OnRelease();
+            // 2 -> 0
+            DockingManager.Instance.LogStateChange(2, 0);
         }
     }
 
@@ -194,8 +202,17 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         // select
         if ((pointed || selected) && !manipulationStarted && ViveInput.GetPressDownEx(HandRole.RightHand, ControllerButton.Trigger))
         {
+            if (selected)
+                // 3 -> 2
+                DockingManager.Instance.LogStateChange(3, 2);
+            else
+                // 1 -> 2
+                DockingManager.Instance.LogStateChange(1, 2);
+
             OnSelect();
             OnManipulationStart();
+
+
         }
 
         // manipulate
@@ -206,11 +223,15 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
         if (manipulationStarted && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Trigger))
         {
             OnManipulationEnd();
+            // 2 -> 3
+            DockingManager.Instance.LogStateChange(2, 3);
         }
 
         if (selected && ViveInput.GetPressUpEx(HandRole.RightHand, ControllerButton.Pad))
         {
             OnRelease();
+            // 3 -> 0
+            DockingManager.Instance.LogStateChange(3, 0);
         }
     }
 

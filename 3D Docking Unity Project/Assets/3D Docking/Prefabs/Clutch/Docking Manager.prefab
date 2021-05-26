@@ -1885,6 +1885,10 @@ MonoBehaviour:
   randomOffsetRadius: 0
   initDist: 0
   initAngle: 0
+  initRotationInEuler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 90, z: 0}
+  - {x: 90, y: 0, z: 90}
   easyDistThreshold: 1
   easyAngleThreshold: 30
   distThreshold: 0.05
@@ -1895,7 +1899,6 @@ MonoBehaviour:
   selectionTimer: 0
   manipulationTimer: 0
   clutchingTimer: 0
-  reactionTimer: 0
   clutch: -1
   distance: 0.3
   angle: 135

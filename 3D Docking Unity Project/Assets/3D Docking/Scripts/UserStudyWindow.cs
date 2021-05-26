@@ -14,8 +14,8 @@ public class UserStudyWindow : EditorWindow
     public string[] options;
 
     int userPerRow = 8;
-    int dataWidth = 30;
-    const int kBtnWidth = 40;
+    int dataWidth = 40;
+    const int kBtnWidth = 80;
     const int kSmallBtnWidth = 20;
     int activeUserId = -1;
 
@@ -215,6 +215,11 @@ public class UserStudyWindow : EditorWindow
             {
                 for (int j = 0; j < usm.numOfConditions; ++j)
                     usm.GetCurrentUser().conditions[j].GetAvgData();
+            }
+
+            if (GUILayout.Button("Clear", GUILayout.Width(kBtnWidth)))
+            {
+                usm.ClearCurrentUserData();
             }
 
             GUILayout.EndHorizontal();

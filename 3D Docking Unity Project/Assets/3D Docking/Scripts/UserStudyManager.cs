@@ -60,6 +60,14 @@ public class UserStudyManager : MonoBehaviour
         return userSessions[currentUser];
     }
 
+    public void ClearCurrentUserData()
+    {
+        if (userSessions == null || userSessions.Count == 0)
+            return;
+
+        userSessions[currentUser] = new UserSession(numOfConditions, numOfTrials, currentUser);
+    }
+
     void Awake()
     {
         if (Instance == null)
@@ -254,11 +262,11 @@ public class UserStudyManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
-        sb.Append("user");
+        sb.Append("u");
         sb.Append("\t");
-        sb.Append("condition");
+        sb.Append("c");
         sb.Append("\t");
-        sb.Append("trial");
+        sb.Append("t");
         sb.Append("\t");
 
         for (int i = 0; i < IvNames.Count; i++)
@@ -330,7 +338,7 @@ public class UserStudyManager : MonoBehaviour
             serializer.Serialize(stream, userSessions);
         }
 
-        AssetDatabase.Refresh();
+        //AssetDatabase.Refresh();
         Debug.Log("XML Saved.");
     }
 
@@ -388,10 +396,10 @@ public class UserStudyManager : MonoBehaviour
             "] [CurrentTrial: " + (currentTrial + 1) +
              "] " + t.ToString());
 
+        AutoSetNextTask();
+
         // save it ?
         SaveXML();
-
-        AutoSetNextTask();
     }
 
     [Serializable]
@@ -613,7 +621,7 @@ public class UserStudyManager : MonoBehaviour
 
             for (int i = 0; i < data.Count; ++i)
             {
-                string s = data[i].ToString();
+                string s = data[i].ToString("F2");
                 sb.Append(s);
                 sb.Append("\t");
             }

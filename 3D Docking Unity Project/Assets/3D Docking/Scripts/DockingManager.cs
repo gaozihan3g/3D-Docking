@@ -21,6 +21,8 @@ public class DockingManager : MonoBehaviour
     public float initDist = 1f;
     public float initAngle;
 
+    public List<Vector3> initRotationInEuler = new List<Vector3>();
+
     //[Range(0f, 0.1f)]
     public float easyDistThreshold = 0.03f;
     //[Range(0f, 30f)]
@@ -94,6 +96,8 @@ public class DockingManager : MonoBehaviour
 
     public LogData logData;
 
+    int curTrial;
+
     //Vector3 preHeadPos;
     //Quaternion preHeadRot;
     //public float totalHeadDistance = 0f;
@@ -104,7 +108,9 @@ public class DockingManager : MonoBehaviour
 
     public void Init(int t)
     {
-        randomSeed = randomSeedBase + (t + 1) * randomSeedBase / 100;
+        curTrial = t;
+
+        randomSeed = randomSeedBase + (t + 1) * randomSeedBase / 100 + t;
 
         Init();
     }
@@ -201,7 +207,7 @@ public class DockingManager : MonoBehaviour
         //var theta = Random.Range(0.25f * Mathf.PI, 0.5f * Mathf.PI);
         var theta = 0.5f * Mathf.PI;
         //var phi = Random.Range(0f, 0.25f * Mathf.PI);
-        var phi = 0.75f * Mathf.PI;
+        var phi = Mathf.PI;
         //var phi = rValues[Random.Range(0, rValues.Length)] * Mathf.PI;
 
         Vector3 d = new Vector3(
@@ -218,10 +224,12 @@ public class DockingManager : MonoBehaviour
 
     public void RandomRotation()
     {
+        //Vector3 axis0 = new Vector3(1f, 1f, 0f);
+        //int s = Random.Range(0, 10);
+        //Quaternion a = Quaternion.AngleAxis(90f * s, axis0);
 
-        Vector3 axis0 = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-        int s = Random.Range(1, 3);
-        Quaternion a = Quaternion.AngleAxis(22.5f * (2 * s + 1), axis0);
+        //Quaternion a = Quaternion.identity;
+        Quaternion a = Quaternion.Euler(initRotationInEuler[curTrial]);
 
         //var a = Random.rotationUniform;
         var axis1 = easyRotation ? Vector3.up : Random.onUnitSphere;
@@ -360,6 +368,12 @@ public class DockingManager : MonoBehaviour
         preHandRot = hand.rotation;
         preFromObjPos = fromObject.position;
         preFromObjRot = fromObject.rotation;
+    }
+
+
+    public void LogStateChange(int from, int to)
+    {
+        logData.AddStateChange(from, to, Time.time - startTime);
     }
 
     public void ManipulationStart()
@@ -559,11 +573,13 @@ public class DockingManager : MonoBehaviour
         translationEfficiency = Vector3.Distance(orgFromObjPos, fromObject.position) / (totalObjDistance - totalObjDistance_0);
         rotationEfficiency = Quaternion.Angle(orgFromObjRot, fromObject.rotation) / (totalObjAngle - totalObjAngle_0);
 
+        // audio feedback - sucess
+        AudioManager.Instance.PlaySound(2);
+
         // send data
         SendData();
 
-        // audio feedback - sucess
-        AudioManager.Instance.PlaySound(2);
+
     }
 
 

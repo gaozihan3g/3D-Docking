@@ -10,6 +10,7 @@ public class ConditionManager : MonoBehaviour
     protected void Awake()
     {
         Instance = this;
+        currentCondition = -1;
     }
 
     public List<string> conditionNames;
@@ -48,6 +49,8 @@ public class ConditionManager : MonoBehaviour
 
     public string GetCurrentConditionName()
     {
+        if (CurrentCondition == -1)
+            return "";
         return conditionNames[CurrentCondition];
     }
 
