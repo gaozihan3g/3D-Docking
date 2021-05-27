@@ -111,12 +111,19 @@ public class UserStudyWindow : EditorWindow
         }
         if (GUILayout.Button("Save XML"))
         {
-            usm.SaveXML();
+            if (EditorUtility.DisplayDialog("Save?", "Save XML?", "Yes", "No"))
+            {
+                usm.SaveXML();
+            }
+
         }
         if (GUILayout.Button("Load XML"))
         {
-            usm.LoadXML();
-            Initialize();
+            if (EditorUtility.DisplayDialog("Load?", "Load XML?", "Yes", "No"))
+            {
+                usm.LoadXML();
+                Initialize();
+            }
         }
 
 
@@ -219,7 +226,10 @@ public class UserStudyWindow : EditorWindow
 
             if (GUILayout.Button("Clear", GUILayout.Width(kBtnWidth)))
             {
-                usm.ClearCurrentUserData();
+                if (EditorUtility.DisplayDialog("Clear?", "Clear Current User?", "Yes", "No"))
+                {
+                    usm.ClearCurrentUserData();
+                }
             }
 
             GUILayout.EndHorizontal();

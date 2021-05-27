@@ -10358,4 +10358,4 @@ MonoBehaviour:
   currentTrial: 0
   log: Initialization needed. Enter condition # and metric #.
   initialized: 1
-  taskInterval: 2
+  taskInterval: 0

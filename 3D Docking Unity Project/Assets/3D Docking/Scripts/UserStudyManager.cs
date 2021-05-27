@@ -31,6 +31,9 @@ public class UserStudyManager : MonoBehaviour
     public List<string> IvNames = new List<string>();
     public List<string> DvNames = new List<string>();
 
+    [SerializeField]
+    bool isDirty = false;
+
 
     [HideInInspector]
     public int currentUser = 0;
@@ -85,11 +88,18 @@ public class UserStudyManager : MonoBehaviour
         practice = true;
     }
 
+    private void OnApplicationQuit()
+    {
+        if (initialized && isDirty)
+            SaveXML();
+    }
+
     public void Init()
     {
         currentCondition = 0;
         currentUser = 0;
         auto = false;
+        isDirty = false;
 
         // get num of condition based on condition manager
         GetNumOfCondition();
@@ -188,6 +198,8 @@ public class UserStudyManager : MonoBehaviour
             // check count, if all done, return
             if (autoConditionCounter >= numOfConditions)
             {
+                //save
+                SaveXML();
                 return;
             }
 
@@ -396,10 +408,12 @@ public class UserStudyManager : MonoBehaviour
             "] [CurrentTrial: " + (currentTrial + 1) +
              "] " + t.ToString());
 
+        isDirty = true;
+
         AutoSetNextTask();
 
         // save it ?
-        SaveXML();
+
     }
 
     [Serializable]

@@ -46,14 +46,13 @@ MonoBehaviour:
   conditionNames: []
   currentCondition: 0
   dm: {fileID: 0}
-  manipulatable: {fileID: 0}
-  targetDists:
-  - 2
-  - 8
   initDists:
   - 2
   - 20
   initAngles:
   - 45
   - 135
+  targetDists:
+  - 2
+  - 8
   config: []
