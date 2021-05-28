@@ -5,6 +5,24 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
+    RecentlyUsedScenePath-0:
+      value: 2242470311464668190b0d2f261110231f1a08262968153120391136acf53a31f6fe
+      flags: 0
+    RecentlyUsedScenePath-1:
+      value: 2242470311464608294e282d1328561e11582b292926232362041c34ebe30339ece379cae8372f333707e1284a2b0f36e613
+      flags: 0
+    RecentlyUsedScenePath-2:
+      value: 2242470311464673392d42171e2a4b09261b0d2d25266906243f181aecf0212cd7f33fe5ee2e26731c1aee311432042cbd5f4728f9070602150bef2b07fa1e075ee617c916c11b19d93c0acbc3099ff6dbdfc0f3
+      flags: 0
+    RecentlyUsedScenePath-3:
+      value: 2242470311464673392d42171e2a4b09261b0d2d25266906243f181aecf0212cd7f33fe5ee2e26731c1aee311432042cbd594758d22f180a1641ae2a35ed11145fd016cc0ed1
+      flags: 0
+    RecentlyUsedScenePath-4:
+      value: 2242470311464668190b0d2f2611103918031d382d2b323922272e2af1f43135add437e4f7363a2f762be128012c003ce6030605e5342f131003ed0214b1051d18d101
+      flags: 0
+    RecentlyUsedScenePath-5:
+      value: 2242470311464608294e282d1328561e11582b2929262323620a1126f6e33c31ece079dde2292b722c0ce6281d
+      flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0
@@ -15,5 +33,7 @@ EditorUserSettings:
   m_SemanticMergeMode: 2
   m_VCShowFailedCheckout: 1
   m_VCOverwriteFailedCheckoutAssets: 1
-  m_VCOverlayIcons: 1
+  m_VCProjectOverlayIcons: 1
+  m_VCHierarchyOverlayIcons: 1
+  m_VCOtherOverlayIcons: 1
   m_VCAllowAsyncUpdate: 0

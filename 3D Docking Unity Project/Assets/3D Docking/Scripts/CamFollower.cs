@@ -12,7 +12,7 @@ public class CamFollower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        b = true;
     }
 
     // Update is called once per frame
@@ -30,8 +30,8 @@ public class CamFollower : MonoBehaviour
         transform.forward = Vector3.ProjectOnPlane(target.forward, Vector3.up);
     }
 
-    void OnApplicationQuit()
-    {
-        Debug.Log("Application ending after " + Time.time + " seconds");
-    }
+    //void OnApplicationQuit()
+    //{
+    //    Debug.Log("Application ending after " + Time.time + " seconds");
+    //}
 }

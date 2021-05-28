@@ -11,6 +11,7 @@ public class UserStudyWindow : EditorWindow
     int gridIndex = 0;
     Vector2 scrollPos;
     bool[] showCondition;
+    bool showPractice = false;
     public string[] options;
 
     int userPerRow = 8;
@@ -234,6 +235,25 @@ public class UserStudyWindow : EditorWindow
 
             GUILayout.EndHorizontal();
 
+            
+
+
+            showPractice = EditorGUILayout.Foldout(showPractice, "Practice: " + (usm.practiceProgress + 1) + "/" + usm.numOfConditions);
+
+            if (showPractice)
+            {
+                GUILayout.BeginHorizontal();
+
+                for (int i = 0; i < usm.numOfConditions; i++)
+                {
+                    if (GUILayout.Button("#" + i))
+                    {
+                        usm.TaskSetup(i, 0, true);
+                    }
+                }
+
+                GUILayout.EndHorizontal();
+            }
 
 
             GUILayout.BeginHorizontal();
@@ -274,16 +294,16 @@ public class UserStudyWindow : EditorWindow
 
                 if (showCondition[j])
                 {
-                    GUILayout.BeginHorizontal();
+                    //GUILayout.BeginHorizontal();
 
-                    if (GUILayout.Button("P", GUILayout.Width(kBtnWidth)))
-                    {
-                        cm.CurrentCondition = c;
+                    //if (GUILayout.Button("P", GUILayout.Width(kBtnWidth)))
+                    //{
+                    //    cm.CurrentCondition = c;
 
-                        usm.PracticeMode();
-                    }
+                    //    usm.PracticeMode();
+                    //}
 
-                    GUILayout.EndHorizontal();
+                    //GUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginVertical();
 

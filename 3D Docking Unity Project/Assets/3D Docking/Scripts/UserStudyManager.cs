@@ -17,6 +17,10 @@ public class UserStudyManager : MonoBehaviour
     const string kFileNameFormat = "output_{0}_{1}.txt";
     const string kNeedInit = "Initialization needed. Enter condition # and metric #.";
     public bool practice = true;
+    public int practiceProgress = 0;
+
+
+
     public bool auto = false;
     public int autoConditionCounter = 0;
 
@@ -55,6 +59,7 @@ public class UserStudyManager : MonoBehaviour
     /// <value>The order dictionary.</value>
     public Dictionary<string, int> OrderDictionary { get => orderDictionary; }
 
+
     public UserSession GetCurrentUser()
     {
         if (userSessions == null || userSessions.Count == 0)
@@ -83,10 +88,10 @@ public class UserStudyManager : MonoBehaviour
         }
     }
 
-    public void PracticeMode()
-    {
-        practice = true;
-    }
+    //public void PracticeMode()
+    //{
+    //    practice = true;
+    //}
 
     private void OnApplicationQuit()
     {
@@ -98,7 +103,7 @@ public class UserStudyManager : MonoBehaviour
     {
         currentCondition = 0;
         currentUser = 0;
-        auto = false;
+        auto = true;
         isDirty = false;
 
         // get num of condition based on condition manager
@@ -200,6 +205,7 @@ public class UserStudyManager : MonoBehaviour
             {
                 //save
                 SaveXML();
+                AudioManager.Instance.PlaySound(3);
                 return;
             }
 
@@ -218,11 +224,26 @@ public class UserStudyManager : MonoBehaviour
 
     }
 
-
-
-    public void TaskSetup(int condition, int trial)
+    void AutoNextPractice()
     {
-        practice = false;
+        if (practiceProgress + 1 >= numOfConditions)
+            return;
+
+        StartCoroutine(DockingHelper.WaitAndDo(taskInterval, () =>
+        {
+            TaskSetup(++practiceProgress, 0, true);
+        }));
+    }
+
+
+
+    public void TaskSetup(int condition, int trial, bool isPractice = false)
+    {
+        practice = isPractice;
+
+        if (practice)
+            practiceProgress = condition;
+
         currentCondition = condition;
         currentTrial = trial;
 
@@ -373,7 +394,7 @@ public class UserStudyManager : MonoBehaviour
         var t = c[0].trials;
         numOfTrials = t.Count;
 
-        auto = false;
+        auto = true;
         initialized = true;
         Debug.Log("XML Loaded.");
     }
@@ -392,10 +413,18 @@ public class UserStudyManager : MonoBehaviour
         log = s;
     }
 
+
+
     public void SetTaskResult(Trial t)
     {
+        //TODO
         if (practice)
+        {
+            // go next
+            AutoNextPractice();
             return;
+        }
+
 
         // add meta info
         t.u = currentUser;

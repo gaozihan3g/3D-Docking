@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e17a41cebfb245788abf260eacf9894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kXmlFileName: 4Test.xml
+  kXmlFileName: final.xml
   practice: 1
+  practiceProgress: 0
   auto: 0
   autoConditionCounter: 0
   numOfUsers: 96
@@ -10353,6 +10354,7 @@ MonoBehaviour:
   - D
   - A
   - CC
+  isDirty: 0
   currentUser: 0
   currentCondition: 0
   currentTrial: 0

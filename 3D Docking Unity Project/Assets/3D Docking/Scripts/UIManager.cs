@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour
 
     void OnBtnClick()
     {
-        UserStudyManager.Instance.PracticeMode();
+        //UserStudyManager.Instance.PracticeMode();
     }
 
     private void OnValidate()

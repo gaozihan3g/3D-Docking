@@ -123,12 +123,12 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
                 break;
             //case FlowType.ClickRelease:
             //    ClickLogic();
-                //break;
+            //break;
             case FlowType.DragRetention:
                 DragEscLogic();
                 break;
-            //case FlowType.ClickRetention:
-            //    ClickEscLogic();
+                //case FlowType.ClickRetention:
+                //    ClickEscLogic();
                 //break;
         }
 
@@ -301,7 +301,7 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void OnManipulationStart()
     {
-        Debug.Log("OnManipulationStart" + Time.frameCount);
+        //Debug.Log("OnManipulationStart" + Time.frameCount);
         //selected = true;
         manipulationStarted = true;
 
@@ -364,7 +364,7 @@ public class ClutchManipulatable : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void OnManipulationEnd()
     {
-        Debug.Log("OnManipulationEnd" + Time.frameCount);
+        //Debug.Log("OnManipulationEnd" + Time.frameCount);
         manipulationStarted = false;
 
         DockingManager.Instance.ManipulationEnd();
