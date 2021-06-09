@@ -9,6 +9,8 @@ public class ClutchConditionManager : ConditionManager
 
     public float[] initDists = { 1f, 10f };
     public float[] initAngles = { 45f, 135f };
+    public float[] init6DofDists = { 1f, 10f };
+    public float[] init6DofAngles = { 1f, 10f };
     public float[] targetDists = { 2f, 8f };
 
     public List<ConditionConfig> config;
@@ -39,9 +41,9 @@ public class ClutchConditionManager : ConditionManager
         {
             for (int j = 0; j < 3; j++)
             {
-                for (int m = 0; m < 2; m++)
+                for (int m = 0; m < initDists.Length; m++)
                 {
-                    for (int n = 0; n < 2; n++)
+                    for (int n = 0; n < targetDists.Length; n++)
                     {
                         ConditionConfig cc = new ConditionConfig();
 
@@ -59,8 +61,8 @@ public class ClutchConditionManager : ConditionManager
                                 break;
                             case 2:
                                 cc.manipulationType = DockingHelper.ManipulationType.Translation | DockingHelper.ManipulationType.Rotation;
-                                cc.initDist = initDists[m];
-                                cc.initAngle = initAngles[m];
+                                cc.initDist = init6DofDists[m];
+                                cc.initAngle = init6DofAngles[m];
                                 break;
                         }
 
