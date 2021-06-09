@@ -1,0 +1,177 @@
+Using pre-set license
+Built from '2021.1/staging' branch; Version is '2021.1.3f1 (4bef613afd59) revision 4976481'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19042.985; Version 2009; 64bit' Language: 'en' Physical Memory: 16309 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+F:\Program Files\Unity 2021.1.3f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+F:/#Docs/GitHub/3D-Docking/3D Docking Unity Project
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49938
+Successfully changed project path to: F:/#Docs/GitHub/3D-Docking/3D Docking Unity Project
+F:/#Docs/GitHub/3D-Docking/3D Docking Unity Project
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 43.69 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.1.3f1 (4bef613afd59)
+[Subsystems] Discovering subsystems at path F:/Program Files/Unity 2021.1.3f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path F:/#Docs/GitHub/3D-Docking/3D Docking Unity Project/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon RX 6900 XT (ID=0x73bf)
+    Vendor:   ATI
+    VRAM:     16338 MB
+    Driver:   27.20.21003.8013
+Initialize mono
+Mono path[0] = 'F:/Program Files/Unity 2021.1.3f1/Editor/Data/Managed'
+Mono path[1] = 'F:/Program Files/Unity 2021.1.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'F:/Program Files/Unity 2021.1.3f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56624
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: F:/Program Files/Unity 2021.1.3f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.003383 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 35.92 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.911 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003270 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.60 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.847 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.53 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1734 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.0 MB.
+System memory in use after: 84.1 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 2199.
+Total: 1.981000 ms (FindLiveObjects: 0.208400 ms CreateObjectMapping: 0.054700 ms MarkObjects: 1.645400 ms  DeleteObjects: 0.071300 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/3D Docking/Prefabs/UI Manager.prefab
+  artifactKey: Guid(72f2532f46757144b8e3a9a6e2e09c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/UI Manager.prefab using Guid(72f2532f46757144b8e3a9a6e2e09c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'daba3b14776d599c776e2a2c0da9dfb6') in 0.060184 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/3D Docking/Prefabs/ViveCameraRig.prefab
+  artifactKey: Guid(37a80cabda9ca4942ad21bb94b7b73ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/ViveCameraRig.prefab using Guid(37a80cabda9ca4942ad21bb94b7b73ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed5fe1a6c41e35575c0200215f512b60') in 0.183009 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000145 seconds.
+  path: Assets/3D Docking/Prefabs/Audio Manager.prefab
+  artifactKey: Guid(70464a73a1abc05478ff6274b7cc38a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Audio Manager.prefab using Guid(70464a73a1abc05478ff6274b7cc38a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ac57b99d52ffd3277199a385df79a7f') in 0.014968 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000191 seconds.
+  path: Assets/3D Docking/Prefabs/LowRes.prefab
+  artifactKey: Guid(8b638c11a579b6c41adb90bd2aba190b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/LowRes.prefab using Guid(8b638c11a579b6c41adb90bd2aba190b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c07f4292e1d456d84feeb4100b20ceb') in 0.037171 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000127 seconds.
+  path: Assets/3D Docking/Prefabs/Tetrahedron.prefab
+  artifactKey: Guid(02483fda8d20ce147b76b02e62d4ba2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Tetrahedron.prefab using Guid(02483fda8d20ce147b76b02e62d4ba2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8ff31d10d7fa3ff38a1323c74f8f621') in 0.030978 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000163 seconds.
+  path: Assets/3D Docking/Prefabs/Magic Docking Manager.prefab
+  artifactKey: Guid(b5527facde277e44486f7df8fcdd9d15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Magic Docking Manager.prefab using Guid(b5527facde277e44486f7df8fcdd9d15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c82ecf762547d52dd48ae4b01882a40') in 0.186750 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000177 seconds.
+  path: Assets/3D Docking/Prefabs/Rubik Cube.prefab
+  artifactKey: Guid(abed876fe062765469b3c55cc5c5423d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Rubik Cube.prefab using Guid(abed876fe062765469b3c55cc5c5423d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56f9ef0a1340d40603dd127de8ca532f') in 0.031125 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000238 seconds.
+  path: Assets/3D Docking/Prefabs/Canvas.prefab
+  artifactKey: Guid(8db2b06cd6755f343b34675f8d8f4ae6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Canvas.prefab using Guid(8db2b06cd6755f343b34675f8d8f4ae6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'baa678d78fbb5c1536e1a76831cccde1') in 0.016403 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000218 seconds.
+  path: Assets/3D Docking/Prefabs/Docking Manager.prefab
+  artifactKey: Guid(07f1d799f1a895041bfb05d995ff52f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Docking Manager.prefab using Guid(07f1d799f1a895041bfb05d995ff52f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a65ed22aadc779c259a5f95cf18d2f1') in 0.036341 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000182 seconds.
+  path: Assets/3D Docking/Prefabs/Widget.prefab
+  artifactKey: Guid(d666a928a74d52c4691d65fc0081fc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Widget.prefab using Guid(d666a928a74d52c4691d65fc0081fc81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc6bd8adec9d0e499be2496dccfa12f7') in 0.029016 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000131 seconds.
+  path: Assets/3D Docking/Prefabs/TrackedCamera.prefab
+  artifactKey: Guid(2f35dbb4669ecd243a2be3a2aaf9116a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/TrackedCamera.prefab using Guid(2f35dbb4669ecd243a2be3a2aaf9116a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '328ff4277504c2388ed4131a695488ba') in 0.029730 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000135 seconds.
+  path: Assets/3D Docking/Prefabs/User Study Manager.prefab
+  artifactKey: Guid(6fd52f34a8974f246813013147e34c27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/User Study Manager.prefab using Guid(6fd52f34a8974f246813013147e34c27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2840c51111df18168cf5892eedca431') in 0.016178 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000136 seconds.
+  path: Assets/3D Docking/Prefabs/Condition Manager.prefab
+  artifactKey: Guid(41b69e0ec62b87c4f84afa432ea2de0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/Condition Manager.prefab using Guid(41b69e0ec62b87c4f84afa432ea2de0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3f93a82ac10d5d90a53f8ebafcfa8ec') in 0.014685 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000125 seconds.
+  path: Assets/3D Docking/Prefabs/HighRes.prefab
+  artifactKey: Guid(e102e5112b66b024baa0e1a0866e74d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Prefabs/HighRes.prefab using Guid(e102e5112b66b024baa0e1a0866e74d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a353c2737e098d21c8a4f492c2d09bd4') in 0.031826 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.581149 seconds.
+  path: Assets/3D Docking/Scenes/Clutching/Test.unity
+  artifactKey: Guid(428c64301669941468b1d6df87385221) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Scenes/Clutching/Test.unity using Guid(428c64301669941468b1d6df87385221) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77c38f60094335f5f710777711f68589') in 0.012501 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 25.030621 seconds.
+  path: Assets/3D Docking/Scenes/Clutching/Test 1.unity
+  artifactKey: Guid(4ab8c1724b9243346a441991c1929ad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Scenes/Clutching/Test 1.unity using Guid(4ab8c1724b9243346a441991c1929ad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '368ab7b3ecb2b95cdca0b10ce40937bd') in 0.013394 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 694.251312 seconds.
+  path: Assets/3D Docking/Scenes/Clutching/Test 1.unity
+  artifactKey: Guid(4ab8c1724b9243346a441991c1929ad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Scenes/Clutching/Test 1.unity using Guid(4ab8c1724b9243346a441991c1929ad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc77e50609831f8da5eb5af910b86837') in 0.009808 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.191342 seconds.
+  path: Assets/3D Docking/Scenes/Clutching/Test_Fitts.unity
+  artifactKey: Guid(4ab8c1724b9243346a441991c1929ad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/3D Docking/Scenes/Clutching/Test_Fitts.unity using Guid(4ab8c1724b9243346a441991c1929ad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e5fa9af1770b024d689ab4c419e8583') in 0.014190 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -36,12 +36,14 @@ public class ClutchConditionManager : ConditionManager
     {
         config = new List<ConditionConfig>();
         conditionNames = new List<string>();
+        int maxNumOfID = Mathf.Max(initDists.Length, initAngles.Length, init6DofDists.Length, init6DofAngles.Length);
+
 
         for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                for (int m = 0; m < initDists.Length; m++)
+                for (int m = 0; m < maxNumOfID; m++)
                 {
                     for (int n = 0; n < targetDists.Length; n++)
                     {
@@ -52,14 +54,20 @@ public class ClutchConditionManager : ConditionManager
                         switch (j)
                         {
                             case 0:
+                                if (m >= initDists.Length)
+                                    continue;
                                 cc.manipulationType = DockingHelper.ManipulationType.Translation;
                                 cc.initDist = initDists[m];
                                 break;
                             case 1:
+                                if (m >= initAngles.Length)
+                                    continue;
                                 cc.manipulationType = DockingHelper.ManipulationType.Rotation;
                                 cc.initAngle = initAngles[m];
                                 break;
                             case 2:
+                                if (m >= init6DofDists.Length)
+                                    continue;
                                 cc.manipulationType = DockingHelper.ManipulationType.Translation | DockingHelper.ManipulationType.Rotation;
                                 cc.initDist = init6DofDists[m];
                                 cc.initAngle = init6DofAngles[m];
