@@ -98,6 +98,8 @@ public class DockingManager : MonoBehaviour
 
     int curTrial;
 
+    public float fittsId;
+
     //Vector3 preHeadPos;
     //Quaternion preHeadRot;
     //public float totalHeadDistance = 0f;
@@ -177,6 +179,9 @@ public class DockingManager : MonoBehaviour
         orgFromObjRot = fromObject.rotation;
 
         logData = new LogData();
+
+
+        fittsId = Mathf.Log(initDist/distThreshold+1f, 2f) + Mathf.Log(initAngle/angleThreshold+1f, 2f);
 
         // reset UI
         //if (UIManager.Instance != null)
@@ -614,7 +619,7 @@ public class DockingManager : MonoBehaviour
         //data.Add(clutch - clutch_0);
         data.Add(clutch);
 
-
+        data.Add(fittsId);
 
         //data.Add(totalHandDistance_0);
         //data.Add(totalHandDistance - totalHandDistance_0);
