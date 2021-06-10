@@ -206,7 +206,8 @@ public class DockingManager : MonoBehaviour
 
     public void RandomPosition()
     {
-        toObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
+        //toObject.position = anchor.position + Random.onUnitSphere * randomOffsetRadius;
+        toObject.position = anchor.position + Vector3.down * 0.1f;
 
         // r, polar theta, azimuth phi
         //var theta = Random.Range(0.25f * Mathf.PI, 0.5f * Mathf.PI);
